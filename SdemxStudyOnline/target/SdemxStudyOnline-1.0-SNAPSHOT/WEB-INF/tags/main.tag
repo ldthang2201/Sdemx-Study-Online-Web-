@@ -15,78 +15,13 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
-<%--    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>--%>
-<%--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">--%>
     <style>
         <%@include file="/Views/Styles.css" %>
     </style>
 </head>
 
 <body>
-
-<!--#region navBar-->
-<div class="fade-dropdown">&nbsp;</div>
-<div class="fade-search" onclick="closefrmSearchMobile()">&nbsp;</div>
-<div id="navigationBar">
-    <div class="navDiv">
-        <div class="menubar ml-3">
-            <button id="btnBars" class="btnBars"><i class="fa fa-bars" aria-hidden="true"></i></button>
-        </div>
-        <a href="${pageContext.request.contextPath}/Home/" class="Logo ml-2"></a>
-        <div class="menu ml-3" onmouseover="activeFade()" onmouseout="unactiveFade()">
-            <div class="btn btn-link btnCategory ml-3">Categories</div>
-            <div class="menu-item">
-                <div class="container">
-                    <div class="row">
-                        <c:forEach var="b" items="${filterlstBranch}">
-                            <div class="col-sm-3">
-                                <ul style="list-style-type: none;">
-                                    <li class="title-list"><a href="" class="title-list">${b.getBranchName()}</a> </li>
-                                    <c:forEach var="cat" items="${b.getLstCategory()}">
-                                        <li><a href="#"  class="cat-list"> ${cat.getCatName()}</a></li>
-                                    </c:forEach>
-                                </ul>
-                            </div>
-                        </c:forEach>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <a href="#" class=" ml-auto mr-auto LogoMobile"></a>
-        <form action="" class="form-inline ml-auto frmSearch mt-2 ">
-            <button type="" class="btnSearch"><i class="fa fa-search" aria-hidden="false"></i></button>
-            <input class=" mr-sm-2 txtSearch" autocomplete="off" placeholder="Search for anything" id="txtSearch">
-            <button type="button" id="some-button" class="btnTimesMobile" onclick="closefrmSearchMobile()"><i
-                    class="fa fa-times" aria-hidden="true"></i></button>
-        </form>
-        <a href="" class="btnTeach">Teach on Sdemx</a>
-        <a href="#" class="btnShopping ml-3 mr-3 "><i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
-        <button type="button" class="btnSearchMobile mr-3 " id="btnSearchMobile" onclick="openfrmSearchMobile()"><i
-                class="fa fa-search " aria-hidden="true "></i></button>
-        <a href="#">
-            <button class="btnLogin ml-2">Log in</button>
-        </a>
-        <a href="#">
-            <button class="btnSignup ml-2 mr-3">Sign up</button>
-        </a>
-    </div>
-</div>
-<!--#endregion-->
-<!--#region Bar-item-->
-<div class="fade-bars">&nbsp;</div>
-<div class="bar-item">
-    <ul style="list-style-type: none">
-        <a href="#" class="bar-cat">
-            <li style="margin-bottom: 10px; margin-top: 10px; color: #0040ff;">Log in</li>
-        </a>
-        <a href="" class="bar-cat">
-            <li style="margin-bottom: 20px; color: #0040ff;">Sign up</li>
-        </a>
-    </ul>
-    <hr style="background-color: red;padding-left: 0px; width: 100%">
-</div>
-<div class="space">&nbsp;</div>
-<!--#endregion Bar-item-->
+<jsp:include page="../../Views/partials/nav.jsp"/>
 
 <jsp:doBody/>
 
@@ -179,9 +114,6 @@
 <!--#endregion-->
 
 
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
-
 <script>
     function openfrmSearchMobile() {
         $('.frmSearch').css('display', 'flex');
@@ -212,27 +144,24 @@
     }
 
     // $('#btnBars').on('click', function () {
-    //     if($('.bar-item').css('display') == 'none'){
-    //         $('.bar-item').css('display', 'block');
-    //         $('.fade-bars').css('display','block')
-    //         $('.bar-item').css('right','40%');
-    //         $('body').css('overflow', 'hidden');
-    //     }
-    //     else {
-    //         $('.bar-item').css('display', 'none');
-    //         $('.fade-bars').css('display','none')
-    //         $('body').css('overflow', 'auto');
-    //     }
+    //     $('.bar-item').css('right','50%');
+    //     $('.fade-bars').css('display','block')
+    //     $('body').css('overflow', 'hidden');
     // })
-    $('#btnBars').on('click', function () {
-        console.log('7');
-        $('.bar-item').css('right','40%');
+    $('#btnBars').on('click',function (){
+        $('#bar-item').css('width','50%')
         $('.fade-bars').css('display','block')
         $('body').css('overflow', 'hidden');
     })
 
+    $('#bar-list-item').on('click',function (){
+        $(this).find('#list-group-item').css('width','100%');
+    })
+    function openBranch(id){
+        $('#'+id).css('width','100%');
+    }
     $('.fade-bars').on('click', function () {
-        $('.bar-item').css('right', '100%');
+        $('#bar-item').css('width','0')
         $('.fade-bars').css('display','none')
         $('body').css('overflow', 'auto');
     })
@@ -250,40 +179,6 @@
         }
         prevScrollpos = currentScrollPos;
     }
-
-    // window.addEventListener("resize",function(){
-    //     if($('body').css('width')>'0850px')
-    //         $('.frmSearch').css('display','block');
-    //
-    //     else
-    //         $('.frmSearch').css('display','none');
-    //
-    // })
-    //
-    // $(".slider").owlCarousel({
-    //     loop: true,
-    //     autoplay: false,
-    //     autoplayTimeout: 2000, //2000ms = 2s;
-    //     autoplayHoverPause: true,
-    //     autoWidth: true,
-    //     items: 4,
-    //
-    // });
-    //
-    //
-    // var owl = $('.owl-carousel');
-    // owl.owlCarousel();
-    // // Go to the next item
-    //
-    // var right_click = function () {
-    //
-    //     owl.trigger('next.owl.carousel');
-    // }
-    // // Go to the previous item
-    //
-    // var left_click = function () {
-    //     owl.trigger('prev.owl.carousel', [300]);
-    // }
 </script>
 </body>
 
