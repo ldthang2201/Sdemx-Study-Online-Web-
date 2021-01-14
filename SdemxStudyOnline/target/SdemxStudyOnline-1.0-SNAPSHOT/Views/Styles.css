@@ -1,5 +1,6 @@
 #navigationBar {
-    position: relative;
+    z-index: 1;
+    position: fixed;
     top: 0;
     width: 100%;
     display: flex;
@@ -43,7 +44,7 @@ body {
 
 .txtSearch {
     /*Input Search Text*/
-    width: 84%;
+    width: 80%;
     height: 40px;
     border: 0px;
     border-radius: 50px;
@@ -183,16 +184,16 @@ body {
 }
 
 .bar-item {
-    z-index: 0;
+    z-index: 1;
     background-color: white;
     position: absolute;
     padding-left: 30px;
-    top: 0px;
-    left: 0px;
+    top: 0;
+    right: 100%;
     height: 100%;
     width: 60%;
-    width: 60%;
-    display: none;
+    /*display: none;*/
+    transition: right 0.5s;
 }
 
 .bar-item ul{
@@ -271,6 +272,7 @@ body {
 }
 
 .fade-search {
+    z-index: 1;
     position: fixed;
     display: none;
     width: 100%;
@@ -279,6 +281,7 @@ body {
     opacity: 0.6;
 }
 .fade-bars {
+    z-index: 1;
     position: fixed;
     display: none;
     width: 100%;
@@ -301,7 +304,6 @@ body {
 /*#endregion*/
 
 /*#region Footer*/
-/* footer  */
 footer .main-footer {
 
     padding: 20px 0;
@@ -543,8 +545,8 @@ ul.social-footer2 li a {
     height: auto;
     opacity: 0;
     visibility: hidden;
-    -webkit-transition: opacity 500ms, visibility 500ms;
-    transition: opacity 500ms, visibility 500ms;
+    -webkit-transition: opacity 300ms, visibility 300ms;
+    transition: opacity 300ms, visibility 300ms;
 
 }
 
@@ -582,6 +584,7 @@ ul.social-footer2 li a {
 }
 
 .fade-dropdown {
+    z-index: 1;
     position: fixed;
     width: 100%;
     height: 100%;

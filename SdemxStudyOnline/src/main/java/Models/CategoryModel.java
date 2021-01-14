@@ -12,7 +12,7 @@ public class CategoryModel {
 
     public static List<Branch> getAllBranch() {
         Sql2o sql2o = new Sql2o("jdbc:mysql://localhost:3306/udemxstudy", "root", "");
-        String sql ="select * from branches";
+        String sql ="select * from branch";
         try(Connection con = sql2o.open()) {
             return con.createQuery(sql).executeAndFetch(Branch.class);
         }
@@ -20,7 +20,7 @@ public class CategoryModel {
 
     public static List<Category> getCategoryWithBranchID(int branchID){
         Sql2o sql2o = new Sql2o("jdbc:mysql://localhost:3306/udemxstudy", "root", "");
-        String sql ="select * from categories where branchID ='"+branchID+"'";
+        String sql ="select * from category where branchID ='"+branchID+"'";
         try(Connection con = sql2o.open()) {
             return con.createQuery(sql).executeAndFetch(Category.class);
         }
@@ -35,7 +35,7 @@ public class CategoryModel {
 
     public static List<Category> getCategory()
     {
-        String sql = "select * from categories";
+        String sql = "select * from category";
         try (Connection con = DBUtils.getConnection()) {
             return con.createQuery(sql).executeAndFetch(Category.class);
         }

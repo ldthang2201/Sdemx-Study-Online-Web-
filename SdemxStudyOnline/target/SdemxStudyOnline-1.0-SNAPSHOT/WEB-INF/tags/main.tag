@@ -85,6 +85,7 @@
     </ul>
     <hr style="background-color: red;padding-left: 0px; width: 100%">
 </div>
+<div class="space">&nbsp;</div>
 <!--#endregion Bar-item-->
 
 <jsp:doBody/>
@@ -206,32 +207,58 @@
     function unactiveFade() {
         $('.fade-dropdown').css('visibility', 'hidden');
         $('.fade-dropdown').css('opacity', '0');
-
         $('.container').css('transition-delay', '500ms');
-
         $('.container').css('z-index', '1');
     }
 
-    var flag = 0;
+    // $('#btnBars').on('click', function () {
+    //     if($('.bar-item').css('display') == 'none'){
+    //         $('.bar-item').css('display', 'block');
+    //         $('.fade-bars').css('display','block')
+    //         $('.bar-item').css('right','40%');
+    //         $('body').css('overflow', 'hidden');
+    //     }
+    //     else {
+    //         $('.bar-item').css('display', 'none');
+    //         $('.fade-bars').css('display','none')
+    //         $('body').css('overflow', 'auto');
+    //     }
+    // })
     $('#btnBars').on('click', function () {
-        if (flag % 2 === 0) {
-            flag = flag + 1;
-            $('.bar-item').css('display', 'block');
-            $('.fade-bars').css('display','block')
-            $('body').css('overflow', 'hidden');
-        } else {
-            flag = flag + 1;
-            $('.bar-item').css('display', 'none');
-            $('.fade-bars').css('display','none')
-            $('body').css('overflow', 'auto');
-        }
+        console.log('7');
+        $('.bar-item').css('right','40%');
+        $('.fade-bars').css('display','block')
+        $('body').css('overflow', 'hidden');
     })
+
     $('.fade-bars').on('click', function () {
-        $('.bar-item').css('display', 'none');
+        $('.bar-item').css('right', '100%');
         $('.fade-bars').css('display','none')
         $('body').css('overflow', 'auto');
     })
 
+    var prevScrollpos = window.pageYOffset;
+    window.onscroll = function() {
+        var currentScrollPos = window.pageYOffset;
+        if (prevScrollpos > currentScrollPos) {
+            $('#navigationBar').css('top', '0');
+            // $('.fade-dropdown').css('top', '0');
+            console.log('len');
+        } else {
+            $('#navigationBar').css('top', '-65px');
+            console.log('xuong');
+        }
+        prevScrollpos = currentScrollPos;
+    }
+
+    // window.addEventListener("resize",function(){
+    //     if($('body').css('width')>'0850px')
+    //         $('.frmSearch').css('display','block');
+    //
+    //     else
+    //         $('.frmSearch').css('display','none');
+    //
+    // })
     //
     // $(".slider").owlCarousel({
     //     loop: true,
