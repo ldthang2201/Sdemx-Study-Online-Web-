@@ -29,7 +29,7 @@
             </div>
         </div>
         <a href="#" class=" ml-auto mr-auto LogoMobile"></a>
-        <form action="" class="form-inline ml-auto frmSearch ">
+        <form action="" class="form-inline ml-auto frmSearch mt-1 ">
             <button type="" class="btnSearch"><i class="fa fa-search" aria-hidden="false"></i></button>
             <input class=" mr-sm-2 txtSearch" autocomplete="off" placeholder="Search for anything" id="txtSearch">
             <button type="button" id="some-button" class="btnTimesMobile" onclick="closefrmSearchMobile()"><i

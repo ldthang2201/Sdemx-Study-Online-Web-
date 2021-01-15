@@ -22,15 +22,15 @@
                     <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
                 </ol>
                 <div class="carousel-inner">
-                    <div class="carousel-item active">
+                    <div class="carousel-item active" style="height: 270px">
                         <img src="${pageContext.request.contextPath}/public/Picture/1.jpg" class="d-block w-100"
                              alt="...">
                     </div>
-                    <div class="carousel-item">
+                    <div class="carousel-item" style="height: 270px">
                         <img src="${pageContext.request.contextPath}/public/Picture/2.jpg" class="d-block w-100"
                              alt="...">
                     </div>
-                    <div class="carousel-item">
+                    <div class="carousel-item" style="height: 270px">
                         <img src="${pageContext.request.contextPath}/public/Picture/3.jpg" class="d-block w-100"
                              alt="...">
                     </div>
@@ -45,6 +45,71 @@
                 </a>
             </div>
             <div class="space"></div>
+            <div class="row ">
+                <div class="card-container d-flex justify-content-center"
+                     style="width: 100%; z-index: 0; position: relative">
+                    <div class="btn-next-prev text-muted" style="top: 100px; left:10px" onclick="left_click_card1()"><i
+                            class="fa fa-chevron-left" aria-hidden="true"></i></div>
+                    <div class="slider owl-carousel owl-carousel_card">
+                        <div class="slider-card">
+                            <a href="#">
+                                <div class="img"><img src="${pageContext.request.contextPath}/public/Picture/1.jpg">
+                                </div>
+                                <div class="card-conent">
+                                    <div class="card-title">Hinh anh dep</div>
+                                    <div class="card-title">test slider card</div>
+                                    <p>lorem sssssssssssssssdzxc sdlahjlxz sald kjsald sa d</p>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="slider-card">
+                            <a href="#">
+                                <div class="img"><img src="${pageContext.request.contextPath}/public/Picture/2.jpg">
+                                </div>
+                                <div class="card-conent">
+                                    <div class="card-title">Hinh anh dep</div>
+                                    <div class="card-title">test slider card</div>
+                                    <p>lorem sssssssssssssssdzxc sdlahjlxz sald kjsald sa d</p>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="slider-card">
+                            <a href="#">
+                                <div class="img"><img src="${pageContext.request.contextPath}/public/Picture/3.jpg">
+                                </div>
+                                <div class="card-conent">
+                                    <div class="card-title">Hinh anh dep</div>
+                                    <div class="card-title">test slider card</div>
+                                    <p>lorem sssssssssssssssdzxc sdlahjlxz sald kjsald sa d</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="btn-next-prev text-muted" style="top: 100px; right:10px" onclick="right_click_card1()">
+                        <i class="fa fa-chevron-right" aria-hidden="true"></i></div>
+                </div>
+            </div>
         </div>
+        <script>
+            $('.slider').owlCarousel({
+                loop: true,
+                autoplay: false,
+                autoplayHoverPause: true,
+                autoWidth: true,
+                items: 4,
+            })
+
+
+            var owl_card1 = $('.owl-carousel_card');
+            owl_card1.owlCarousel();
+
+            var right_click_card1 = function () {
+                owl_card1.trigger('next.owl.carousel', [300]);
+            }
+
+            var left_click_card1 = function () {
+                owl_card1.trigger('prev.owl.carousel', [300]);
+            }
+        </script>
     </jsp:body>
 </t:main>

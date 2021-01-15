@@ -313,104 +313,52 @@ body {
 /*#endregion*/
 
 /*#region carousel*/
-/*Code slider car here*/
-/*#endregion*/
-
-/*#region Card body*/
-@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
+.slider{
+    width: 95%;
+    display: flex;
 }
 
-.card-container {
-    display: flex;
-    align-items: center;
+.slider .slider-card{
+    width: 200px;
+    margin: 10px;
+}
+
+.slider .slider-card:hover img{
+    opacity: 0.7;
+}
+
+.slider .slider-card a{
+    text-decoration: none;
+    color: black;
+}
+
+.slider .slider-card .img{
+    height: 120px;
+    width: 200px;
+}
+.slider .slider-card .img img{
+    height: 100%;
     width: 100%;
-    position: relative;
-
-}
-
-.slider {
-    max-width: 95%;
-    display: flex;
-    z-index: 1;
-    position: relative;
-}
-
-.slider .card {
-    flex: 1;
-    margin: 0 10px;
-    background: #fff;
-    width: 250px;
-
-
-}
-
-.slider .card .img {
-    height: 150px;
-    width: auto;
-}
-
-.slider .card .img img {
-    height: 80%;
-    width: 80%;
     object-fit: cover;
 }
 
-.slider .card .content {
+.slider .slider-card .card-conent{
     padding: 10px 20px;
 }
-
-.card .content .title {
-    font-size: 18px;
-    font-weight: 500;
-}
-
-.card .content .sub-title {
-    font-size: 20px;
+.slider .slider-card .card-conent .title{
+    font-size: 25px;
     font-weight: 600;
-    color: #e74c3c;
-    line-height: 20px;
 }
-
-.card .content p {
-    text-align: justify;
-    margin: 10px 0;
-}
-
-.card .content .btn {
-    display: block;
-    text-align: left;
-    margin: 10px 0;
-}
-
-.card .content .btn button {
-    background: #e74c3c;
-    color: #fff;
-    border: none;
-    outline: none;
-    font-size: 17px;
-    padding: 5px 8px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: 0.2s;
-}
-
-
-.btn-prev {
-    -webkit-transform: scaleX(-1);
-    transform: scaleX(-1);
-}
-
-.btn-next:hover {
-    transform: scale(0.9);
-}
-
-.btn-prev:hover {
-    transform: scale(-1);
+.btn-next-prev{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    z-index: 2;
+    position: absolute;
 }
 
 /*#endregion*/
@@ -645,14 +593,13 @@ ul.social-footer2 li a {
 .menu-item {
     z-index: 1;
     position: absolute;
-    height: 300px;
     background-color: white;
     align-items: center;
     width: 80%;
     max-width: 1000px;
     margin-top: 5px;
     padding-top: 12.5px;
-    border-radius: 0px 0px 20px 20px;
+    border-radius: 0 0 20px 20px;
     height: auto;
     opacity: 0;
     visibility: hidden;
