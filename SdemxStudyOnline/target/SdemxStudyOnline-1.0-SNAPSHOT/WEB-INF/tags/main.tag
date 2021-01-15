@@ -4,6 +4,8 @@
 
 <%@ tag pageEncoding="utf-8" %>
 
+<%@attribute name="js" fragment="true" required="false" %>
+
 
 <html>
 <head>
@@ -26,7 +28,7 @@
 <jsp:doBody/>
 
 <!--region Footer-->
-<footer id="footer" class="footer-1" style="z-index: 1; position: relative">
+<footer id="footer" class="footer-1" style="z-index: 0; position: relative">
     <div class="main-footer widgets-dark typo-light">
         <div class="container">
             <div class="row">
@@ -149,16 +151,20 @@
     //     $('body').css('overflow', 'hidden');
     // })
     $('#btnBars').on('click',function (){
-        $('#bar-item').css('width','50%')
-        $('.fade-bars').css('display','block')
+        $('#bar-item').css('width','50%');
+        $('.fade-bars').css('display','block');
         $('body').css('overflow', 'hidden');
     })
 
     $('#bar-list-item').on('click',function (){
         $(this).find('#list-group-item').css('width','100%');
+        $(this).find('#list-group-item').css('opacity','1');
     })
     function openBranch(id){
         $('#'+id).css('width','100%');
+    }
+    function closeBranch(id){
+        $('#'+id).css('width','0');
     }
     $('.fade-bars').on('click', function () {
         $('#bar-item').css('width','0')
@@ -171,11 +177,8 @@
         var currentScrollPos = window.pageYOffset;
         if (prevScrollpos > currentScrollPos) {
             $('#navigationBar').css('top', '0');
-            // $('.fade-dropdown').css('top', '0');
-            console.log('len');
         } else {
-            $('#navigationBar').css('top', '-65px');
-            console.log('xuong');
+            $('#navigationBar').css('top', '-65px');;
         }
         prevScrollpos = currentScrollPos;
     }

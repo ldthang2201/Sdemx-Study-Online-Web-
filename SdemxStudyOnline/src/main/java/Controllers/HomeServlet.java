@@ -26,7 +26,6 @@ public class HomeServlet extends HttpServlet {
         }
         switch (path){
             case "/Index":
-
                 ServletUtils.forward("/Views/vwHome/Home.jsp", request, response);
                 break;
             default:

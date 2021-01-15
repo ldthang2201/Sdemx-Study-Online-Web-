@@ -45,19 +45,6 @@
                 </a>
             </div>
             <div class="space"></div>
-            <div>
-                <c:forEach var="cat" items="${lstCat}">
-                    <div>${cat.getCatName()}</div>
-                </c:forEach>
-
-                <c:forEach var="bran" items="${filterlstBranch}">
-                    <h4 style="color:red">${bran.getBranchName()}</h4>
-                    <c:forEach var="cat" items="${bran.getLstCategory()}">
-                        <div>${cat.getCatID()} - ${cat.getCatName()}</div>
-                    </c:forEach>
-
-                </c:forEach>
-            </div>
         </div>
     </jsp:body>
 </t:main>

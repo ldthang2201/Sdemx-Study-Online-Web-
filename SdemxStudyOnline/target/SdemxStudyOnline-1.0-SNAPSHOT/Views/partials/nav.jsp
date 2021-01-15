@@ -29,7 +29,7 @@
             </div>
         </div>
         <a href="#" class=" ml-auto mr-auto LogoMobile"></a>
-        <form action="" class="form-inline ml-auto frmSearch mt-2 ">
+        <form action="" class="form-inline ml-auto frmSearch ">
             <button type="" class="btnSearch"><i class="fa fa-search" aria-hidden="false"></i></button>
             <input class=" mr-sm-2 txtSearch" autocomplete="off" placeholder="Search for anything" id="txtSearch">
             <button type="button" id="some-button" class="btnTimesMobile" onclick="closefrmSearchMobile()"><i
@@ -57,6 +57,12 @@
             <span><i class="fa fa-caret-right" aria-hidden="true"></i></span>
         </a>
         <div class="list-group bar-item-list" id="${b.getBranchID()}">
+            <a href="#" class="list-group-item list-group-item-action bar-btnReturn" onclick="closeBranch(${b.getBranchID()})">
+                <i class="fa fa-caret-left" aria-hidden="true"></i> Menu
+            </a>
+            <a href="#" class="list-group-item list-group-item-action font-weight-bold">
+                    All ${b.getBranchName()}
+            </a>
             <c:forEach var="c" items="${b.getLstCategory()}">
                 <a href="#" class="list-group-item list-group-item-action">
                     ${c.getCatName()}
@@ -64,6 +70,8 @@
             </c:forEach>
         </div>
     </c:forEach>
+    <a href="" class="list-group-item list-group-item-action" style="color: #0040ff">Log in</a>
+    <a href="" class="list-group-item list-group-item-action" style="color: #0040ff">Sign up</a>
 </div>
 <div class="space">&nbsp;</div>
 <!--#endregion Bar-item-->
