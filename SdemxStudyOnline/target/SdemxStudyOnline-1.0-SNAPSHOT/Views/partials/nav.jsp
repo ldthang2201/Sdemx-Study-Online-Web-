@@ -39,10 +39,10 @@
         <a href="#" class="btnShopping ml-3 mr-3 "><i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
         <button type="button" class="btnSearchMobile mr-3 " id="btnSearchMobile" onclick="openfrmSearchMobile()"><i
                 class="fa fa-search " aria-hidden="true "></i></button>
-        <a href="#">
+        <a href= "/SdemxStudyOnline/Home/Login">
             <button class="btnLogin ml-2">Log in</button>
         </a>
-        <a href="#">
+        <a href="/SdemxStudyOnline/Home/Login">
             <button class="btnSignup ml-2 mr-3">Sign up</button>
         </a>
     </div>
