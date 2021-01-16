@@ -360,6 +360,10 @@ body {
     z-index: 2;
     position: absolute;
 }
+.btn-next-prev:hover{
+    cursor: pointer;
+    background-color: #D8CCFF;
+}
 
 /*#endregion*/
 
