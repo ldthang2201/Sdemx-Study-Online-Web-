@@ -24,7 +24,7 @@ public class AccountServlet extends HttpServlet {
 
         switch (path){
             case "/Login":
-
+            case "/login":
                 ServletUtils.forward("/Views/vwAccount/Login.jsp", request, response);
                 break;
             case "/signup" :
