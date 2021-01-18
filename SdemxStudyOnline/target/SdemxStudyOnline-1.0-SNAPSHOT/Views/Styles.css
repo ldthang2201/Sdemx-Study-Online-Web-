@@ -899,6 +899,17 @@ ul.social-footer2 li a {
     margin-top: 45px;
     font-size:1rem;
 }
+.social-text::after{
+    background:-webkit-linear-gradient(left, #d03746,#1dbdc9);
+    bottom: 0;
+    content: 'ewqeqweq';
+    display: block;
+    height: 1px;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%,0);
+    width: 200px;
+}
 .social-media{
     display:flex;
     justify-content:center ;
