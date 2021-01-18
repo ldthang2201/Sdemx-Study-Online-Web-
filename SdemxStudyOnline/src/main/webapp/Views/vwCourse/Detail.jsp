@@ -26,7 +26,6 @@
                     <div class="card-body">
                         <a href="#" class="card-link">${course.prices}</a>
                         <a href="#" class="card-link">${course.rate}</a>
-                        <a href="#" class="card-link">${course.numRegister}</a>
                     </div>
                 </div>
             </div>
