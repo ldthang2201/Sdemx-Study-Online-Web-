@@ -1,11 +1,13 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%--<%@ page contentType="text/html;charset=UTF-8" language="java" %>--%>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<!DOCTYPE html>
-<html lang="en">
+
+
+
+<html>
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200&display=swap" rel="stylesheet">
@@ -77,7 +79,7 @@
         </div>
         <div class="form sign-up form-signup">
             <h2>Sign Up</h2>
-            <form method="post" id="frmRegister">
+            <form method="post" id="frmRegister" action="signup">
                 <label class="label-signup">
                     <input type="text" class="input-signup"  placeholder ="Name" name="name">
                 </label>
@@ -125,7 +127,13 @@
 
     $('#frmRegister').on('submit', function (e) {
         e.preventDefault();
-        console.log("submit")
+        var form =document.getElementById('frmRegister');//retrieve the form as a DOM element
+
+        var input = document.createElement('input');//prepare a new input DOM element
+        input.setAttribute('name', "action");//set the param name
+        input.setAttribute('value', 'Signup');//set the value
+        input.setAttribute('type', 'text')//set the type, like "hidden" or other
+        form.appendChild(input);
         // const username = $('#txtUsername').val();
         // if (username.length === 0) {
         //     alert('Invalid username.');
@@ -141,30 +149,6 @@
         <%--});--%>
     });
 
-    function isValidDate(dateString)
-    {
-        // First check for the pattern
-        if(!/^\d{1,2}\/\d{1,2}\/\d{4}$/.test(dateString))
-            return false;
-
-        // Parse the date parts to integers
-        var parts = dateString.split("/");
-        var day = parseInt(parts[1], 10);
-        var month = parseInt(parts[0], 10);
-        var year = parseInt(parts[2], 10);
-
-        // Check the ranges of month and year
-        if(year < 1000 || year > 3000 || month == 0 || month > 12)
-            return false;
-
-        var monthLength = [ 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 ];
-
-        // Adjust for leap years
-        if(year % 400 == 0 || (year % 100 != 0 && year % 4 == 0))
-            monthLength[1] = 29;
-
-        // Check the range of the day
-        return day > 0 && day <= monthLength[month - 1];
-    };
 </script>
+
 </html>

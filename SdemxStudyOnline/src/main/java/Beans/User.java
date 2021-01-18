@@ -3,30 +3,34 @@ package Beans;
 import java.util.Date;
 
 public class User {
-    int id;
-    String username, password, name, email;
+    int UserID;
+    String username, password, fullName, email;
     Date dob;
-    int permission;
+    String avatar;
+    int rule;
+    int premium;
 
     public User() {
     }
 
-    public User(int id, String username, String password, String name, String email, Date dob, int permission) {
-        this.id = id;
+    public User(int UserID, String username, String password, String fullName ,String email, Date dob, int rule,int premium,String avatar) {
+        this.UserID = UserID;
         this.username = username;
         this.password = password;
-        this.name = name;
+        this.fullName = fullName;
         this.email = email;
+        this.avatar=avatar;
         this.dob = dob;
-        this.permission = permission;
+        this.rule = rule;
+        this.premium=premium;
     }
 
     public int getId() {
-        return id;
+        return UserID;
     }
 
     public void setId(int id) {
-        this.id = id;
+        this.UserID = UserID;
     }
 
     public String getUsername() {
@@ -46,11 +50,11 @@ public class User {
     }
 
     public String getName() {
-        return name;
+        return fullName;
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.fullName = name;
     }
 
     public String getEmail() {
@@ -70,23 +74,37 @@ public class User {
     }
 
     public int getPermission() {
-        return permission;
+        return rule;
     }
 
     public void setPermission(int permission) {
-        this.permission = permission;
+        this.rule = rule;
+    }
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(int id) {
+        this.avatar = avatar;
+    }
+    public int getPremium() {
+        return premium;
+    }
+
+    public void setPremium(int id) {
+        this.premium = premium;
     }
 
     @Override
     public String toString() {
         return "User {" +
-                "id=" + id +
+                "UserID=" + UserID +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
-                ", name='" + name + '\'' +
+                ", fullName='" + fullName + '\'' +
                 ", email='" + email + '\'' +
                 ", dob=" + dob +
-                ", permission=" + permission +
+                ", rule=" + rule +
                 '}';
     }
 }
