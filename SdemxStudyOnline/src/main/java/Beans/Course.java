@@ -1,5 +1,7 @@
 package Beans;
 
+import Models.CategoryModel;
+
 import java.time.DateTimeException;
 import java.util.Date;
 import java.util.List;
@@ -22,16 +24,17 @@ public class Course {
     boolean premium;
     String language;
     float rate;
+    int numRate;
     int numRegister;
 
     public Course() {
     }
 
-    public Course(int courID, String title, int catID, int branch, int teacherID, String tiniDes, int prices, float sale, String fullDes, Date dateUpload, Date lastUpdate, int views, boolean status, boolean premium, String language, float rate, int numRegister) {
+    public Course(int courID, String title, int catID, int branchID, int teacherID, String tiniDes, int prices, float sale, String fullDes, Date dateUpload, Date lastUpdate, int views, boolean status, boolean premium, String language, float rate, int numRate, int numRegister) {
         this.courID = courID;
         this.title = title;
         this.catID = catID;
-        this.branchID = branch;
+        this.branchID = branchID;
         this.teacherID = teacherID;
         this.tiniDes = tiniDes;
         this.prices = prices;
@@ -44,6 +47,7 @@ public class Course {
         this.premium = premium;
         this.language = language;
         this.rate = rate;
+        this.numRate = numRate;
         this.numRegister = numRegister;
     }
 
@@ -71,12 +75,12 @@ public class Course {
         this.catID = catID;
     }
 
-    public int getBranch() {
+    public int getBranchID() {
         return branchID;
     }
 
-    public void setBranch(int branch) {
-        this.branchID = branch;
+    public void setBranchID(int branchID) {
+        this.branchID = branchID;
     }
 
     public int getTeacherID() {
@@ -175,6 +179,14 @@ public class Course {
         this.rate = rate;
     }
 
+    public int getNumRate() {
+        return numRate;
+    }
+
+    public void setNumRate(int numRate) {
+        this.numRate = numRate;
+    }
+
     public int getNumRegister() {
         return numRegister;
     }
@@ -182,4 +194,14 @@ public class Course {
     public void setNumRegister(int numRegister) {
         this.numRegister = numRegister;
     }
+
+    public String getCatNameByCatID(){
+        return CategoryModel.getCategoryNameByCatID(this.catID);
+    }
+
+    public String getBranchNameByBranchID(){
+        return CategoryModel.getBranchNameByBranchID(this.branchID);
+    }
+
+
 }

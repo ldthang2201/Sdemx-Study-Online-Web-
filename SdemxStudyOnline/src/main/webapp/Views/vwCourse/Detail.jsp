@@ -18,14 +18,16 @@
         <div class="container">
             <div class="row">
                 <div class="card" style="width: 18rem;">
-                    <img src="${pageContext.request.contextPath}/public/Picture/1.jpg" class="card-img-top" alt="...">
+                    <img src="${pageContext.request.contextPath}/public/course/${course.courID}/main.jpg" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">${course.title}</h5>
                         <p class="card-text">${course.tiniDes}</p>
                     </div>
                     <div class="card-body">
-                        <a href="#" class="card-link">${course.prices}</a>
-                        <a href="#" class="card-link">${course.rate}</a>
+<%--                        <a href="#" class="card-link">${course.prices}</a>--%>
+<%--                        <a href="#" class="card-link">${course.rate}</a>--%>
+                        <a href="#" class="card-link">${course.getBranchNameByBranchID()} </a>
+                        <a href="#" class="card-link">${course.getCatNameByCatID()} </a>
                     </div>
                 </div>
             </div>

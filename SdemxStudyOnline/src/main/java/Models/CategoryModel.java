@@ -40,4 +40,22 @@ public class CategoryModel {
             return con.createQuery(sql).executeAndFetch(Category.class);
         }
     }
+
+    public static String getBranchNameByBranchID(int id){
+        final String sql = "select branchname from branch where branchID=:branchID";
+        try(Connection con = DBUtils.getConnection()){
+            return con.createQuery(sql)
+                    .addParameter("branchID",id)
+                    .executeScalar(String.class);
+        }
+    }
+
+    public static String getCategoryNameByCatID(int id){
+        String sql = "select catName from category where catID= :catID ";
+        try (Connection con = DBUtils.getConnection()) {
+            return con.createQuery(sql)
+                    .addParameter("catID",id)
+                    .executeScalar(String.class);
+        }
+    }
 }
