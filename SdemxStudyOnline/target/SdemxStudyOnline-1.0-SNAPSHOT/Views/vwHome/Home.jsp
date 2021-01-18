@@ -52,7 +52,7 @@
                     <div class="slider owl-carousel owl-carousel_card">
                         <div class="slider-card">
                             <a href="#">
-                                <div class="img"><img src="${pageContext.request.contextPath}/public/Picture/1.jpg">
+                                <div class="imgslider"><img src="${pageContext.request.contextPath}/public/Picture/1.jpg">
                                 </div>
                                 <div class="card-conent">
                                     <div class="card-title">Hinh anh dep</div>
@@ -63,7 +63,7 @@
                         </div>
                         <div class="slider-card">
                             <a href="#">
-                                <div class="img"><img src="${pageContext.request.contextPath}/public/Picture/2.jpg">
+                                <div class="imgslider"><img src="${pageContext.request.contextPath}/public/Picture/2.jpg">
                                 </div>
                                 <div class="card-conent">
                                     <div class="card-title">Hinh anh dep</div>
@@ -74,7 +74,7 @@
                         </div>
                         <div class="slider-card">
                             <a href="#">
-                                <div class="img"><img src="${pageContext.request.contextPath}/public/Picture/3.jpg">
+                                <div class="imgslider"><img src="${pageContext.request.contextPath}/public/Picture/3.jpg">
                                 </div>
                                 <div class="card-conent">
                                     <div class="card-title">Hinh anh dep</div>
