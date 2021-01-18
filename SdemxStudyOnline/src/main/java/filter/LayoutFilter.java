@@ -6,6 +6,7 @@ import Models.CategoryModel;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.List;
 
@@ -24,5 +25,6 @@ public class LayoutFilter implements Filter {
     public void init(FilterConfig config) throws ServletException {
 
     }
+
 
 }

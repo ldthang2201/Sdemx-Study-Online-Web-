@@ -803,10 +803,14 @@ ul.social-footer2 li a {
     font-family: 'Nunito', sans-serif;
 
 }
-.btn-signin,.input-password,.input-email,.input-signup{
+.btn-signin,.input-password,.input-email,.input-signup,.btn-signup{
     border:none;
     outline:none;
     background:none;
+
+}
+.input-password,.input-email{
+    text-align:left;
 }
 .cont{
     overflow:hidden;
@@ -819,21 +823,27 @@ ul.social-footer2 li a {
     position: relative;
     width:640px;
     height: 100%;
-    padding:50px 30px;
+    padding:30px 30px;
     -webkit-transition: -webkit-form 1.2s ease-in-out;
     transition: -webkit-transform 1.2s ease-in-out;
     transition: transform 1.2s ease-in-out;
     transition: transform 1.2s ease-in-out ,-webkit-transform 1.2s ease-in-out;
 }
-.form-signin h2,.sign-up h2{
+.form-signin h2 {
     width: 100%;
     font-size: 30px;
     text-align:center;
 }
+.sign-up h2{
+    width: 100%;
+    font-size: 30px;
+    text-align:center;
+}
+
 .label-email,.label-password,.label-signup{
     display: block;
     width:260px;
-    margin:25px auto;
+    margin:20px auto;
     text-align:center;
 }
 .label-email >span,.label-password>span{
@@ -843,7 +853,7 @@ ul.social-footer2 li a {
     text-transform: uppercase;
 }
 .label-signup{
-    margin:40px auto;
+    margin:30px auto;
 }
 .input-password,.input-email,.input-signup{
     display: block;
@@ -857,8 +867,10 @@ ul.social-footer2 li a {
 }
 .input-signup{
     text-align: left;
+    margin-bottom:0px ;
+    margin-top:0px;
 }
-.btn-signin{
+.btn-signin,.btn-signup{
     display: block;
     margin: 0 auto;
     width:260px;
@@ -869,7 +881,7 @@ ul.social-footer2 li a {
     cursor: pointer;
     /* -------------------- */
     margin-top:40px;
-    margin-bottom:30px;
+    margin-bottom:10px;
     text-transform: uppercase;
     font-weight: 600;
     font-family: 'Nunito', sans-serif;
@@ -877,8 +889,11 @@ ul.social-footer2 li a {
 
 
 }
-.btn-signin:hover{
+.btn-signin:hover,.btn-signup:hover{
     background:-webkit-linear-gradient(left,#b224ef,#7579ff);
+}
+.btn-signup{
+    margin-top: 0px;
 }
 .forgot-password{
     margin-top:15px;
@@ -1027,7 +1042,7 @@ ul.social-footer2 li a {
 }
 
 .img-text h2{
-    margin-bottom: 10px;
+    margin-bottom: 0px;
     font-weight: normal;
 }
 
@@ -1139,7 +1154,7 @@ ul.social-footer2 li a {
     text-align: center;
     font-size: 10px;
     margin: 0 0 10px;
-    padding: 0 0 10px;
+    padding: 0 0 0px;
     position: relative;
 }
 .Policy-agree::after{
@@ -1153,4 +1168,5 @@ ul.social-footer2 li a {
     transform: translate(-50%,0);
     width: 200px;
 }
+
 /*#endregion*/

@@ -1,20 +1,35 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%--<%@ page contentType="text/html;charset=UTF-8" language="java" %>--%>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<!DOCTYPE html>
-<html lang="en">
+
+
+
+<html>
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200&display=swap" rel="stylesheet">
     <title>Online Course - Learn anything | Sdemx</title>
     <link rel="shortcut icon" href="${pageContext.request.contextPath}/public/ImgLogo/logo1.ico" type="image/x-icon">
+
+<%--    <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/themes/base/jquery-ui.css" rel="stylesheet" />--%>
+<%--    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>--%>
+<%--    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/jquery-ui.min.js"></script>--%>
+
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<%--    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>--%>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css">
+
     <style>
-        <%@include file="/Views/Styles.css" %>
+    <%@include file="/Views/Styles.css" %>
     </style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script>
+
+
 </head>
+
 <body class="body-login">
 <div class='cont'>
     <div class="form-signin">
@@ -64,24 +79,30 @@
         </div>
         <div class="form sign-up form-signup">
             <h2>Sign Up</h2>
+            <form method="post" id="frmRegister">
             <label class="label-signup">
-
-                <input type="text" class="input-signup"  placeholder ="Name">
+                <input type="text" class="input-signup"  placeholder ="Name" name="name">
+            </label>
+                <label class="label-signup">
+                    <input type="text" class="input-signup"  placeholder ="UserName" name="username">
+                </label>
+            <label class="label-signup">
+                <input  type="text" class="input-signup" placeholder ="Email" name="email">
             </label>
             <label class="label-signup">
-                <input type="email" class="input-signup" placeholder ="Email">
+                <input type="text" id="datepicker" class="input-signup"  placeholder ="BirthDay" name="dob"></p>
             </label>
             <label class="label-password">
 
-                <input type="password" class="input-signup"  placeholder ="Password">
+                <input type="password" class="input-signup"  placeholder ="Password" name="password">
             </label>
             <label class="label-signup">
 
                 <input type="password" class="input-signup" placeholder="Confirm Password">
             </label>
-            <button type="button" class="btn-signin">Sign Up </button>
+            <button  class="btn-signup" type="submit">Sign Up </button>
             <p class="Policy-agree">By signing up, you agree to our Terms of Use and Privacy Policy. </p>
-
+            </form>
         </div>
     </div>
 </div>
@@ -96,5 +117,57 @@
         }
     );
 
+    $('#datepicker').on('click', function() {
+        $("#datepicker").datetimepicker({
+            format: 'd/m/Y',
+            timepicker: false,
+            mask: true,
+        });
+    } );
+
+    $('#frmRegister').on('submit', function (e) {
+        e.preventDefault();
+            console.log("submit")
+        // const username = $('#txtUsername').val();
+        // if (username.length === 0) {
+        //     alert('Invalid username.');
+        //     return;
+        // }
+        $('#frmRegister').off('submit').submit();
+
+        <%--$.getJSON('${pageContext.request.contextPath}/Account/IsAvailable?user=' + username, function (data) {--%>
+        <%--    if (data === true) {--%>
+        <%--    } else {--%>
+        <%--        alert('Not available.');--%>
+        <%--    }--%>
+        <%--});--%>
+    });
+
+    function isValidDate(dateString)
+    {
+        // First check for the pattern
+        if(!/^\d{1,2}\/\d{1,2}\/\d{4}$/.test(dateString))
+            return false;
+
+        // Parse the date parts to integers
+        var parts = dateString.split("/");
+        var day = parseInt(parts[1], 10);
+        var month = parseInt(parts[0], 10);
+        var year = parseInt(parts[2], 10);
+
+        // Check the ranges of month and year
+        if(year < 1000 || year > 3000 || month == 0 || month > 12)
+            return false;
+
+        var monthLength = [ 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 ];
+
+        // Adjust for leap years
+        if(year % 400 == 0 || (year % 100 != 0 && year % 4 == 0))
+            monthLength[1] = 29;
+
+        // Check the range of the day
+        return day > 0 && day <= monthLength[month - 1];
+    };
 </script>
+
 </html>
