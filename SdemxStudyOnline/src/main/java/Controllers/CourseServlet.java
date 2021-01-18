@@ -1,5 +1,7 @@
 package Controllers;
 
+import Beans.Course;
+import Models.CourseModel;
 import Utility.ServletUtils;
 
 import javax.servlet.ServletException;
@@ -8,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Optional;
 
 @WebServlet(name = "CourseServlet", urlPatterns = "/Course/*")
 public class CourseServlet extends HttpServlet {
@@ -19,7 +22,16 @@ public class CourseServlet extends HttpServlet {
         String path = request.getPathInfo();
         switch (path){
             case "/Detail":
-                ServletUtils.forward("/Views/vwCourse/Detail.jsp", request, response);
+                int id = Integer.parseInt(request.getParameter("id"));
+                Optional<Course> c = CourseModel.getCourseDetailsById(id);
+
+                if(c.isPresent()){
+                    System.out.println(c.get());
+                    request.setAttribute("course",c.get());
+                    ServletUtils.forward("/Views/vwCourse/Detail.jsp", request, response);
+                } else {
+                    ServletUtils.redirect("/Home",request,response);
+                }
                 break;
             case "/ByCat":
                 ServletUtils.forward("/Views/vwCourse/ByCat.jsp", request, response);
