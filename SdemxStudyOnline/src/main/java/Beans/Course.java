@@ -3,6 +3,7 @@ package Beans;
 import java.time.DateTimeException;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 public class Course {
     int courID;
@@ -10,59 +11,40 @@ public class Course {
     int catID;
     int branchID;
     int teacherID;
-    String tinyDes;
+    String tiniDes;
     int prices;
+    float sale;
     String fullDes;
     Date dateUpload;
     Date lastUpdate;
     int views;
     boolean status;
-    String Language;
+    boolean premium;
+    String language;
     float rate;
-    int numberRegister;
-    List<Feedback> lstFeedback;
+    int numRegister;
 
     public Course() {
     }
 
-    public Course(int courID, String title, int catID, int branchID, int teacherID, String tinyDes, int prices, String fullDes, Date dateUpload, Date lastUpdate, int views, boolean status, String language, float rate, int numberRegister) {
+    public Course(int courID, String title, int catID, int branch, int teacherID, String tiniDes, int prices, float sale, String fullDes, Date dateUpload, Date lastUpdate, int views, boolean status, boolean premium, String language, float rate, int numRegister) {
         this.courID = courID;
         this.title = title;
         this.catID = catID;
-        this.branchID = branchID;
+        this.branchID = branch;
         this.teacherID = teacherID;
-        this.tinyDes = tinyDes;
+        this.tiniDes = tiniDes;
         this.prices = prices;
+        this.sale = sale;
         this.fullDes = fullDes;
         this.dateUpload = dateUpload;
         this.lastUpdate = lastUpdate;
         this.views = views;
         this.status = status;
-        Language = language;
+        this.premium = premium;
+        this.language = language;
         this.rate = rate;
-        this.numberRegister = numberRegister;
-    }
-
-//    Hàm constructor không có numberRegister
-    public Course(int courID, String title, int catID, int branchID, int teacherID, String tinyDes, int prices, String fullDes, Date dateUpload, Date lastUpdate, int views, boolean status, String language, float rate) {
-        this.courID = courID;
-        this.title = title;
-        this.catID = catID;
-        this.branchID = branchID;
-        this.teacherID = teacherID;
-        this.tinyDes = tinyDes;
-        this.prices = prices;
-        this.fullDes = fullDes;
-        this.dateUpload = dateUpload;
-        this.lastUpdate = lastUpdate;
-        this.views = views;
-        this.status = status;
-        Language = language;
-        this.rate = rate;
-    }
-
-    public List<Feedback> getLstFeedback() {
-        return lstFeedback;
+        this.numRegister = numRegister;
     }
 
     public int getCourID() {
@@ -89,12 +71,12 @@ public class Course {
         this.catID = catID;
     }
 
-    public int getBranchID() {
+    public int getBranch() {
         return branchID;
     }
 
-    public void setBranchID(int branchID) {
-        this.branchID = branchID;
+    public void setBranch(int branch) {
+        this.branchID = branch;
     }
 
     public int getTeacherID() {
@@ -105,12 +87,12 @@ public class Course {
         this.teacherID = teacherID;
     }
 
-    public String getTinyDes() {
-        return tinyDes;
+    public String getTiniDes() {
+        return tiniDes;
     }
 
-    public void setTinyDes(String tinyDes) {
-        this.tinyDes = tinyDes;
+    public void setTiniDes(String tiniDes) {
+        this.tiniDes = tiniDes;
     }
 
     public int getPrices() {
@@ -119,6 +101,14 @@ public class Course {
 
     public void setPrices(int prices) {
         this.prices = prices;
+    }
+
+    public float getSale() {
+        return sale;
+    }
+
+    public void setSale(float sale) {
+        this.sale = sale;
     }
 
     public String getFullDes() {
@@ -161,12 +151,20 @@ public class Course {
         this.status = status;
     }
 
+    public boolean isPremium() {
+        return premium;
+    }
+
+    public void setPremium(boolean premium) {
+        this.premium = premium;
+    }
+
     public String getLanguage() {
-        return Language;
+        return language;
     }
 
     public void setLanguage(String language) {
-        Language = language;
+        this.language = language;
     }
 
     public float getRate() {
@@ -177,11 +175,11 @@ public class Course {
         this.rate = rate;
     }
 
-    public int getNumberRegister() {
-        return numberRegister;
+    public int getNumRegister() {
+        return numRegister;
     }
 
-    public void setNumberRegister(int numberRegister) {
-        this.numberRegister = numberRegister;
+    public void setNumRegister(int numRegister) {
+        this.numRegister = numRegister;
     }
 }

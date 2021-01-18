@@ -11,21 +11,22 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
-<jsp:useBean id="course" scope="request" type="java.util.List<Beans.Course>"/>
+<%--<jsp:useBean id="course" scope="request" type="java.util.List<Beans.Course>"/>--%>
 
 <t:main>
     <jsp:body>
         <div class="container">
             <div class="row">
                 <div class="card" style="width: 18rem;">
-                    <img src="..." class="card-img-top" alt="...">
+                    <img src="${pageContext.request.contextPath}/public/Picture/1.jpg" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">${course.title}</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <p class="card-text">${course.tiniDes}</p>
                     </div>
                     <div class="card-body">
-                        <a href="#" class="card-link">Card link</a>
-                        <a href="#" class="card-link">Another link</a>
+                        <a href="#" class="card-link">${course.prices}</a>
+                        <a href="#" class="card-link">${course.rate}</a>
+                        <a href="#" class="card-link">${course.numRegister}</a>
                     </div>
                 </div>
             </div>

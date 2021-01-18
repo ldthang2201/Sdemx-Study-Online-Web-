@@ -23,8 +23,8 @@ public class CourseServlet extends HttpServlet {
         switch (path){
             case "/Detail":
                 int id = Integer.parseInt(request.getParameter("id"));
+                System.out.println(id);
                 Optional<Course> c = CourseModel.getCourseDetailsById(id);
-
                 if(c.isPresent()){
                     System.out.println(c.get());
                     request.setAttribute("course",c.get());
