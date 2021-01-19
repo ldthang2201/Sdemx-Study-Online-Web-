@@ -72,6 +72,19 @@
                                 </div>
                             </a>
                         </div>
+                        <c:forEach var="c" items="${lstMV}">
+                            <div class="slider-card">
+                                <a href="#">
+                                    <div class="imgslider"><img src="${pageContext.request.contextPath}/public/course/${c.courID}/main.jpg">
+                                    </div>
+                                    <div class="card-conent">
+                                        <div class="card-title">${c.title}</div>
+                                        <div class="card-title">test slider card</div>
+                                        <p>lorem sssssssssssssssdzxc sdlahjlxz sald kjsald sa d</p>
+                                    </div>
+                                </a>
+                            </div>
+                        </c:forEach>
                         <div class="slider-card">
                             <a href="#">
                                 <div class="imgslider"><img src="${pageContext.request.contextPath}/public/Picture/3.jpg">

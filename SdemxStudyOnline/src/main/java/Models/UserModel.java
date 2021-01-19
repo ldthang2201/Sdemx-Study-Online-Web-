@@ -39,4 +39,12 @@ public class UserModel {
                     .executeUpdate();
         }
     }
+    public static String getUserFullnameByUserID(int id){
+        final String sql = "select fullname from user where userID=:userID";
+        try(Connection con = DBUtils.getConnection()){
+            return con.createQuery(sql)
+                    .addParameter("userID",id)
+                    .executeScalar(String.class);
+        }
+    }
 }

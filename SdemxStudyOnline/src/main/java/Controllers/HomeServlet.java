@@ -2,7 +2,9 @@ package Controllers;
 
 import Beans.Branch;
 import Beans.Category;
+import Beans.Course;
 import Models.CategoryModel;
+import Models.CourseModel;
 import Utility.ServletUtils;
 
 import javax.servlet.ServletException;
@@ -26,6 +28,8 @@ public class HomeServlet extends HttpServlet {
         }
         switch (path){
             case "/Index":
+                List<Course> lstMostViewedCour = CourseModel.getTop10MostViewdCourse();
+                request.setAttribute("lstMV",lstMostViewedCour);
                 ServletUtils.forward("/Views/vwHome/Home.jsp", request, response);
                 break;
             case "/Login":

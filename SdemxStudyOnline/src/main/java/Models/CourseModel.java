@@ -27,4 +27,18 @@ public class CourseModel {
             return Optional.ofNullable(lstCourse.get(0));
         }
     }
+
+    public static int getNumberofRegisterByCourID(int id){
+        final  String sql = "select count(*) from watchlist where courID=:courID";
+        try (Connection con = DBUtils.getConnection()){
+            return con.createQuery(sql).addParameter("courID",id).executeScalar(int.class);
+        }
+    }
+
+    public static List<Course> getTop10MostViewdCourse(){
+        final String sql = "select * from vw_top10mostviewed";
+        try (Connection con = DBUtils.getConnection()){
+            return con.createQuery(sql).executeAndFetch(Course.class);
+        }
+    }
 }

@@ -1170,3 +1170,51 @@ ul.social-footer2 li a {
 }
 
 /*#endregion*/
+
+/*#region Star-rating*/
+.star-ratings-css {
+    unicode-bidi: bidi-override;
+    color: #c5c5c5;
+    font-size: 15px;
+    height: 15px;
+    width: 100px;
+    position: relative;
+    text-shadow: 0 1px 0 #a2a2a2;
+    font-family: FontAwesome;
+    color:gold;
+}
+
+[title=".0.0"]::before {
+    content: "\f006\f006\f006\f006\f006"
+}
+[title=".0.5"]::before {
+    content: "\f123\f006\f006\f006\f006"
+}
+[title=".1.0"]::before {
+    content: "\f005\f006\f006\f006\f006"
+}
+[title=".1.5"]::before {
+    content: "\f005\f123\f006\f006\f006"
+}
+[title=".2.0"]::before {
+    content: "\f005\f005\f006\f006\f006"
+}
+[title=".2.5"]::before {
+    content: "\f005\f005\f123\f006\f006"
+}
+[title=".3.0"]::before {
+    content: "\f005\f005\f005\f006\f006"
+}
+[title=".3.5"]::before {
+    content: "\f005\f005\f005\f123\f006"
+}
+[title=".4.0"]::before {
+    content: "\f005\f005\f005\f005\f006"
+}
+[title=".4.5"]::before {
+    content: "\f005\f005\f005\f005\f123"
+}
+[title=".5.0"]::before {
+    content: "\f005\f005\f005\f005\f005"
+}
+/*#endregion*/

@@ -22,12 +22,13 @@
                     <div class="card-body">
                         <h5 class="card-title">${course.title}</h5>
                         <p class="card-text">${course.tiniDes}</p>
+                        <div class="star-ratings-css" title=".${course.getRate()}"></div>
                     </div>
                     <div class="card-body">
 <%--                        <a href="#" class="card-link">${course.prices}</a>--%>
 <%--                        <a href="#" class="card-link">${course.rate}</a>--%>
                         <a href="#" class="card-link">${course.getBranchNameByBranchID()} </a>
-                        <a href="#" class="card-link">${course.getCatNameByCatID()} </a>
+                        <a href="#" class="card-link">${course.getTeacherNameByTeacherID()} </a>
                     </div>
                 </div>
             </div>

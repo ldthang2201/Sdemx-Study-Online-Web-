@@ -1,6 +1,8 @@
 package Beans;
 
 import Models.CategoryModel;
+import Models.CourseModel;
+import Models.UserModel;
 
 import java.time.DateTimeException;
 import java.util.Date;
@@ -49,6 +51,20 @@ public class Course {
         this.rate = rate;
         this.numRate = numRate;
         this.numRegister = numRegister;
+    }
+
+    public Course(int courID, String title, int branchID, int teacherID, int prices, float sale, Date dateUpload, int views, boolean premium, float rate, int numRate) {
+        this.courID = courID;
+        this.title = title;
+        this.branchID = branchID;
+        this.teacherID = teacherID;
+        this.prices = prices;
+        this.sale = sale;
+        this.dateUpload = dateUpload;
+        this.views = views;
+        this.premium = premium;
+        this.rate = rate;
+        this.numRate = numRate;
     }
 
     public int getCourID() {
@@ -172,7 +188,9 @@ public class Course {
     }
 
     public float getRate() {
-        return rate;
+        float x = (float)(rate - (rate % 0.5));
+        System.out.println(x);
+        return x;
     }
 
     public void setRate(float rate) {
@@ -203,5 +221,10 @@ public class Course {
         return CategoryModel.getBranchNameByBranchID(this.branchID);
     }
 
-
+    public String getTeacherNameByTeacherID(){
+        return UserModel.getUserFullnameByUserID(this.teacherID);
+    }
+    public int getNumberofRegiterByCourID(){
+        return CourseModel.getNumberofRegisterByCourID(this.courID);
+    }
 }
