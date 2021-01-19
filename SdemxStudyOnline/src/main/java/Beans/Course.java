@@ -188,11 +188,17 @@ public class Course {
     }
 
     public float getRate() {
-        float x = (float)(rate - (rate % 0.5));
-        System.out.println(x);
-        return x;
+        return (float)(Math.round(rate*10.0)/10.0);
     }
+    public float getStarRate(){
 
+        float x = (int)(rate / 0.5);
+        float y = (rate % 1);
+        if (y%0.5 > 0.2)
+            return ((x+1)/2);
+        else
+            return (x/2);
+    }
     public void setRate(float rate) {
         this.rate = rate;
     }
@@ -227,4 +233,9 @@ public class Course {
     public int getNumberofRegiterByCourID(){
         return CourseModel.getNumberofRegisterByCourID(this.courID);
     }
+    public int getFinalPrice()
+    {
+        return (int)(prices * sale);
+    }
+
 }

@@ -15,7 +15,7 @@
                 <div class="container">
                     <div class="row">
                         <c:forEach var="b" items="${filterlstBranch}">
-                            <div class="col-sm-3 p-1">
+                            <div class="col-sm-3 pl-3">
                                 <ul style="list-style-type: none;">
                                     <li class="title-list"><a href="" class="title-list">${b.getBranchName()}</a></li>
                                     <c:forEach var="cat" items="${b.getLstCategory()}">
