@@ -888,6 +888,61 @@ ul.social-footer2 li a {
     margin-bottom:0px ;
     margin-top:0px;
 }
+.login-message{
+    font-family: 'Nunito', sans-serif;
+    text-align: center;
+    font-weight: 200;
+    color: red;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.user-info{
+    font-size:medium;
+    text-align:center;
+    cursor:pointer;
+    font-weight: bold;
+
+}
+.user-icon{
+    width:35px;
+    height:35px;
+    border-radius:50%;
+    margin: 0 auto;
+}
+.user-icon:hover{
+    cursor: pointer;
+}
+
+.user-option{
+
+    position: absolute;
+    /*right:50px;*/
+
+    padding-top: 12.5px;
+    height:auto ;
+    -webkit-transition: opacity 300ms, visibility 10ms;
+    transition: opacity 300ms, visibility 10ms;
+    background-color:lightskyblue;
+    display: none;
+    /*box-shadow: 2px 2px 2px 2px black;*/
+
+}
+.user-option-div:hover .user-option{
+    display: block;
+}
+
+
+.user-option-dropdown{
+    position: relative;
+    display: inline-block;
+}
+
+
+.user-option-item{
+font-size:medium;
+    margin-top:5px;
+    margin-bottom:5px;
+}
 .btn-signin,.btn-signup{
     display: block;
     margin: 0 auto;
@@ -956,10 +1011,10 @@ ul.social-footer2 li a {
     justify-content:center ;
 
 }
+
 .social-icon{
      height: 50px;
     width: 50px;
-
     border:1px solid #333;
     margin : 0px 15px;
     display:flex;

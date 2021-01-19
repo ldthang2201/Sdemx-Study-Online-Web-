@@ -12,7 +12,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200&display=swap" rel="stylesheet">
     <title>Online Course - Learn anything | Sdemx</title>
-    <link rel="shortcut icon" href="${pageContext.request.contextPath}/public/ImgLogo/logo1.ico" type="image/x-icon">
+    <link rel="icon" href="${pageContext.request.contextPath}/public/ImgLogo/logo1.ico" type="image/x-icon">
 
 <%--    <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/themes/base/jquery-ui.css" rel="stylesheet" />--%>
 <%--    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>--%>
@@ -45,6 +45,10 @@
             </label>
             <button  type="submit" class="btn-signin" > Sign in</button>
             <p class="forgot-password">Forgot password</p>
+
+            <c:if test="${hasError}" >
+                <p class="login-message"> Login failed! ${errorMessage}</p>
+            </c:if>
             <p class="social-text"> Or sign in with social</p>
             <div class="social-media">
                 <a href="#" class="social-icon">
@@ -81,8 +85,9 @@
             </div>
         </div>
         <div class="form sign-up form-signup">
-            <h2>Sign Up</h2>
+
             <form method="post" id="frmRegister" action="signup">
+                <h2>Sign Up</h2>
             <label class="label-signup">
                 <input type="text" class="input-signup"  placeholder ="Name" name="name">
             </label>

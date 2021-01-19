@@ -9,6 +9,7 @@ import java.io.IOException;
 public class ServletUtils {
     public static void forward(String viewPath, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         RequestDispatcher rd=request.getRequestDispatcher(viewPath);
+//        System.out.println(viewPath);
         rd.forward(request,response);
     }
 

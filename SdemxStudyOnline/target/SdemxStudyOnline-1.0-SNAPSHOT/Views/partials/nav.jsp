@@ -1,5 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<jsp:useBean id="authUser" scope="session" type="Beans.User"/>
 <!--#region navBar-->
 <div class="fade-dropdown">&nbsp;</div>
 <div class="fade-search" onclick="closefrmSearchMobile()">&nbsp;</div>
@@ -37,14 +37,40 @@
         </form>
         <a href="" class="btnTeach">Teach on Sdemx</a>
         <a href="#" class="btnShopping ml-3 mr-3 "><i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
-        <button type="button" class="btnSearchMobile mr-3 " id="btnSearchMobile" onclick="openfrmSearchMobile()"><i
-                class="fa fa-search " aria-hidden="true "></i></button>
-        <a href= "/SdemxStudyOnline/Account/Login">
-            <button class="btnLogin ml-2">Log in</button>
-        </a>
-        <a href="/SdemxStudyOnline/Account/Signup">
-            <button class="btnSignup ml-2 mr-3">Sign up</button>
-        </a>
+        <button type="button" class="btnSearchMobile mr-3 " id="btnSearchMobile" onclick="openfrmSearchMobile()">
+            <i class="fa fa-search " aria-hidden="true "></i></button>
+        <c:choose><c:when test="${auth}">
+            <div style="   margin: 0 auto;" class="user-option-div">
+                <img class="user-icon " src="${pageContext.request.contextPath}/public/ImgLogo/user-logo.png" >
+                <div class="user-opton-dropdown">
+                    <div class="user-option " aria-labelledby="navbarDropdown">
+                        <a class="user-option-item" href="#">About me</a><br>
+                        <a class="user-option-item" href="javascript: $('#frmlogout').submit();">Logout <i class="fa fa-sign-out" aria-hidden="true"></i></a><br>
+                        <a class=user-option-item" href="#">Something else here</a><br>
+                    </div>
+                </div>
+            </div>
+            <a class="user-info">Hi! ${authUser.name}</a>
+                <form method="post" id="frmlogout" action="${pageContext.request.contextPath}/Account/Logout">
+                    <input type="hidden" name="action" value="Logout">
+                </form>
+            <script>$('#frmlogout').on('submit', function (e) {
+                e.preventDefault();
+                $('#frmlogout').off('submit').submit();
+
+
+            })</script>
+        </c:when>
+        <c:otherwise>
+            <a href= "/SdemxStudyOnline/Account/Login">
+                <button class="btnLogin ml-2">Log in</button>
+            </a>
+            <a href="/SdemxStudyOnline/Account/Signup">
+                <button class="btnSignup ml-2 mr-3">Sign up</button>
+            </a>
+        </c:otherwise>
+        </c:choose>
+
     </div>
 </div>
 <!--#endregion-->

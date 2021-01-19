@@ -8,13 +8,10 @@ import Models.CategoryModel;
 import Beans.User;
 import Models.UserModel;
 import Utility.ServletUtils;
-
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.*;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -22,12 +19,14 @@ import java.util.Date;
 import java.util.Enumeration;
 import java.util.Optional;
 import java.util.List;
+import java.net.URL;
 
 @WebServlet(name = "AccountServlet", urlPatterns = "/Account/*")
 public class AccountServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//        String path = request.getPathInfo();
+        String path = request.getPathInfo();
         String action = request.getParameter("action");
+        System.out.println(action);
         switch (action) {
             case "Login":
                postLogin(request, response);
@@ -35,12 +34,18 @@ public class AccountServlet extends HttpServlet {
             case "Signup" :
                 postRegister(request, response);
                 break;
-            case "/Logout":
-                postLogout(request, response);
+            case "Logout":
+//                postLogout(request, response);
                 break;
             default:
                 ServletUtils.redirect("/NotFound", request, response);
                 break;
+        }
+        switch (path) {
+            case "/Logout":
+                postLogout(request, response);
+                break;
+
         }
     }
 
@@ -56,6 +61,12 @@ public class AccountServlet extends HttpServlet {
             case "/Signup" :
                 ServletUtils.forward("/Views/vwAccount/Signup.jsp", request, response);
                 break;
+//            case"/Logout":
+//            case"/logout":
+//                 String url = request.getHeader("referer");
+//                if (url == null) url = "/Home";
+//                ServletUtils.forward(url, request, response);
+//                break;
             default:
                 ServletUtils.redirect("/NotFound", request, response);
                 break;
@@ -82,7 +93,24 @@ public class AccountServlet extends HttpServlet {
         ServletUtils.redirect("/Home", request, response);
     }
     private void postLogout(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        session.setAttribute("auth",false);
+        session.setAttribute("authUser",new User());
 
+
+        String url = request.getHeader("referer");;
+        String patch = request.getScheme() + "://" +   // "http" + "://
+                request.getServerName() +       // "myhost"
+                ":" + request.getServerPort(); //port
+        System.out.println(patch);
+        String rqpatch=url.replace(patch,"");
+        System.out.println(rqpatch );
+
+//        System.out.println(url);
+        if (url == null) url = "/Home";
+//
+//
+        ServletUtils.redirect(rqpatch, request, response);
 
     }
     private void postLogin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -93,11 +121,17 @@ public class AccountServlet extends HttpServlet {
          if (user.isPresent()) {
             BCrypt.Result result = BCrypt.verifyer().verify(password.toCharArray(), user.get().getPassword());
             if (result.verified) {
+
                 HttpSession session = request.getSession();
                 session.setAttribute("auth", true);
                 session.setAttribute("authUser", user.get());
-
                 String url = (String) session.getAttribute("retUrl");
+
+//                set cookie
+                Cookie cookie = new Cookie("User",user.get().getUsername());
+                cookie.setMaxAge(60 * 60 * 24);
+                response.addCookie(cookie);
+
                 if (url == null) url = "/Home";
                 ServletUtils.redirect(url, request, response);
             } else {

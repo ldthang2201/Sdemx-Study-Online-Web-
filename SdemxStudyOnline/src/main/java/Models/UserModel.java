@@ -11,7 +11,7 @@ public class UserModel {
 
     public static Optional<User> findByUserName(String username) {
         final String sql = "select * from user where userName = :username";
-        System.out.println("found");
+
         try (Connection con = DBUtils.getConnection()) {
 
             List<User> list = con.createQuery(sql)
