@@ -157,8 +157,6 @@
                     <a href="" class="btn btn-register-slide" style="background-color: #ff8d1e; color: white">Start Teaching</a>
                 </div>
                 <div class="col-sm div-img-teacher" style="position: relative"><img src="${pageContext.request.contextPath}/public/Picture/teacher.jpg" class="img-teacher"></div>
-
-
             </div>
         </div>
         <div class="space"></div>
