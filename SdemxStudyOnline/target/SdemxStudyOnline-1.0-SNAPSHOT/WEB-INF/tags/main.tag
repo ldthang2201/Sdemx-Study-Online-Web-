@@ -102,6 +102,14 @@
         } else {
             $('#navigationBar').css('top', '-65px');;
         }
+        if(currentScrollPos>1230){
+            $('.div-register').css('bottom','0px');
+            $('.img-teacher').css('top','-80px')
+        }
+        else{
+            $('.div-register').css('bottom','-1000px');
+            $('.img-teacher').css('top','1000px')
+        }
         prevScrollpos = currentScrollPos;
     }
 

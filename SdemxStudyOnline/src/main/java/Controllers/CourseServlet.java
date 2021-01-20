@@ -27,7 +27,6 @@ public class CourseServlet extends HttpServlet {
                 int id = Integer.parseInt(request.getParameter("id"));
                 Optional<Course> c = CourseModel.getCourseDetailsById(id);
                 if(c.isPresent()){
-                    System.out.println(c.get());
                     request.setAttribute("course",c.get());
                     ServletUtils.forward("/Views/vwCourse/Detail.jsp", request, response);
                 } else {

@@ -28,12 +28,13 @@ public class HomeServlet extends HttpServlet {
         }
         switch (path){
             case "/Index":
+                List<Course> lstNewestCour = CourseModel.getTop10NewestCourse();
+                request.setAttribute("lstNewest",lstNewestCour);
                 List<Course> lstMostViewedCour = CourseModel.getTop10MostViewdCourse();
                 request.setAttribute("lstMV",lstMostViewedCour);
+                List<Branch> lstMostSubBranch = CategoryModel.getTop4MostSubBranch();
+                request.setAttribute("lstMSB",lstMostSubBranch);
                 ServletUtils.forward("/Views/vwHome/Home.jsp", request, response);
-                break;
-            case "/Login":
-                ServletUtils.forward("/Views/vwHome/Login.jsp", request, response);
                 break;
             default:
                 ServletUtils.redirect("/NotFound", request, response);

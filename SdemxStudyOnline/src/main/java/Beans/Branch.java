@@ -8,6 +8,7 @@ public class Branch {
     int branchID;
     String branchName;
     List<Category> lstCategory;
+    int numRegister;
 
     public Branch() {
     }
@@ -16,6 +17,12 @@ public class Branch {
         this.branchID = branchID;
         this.branchName = branchName;
         this.lstCategory = lstCategory;
+    }
+
+    public Branch(int branchID, String branchName, int numRegister) {
+        this.branchID = branchID;
+        this.branchName = branchName;
+        this.numRegister = numRegister;
     }
 
     public int getBranchID() {
@@ -40,5 +47,13 @@ public class Branch {
 
     public void setLstCategory(List<Category> lstCategory) {
         this.lstCategory = lstCategory;
+    }
+
+    public int getNumRegister() {
+        return numRegister;
+    }
+
+    public void setNumRegister(int numRegister) {
+        this.numRegister = numRegister;
     }
 }

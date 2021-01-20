@@ -77,4 +77,11 @@ public class CategoryModel {
         }
     }
 
+    public static List<Branch> getTop4MostSubBranch(){
+        final String sql = "select * from Top4CategoriesMostSubc";
+        try (Connection con = DBUtils.getConnection()){
+            return con.createQuery(sql).executeAndFetch(Branch.class);
+        }
+    }
+
 }
