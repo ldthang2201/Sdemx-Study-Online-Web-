@@ -62,11 +62,19 @@
             })</script>
         </c:when>
         <c:otherwise>
-            <a href= "/SdemxStudyOnline/Account/Login">
-                <button class="btnLogin ml-2">Log in</button>
-            </a>
+
+                <a href= "/SdemxStudyOnline/Account/Login">
+                    <button class="btnLogin ml-2">Log in
+                        <i class="fa fa-sign-in" aria-hidden="true"></i>
+                    </button>
+                </a>
+
+
             <a href="/SdemxStudyOnline/Account/Signup">
-                <button class="btnSignup ml-2 mr-3">Sign up</button>
+                <button class="btnSignup ml-2 mr-3">Sign up
+                    <i class="fa fa-user-plus" aria-hidden="true"></i>
+                </button>
+
             </a>
         </c:otherwise>
         </c:choose>
