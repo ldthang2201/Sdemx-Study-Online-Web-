@@ -54,7 +54,7 @@
                     <div class="slider owl-carousel owl-carousel_card">
                         <c:forEach var="c" items="${lstMV}">
                             <div class="slider-card">
-                                <a href="#">
+                                <a href="${pageContext.request.contextPath}/Course/Detail?id=${c.courID}">
                                     <div class="imgslider"><img
                                             src="${pageContext.request.contextPath}/public/course/${c.courID}/main.jpg">
                                     </div>

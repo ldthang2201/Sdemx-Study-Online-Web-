@@ -2,6 +2,7 @@ package Models;
 
 import Beans.Branch;
 import Beans.Category;
+import Beans.Course;
 import Utility.DBUtils;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
@@ -40,9 +41,8 @@ public class CategoryModel {
             return con.createQuery(sql).executeAndFetch(Category.class);
         }
     }
-
     public static String getBranchNameByBranchID(int id){
-        final String sql = "select branchname from branch where branchID=:branchID";
+        final String sql = "select branchName from branch where branchID=:branchID";
         try(Connection con = DBUtils.getConnection()){
             return con.createQuery(sql)
                     .addParameter("branchID",id)
@@ -58,4 +58,23 @@ public class CategoryModel {
                     .executeScalar(String.class);
         }
     }
+
+    public static List<Course> getAllCourseByCatID(int id){
+        final String sql = "call sp_ViewAllCourseByCatID(:catID)";
+        try (Connection con = DBUtils.getConnection()){
+            return con.createQuery(sql)
+                    .addParameter("catID",id)
+                    .executeAndFetch(Course.class);
+        }
+    }
+
+    public static List<Course> getAllCourseByBranchID(int id){
+        final String sql = "call sp_ViewAllCourseByBranchID(:branchID)";
+        try(Connection con = DBUtils.getConnection()){
+            return con.createQuery(sql)
+                    .addParameter("branchID",id)
+                    .executeAndFetch(Course.class);
+        }
+    }
+
 }

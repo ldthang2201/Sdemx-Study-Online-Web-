@@ -15,7 +15,7 @@
     <jsp:body>
         <div class="container">
             <div class="row">
-                <p class="h1">${titleCat} Courses</p>
+                <p class="h1">${titleBranch} Courses</p>
             </div>
             <div class="row">
                 <c:choose>

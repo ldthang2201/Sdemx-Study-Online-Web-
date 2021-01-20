@@ -17,9 +17,9 @@
                         <c:forEach var="b" items="${filterlstBranch}">
                             <div class="col-sm-3 pl-3">
                                 <ul style="list-style-type: none;">
-                                    <li class="title-list"><a href="" class="title-list">${b.getBranchName()}</a></li>
+                                    <li class="title-list"><a href="${pageContext.request.contextPath}/Course/Branch?id=${b.branchID}" class="title-list">${b.getBranchName()}</a></li>
                                     <c:forEach var="cat" items="${b.getLstCategory()}">
-                                        <li><a href="#" class="cat-list"> ${cat.getCatName()}</a></li>
+                                        <li><a href="${pageContext.request.contextPath}/Course/Category?id=${cat.getCatID()}" class="cat-list"> ${cat.getCatName()}</a></li>
                                     </c:forEach>
                                 </ul>
                             </div>

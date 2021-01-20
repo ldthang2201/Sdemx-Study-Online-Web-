@@ -32,6 +32,7 @@ public class Course {
     public Course() {
     }
 
+    //Constructor for Course Details
     public Course(int courID, String title, int catID, int branchID, int teacherID, String tiniDes, int prices, float sale, String fullDes, Date dateUpload, Date lastUpdate, int views, boolean status, boolean premium, String language, float rate, int numRate, int numRegister) {
         this.courID = courID;
         this.title = title;
@@ -53,11 +54,29 @@ public class Course {
         this.numRegister = numRegister;
     }
 
+    //Constructor for Course Home
     public Course(int courID, String title, int branchID, int teacherID, int prices, float sale, Date dateUpload, int views, boolean premium, float rate, int numRate) {
         this.courID = courID;
         this.title = title;
         this.branchID = branchID;
         this.teacherID = teacherID;
+        this.prices = prices;
+        this.sale = sale;
+        this.dateUpload = dateUpload;
+        this.views = views;
+        this.premium = premium;
+        this.rate = rate;
+        this.numRate = numRate;
+    }
+
+    //Constructor for Course by Category
+    public Course(int courID, String title, int catID, int branchID, int teacherID, String tiniDes, int prices, float sale, Date dateUpload, int views, boolean premium, float rate, int numRate) {
+        this.courID = courID;
+        this.title = title;
+        this.catID = catID;
+        this.branchID = branchID;
+        this.teacherID = teacherID;
+        this.tiniDes = tiniDes;
         this.prices = prices;
         this.sale = sale;
         this.dateUpload = dateUpload;
@@ -190,8 +209,8 @@ public class Course {
     public float getRate() {
         return (float)(Math.round(rate*10.0)/10.0);
     }
-    public float getStarRate(){
 
+    public float getStarRate(){
         float x = (int)(rate / 0.5);
         float y = (rate % 1);
         if (y%0.5 > 0.2)
@@ -230,9 +249,11 @@ public class Course {
     public String getTeacherNameByTeacherID(){
         return UserModel.getUserFullnameByUserID(this.teacherID);
     }
+
     public int getNumberofRegiterByCourID(){
         return CourseModel.getNumberofRegisterByCourID(this.courID);
     }
+
     public int getFinalPrice()
     {
         return (int)(prices * sale);
