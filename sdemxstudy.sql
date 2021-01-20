@@ -11,7 +11,7 @@
  Target Server Version : 100414
  File Encoding         : 65001
 
- Date: 19/01/2021 17:21:22
+ Date: 20/01/2021 18:37:58
 */
 
 SET NAMES utf8mb4;
@@ -37,7 +37,6 @@ INSERT INTO `branch` VALUES (4, 'Marketing');
 INSERT INTO `branch` VALUES (5, 'Development');
 INSERT INTO `branch` VALUES (6, 'Photography & Video');
 INSERT INTO `branch` VALUES (7, 'Business');
-INSERT INTO `branch` VALUES (8, 'test branch');
 
 -- ----------------------------
 -- Table structure for category
@@ -206,8 +205,8 @@ INSERT INTO `user` VALUES (3, 'tnthanh', 'trannhatthanh', 'Tran Nhat Thanh', 'th
 INSERT INTO `user` VALUES (4, 'hhelomoinguoi', 'leducthangsad', 'Le Duc Thang', 'ldthang@email', '2000-01-01', NULL, 3, 0);
 INSERT INTO `user` VALUES (5, 'testusername', 'leducthangsad', 'Le Duc Thang', 'ldthang@email', '2000-01-01', NULL, 3, 0);
 INSERT INTO `user` VALUES (6, 'teacher1', 'leducthangsad', 'teacher no 1', 'ldthang@email', '2000-01-01', NULL, 2, 0);
-INSERT INTO `user` VALUES (383, 'ldthang', '$2a$12$8MS4tRdTqMWGo07dM7ubUuiaiuLufcyzalQdBM8c5KYScQ9mw1See', 'Le Duc Thang', 'ldthang2201@gmail.com', '2021-01-07', NULL, 3, 0);
-INSERT INTO `user` VALUES (412, 'ldt', '$2a$12$4rU9iUgJh2fCnD7YFE.pLO/HQvQO7LSECNZxOiHFUdksyYOBrQRcC', 'ldt', 'ldtsfd', '2021-01-07', NULL, 3, 0);
+INSERT INTO `user` VALUES (7, 'ldthang', '$2a$12$8MS4tRdTqMWGo07dM7ubUuiaiuLufcyzalQdBM8c5KYScQ9mw1See', 'Le Duc Thang', 'ldthang2201@gmail.com', '2021-01-07', NULL, 3, 0);
+INSERT INTO `user` VALUES (8, 'ldt', '$2a$12$4rU9iUgJh2fCnD7YFE.pLO/HQvQO7LSECNZxOiHFUdksyYOBrQRcC', 'ldt', 'ldtsfd', '2021-01-07', NULL, 3, 0);
 
 -- ----------------------------
 -- Table structure for watchlist
@@ -228,6 +227,12 @@ CREATE TABLE `watchlist`  (
 -- ----------------------------
 INSERT INTO `watchlist` VALUES (2, 1, '2021-01-18');
 INSERT INTO `watchlist` VALUES (3, 1, '2021-01-18');
+INSERT INTO `watchlist` VALUES (4, 1, '2021-01-20');
+INSERT INTO `watchlist` VALUES (4, 2, '2021-01-20');
+INSERT INTO `watchlist` VALUES (4, 3, '2021-01-20');
+INSERT INTO `watchlist` VALUES (4, 12, '2021-01-20');
+INSERT INTO `watchlist` VALUES (4, 31, '2021-01-06');
+INSERT INTO `watchlist` VALUES (5, 1, '2021-01-20');
 
 -- ----------------------------
 -- Table structure for wishlist
@@ -241,6 +246,16 @@ CREATE TABLE `wishlist`  (
   CONSTRAINT `FK_wishlist_course` FOREIGN KEY (`courID`) REFERENCES `course` (`courID`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `FK_wishlist_user` FOREIGN KEY (`userID`) REFERENCES `user` (`userID`) ON DELETE RESTRICT ON UPDATE RESTRICT
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- View structure for top4categoriesmostsubc
+-- ----------------------------
+DROP VIEW IF EXISTS `top4categoriesmostsubc`;
+CREATE ALGORITHM = UNDEFINED SQL SECURITY DEFINER VIEW `top4categoriesmostsubc` AS select branch.branchID, branch.branchName, count(dateRegister) as numRegister
+from branch,category,course LEFT JOIN watchlist on course.courID=watchlist.courID
+where branch.branchID=category.branchID and course.catID = category.catID and (DATEDIFF(NOW(),dateRegister)<=7)
+group By  branch.branchID, branch.branchName
+ORDER BY numRegister DESC LIMIT 4 ;
 
 -- ----------------------------
 -- View structure for vw_top10mostviewed
@@ -338,15 +353,31 @@ end
 delimiter ;
 
 -- ----------------------------
--- Procedure structure for sp_testProc
+-- Procedure structure for sp_ViewAllCourseByBranchID
 -- ----------------------------
-DROP PROCEDURE IF EXISTS `sp_testProc`;
+DROP PROCEDURE IF EXISTS `sp_ViewAllCourseByBranchID`;
 delimiter ;;
-CREATE PROCEDURE `sp_testProc`(IN catte varchar(10))
+CREATE PROCEDURE `sp_ViewAllCourseByBranchID`(IN id int(11))
 begin
-	declare id int(10);
-	set id = 1;
-	select * from category where catID=id;
+	select course.courID, title, course.catID, branch.branchID, teacherID, tiniDes,prices,sale,dateUpload,views,premium,avg(rate) as rate, count(rate) as numRate
+	from branch, category, course LEFT JOIN feedback on course.courID=feedback.courID
+	where branch.branchID=category.branchID and category.catID=course.catID and branch.branchID= id
+	group by course.courID, title, branch.branchID, course.catID, teacherID, tiniDes,prices,sale,dateUpload,views,premium;
+end
+;;
+delimiter ;
+
+-- ----------------------------
+-- Procedure structure for sp_ViewAllCourseByCatID
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `sp_ViewAllCourseByCatID`;
+delimiter ;;
+CREATE PROCEDURE `sp_ViewAllCourseByCatID`(IN id int(11))
+begin
+	select course.courID, title, course.catID, branch.branchID, teacherID, tiniDes,prices,sale,dateUpload,views,premium,avg(rate) as rate, count(rate) as numRate
+	from branch, category, course LEFT JOIN feedback on course.courID=feedback.courID
+	where branch.branchID=category.branchID and category.catID=course.catID and course.catID = id
+	group by course.courID, title, branch.branchID, course.catID, teacherID, tiniDes,prices,sale,dateUpload,views,premium;
 end
 ;;
 delimiter ;

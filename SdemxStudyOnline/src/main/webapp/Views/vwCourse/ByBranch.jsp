@@ -24,7 +24,7 @@
                     </c:when>
                     <c:otherwise>
                         <c:forEach var="c" items="${lstCourse}">
-                            <div class="card" style="width: 18rem;">
+                            <div class="card card-course" style="width: 18rem;">
                                 <img src="${pageContext.request.contextPath}/public/course/${c.courID}/main.jpg" class="card-img-top" alt="...">
                                 <div class="card-body">
                                     <h5 class="card-title">${c.title}</h5>

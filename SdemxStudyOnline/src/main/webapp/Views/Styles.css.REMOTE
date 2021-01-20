@@ -93,31 +93,16 @@ body {
     font-weight: bold;
     font-size: small;
     border-radius: 5px;
-    /*------------*/
-    box-shadow: inset 0 0 0 0 lightskyblue;
-    transition: ease-in-out 0.3s;
-
-
-
 }
 
-.btnlogin:hover{
-    color: white;
-    /*border: 2px solid #809fff;*/
-    box-shadow: inset 100px 0 0 0  lightskyblue;
-
-}
-.fa-sign-in{
-    display: none;
-}
-.btnLogin:hover .fa-sign-in{
-    display:initial;
+.btnLogin:hover {
+    color: #0040ff;
+    border: 2px solid #809fff;
 }
 
 .btnLogin:focus {
     outline: none;
 }
-
 
 .btnSignup {
     /*Button Log in and Sign up*/
@@ -130,30 +115,13 @@ body {
     font-weight: bold;
     font-size: small;
     border-radius: 5px;
-    /*-----------------------------*/
-    transition:ease-in-out 0.3s;
-
-    box-shadow: 0 0 0 0,inset 0 0 0 0 white;
-
-
 }
 
 .btnSignup:hover {
-    background-color: lightskyblue;
-    /*border: 2px solid #809fff;*/
+    background-color: #0040ff;
+    border: 2px solid #809fff;
 }
-.fa-user-plus{
-    display: none;
-}
-.btnSignup:hover .fa-user-plus{
-    display:initial;
-}
-.btnSignup:hover{
-    color: #809fff;
-    /*border: 2px solid #809fff;*/
-    box-shadow:0 0 0 0,inset  100px   0 0 0  white;
 
-}
 .btnSignup:focus {
     outline: none;
 }
@@ -991,13 +959,11 @@ ul.social-footer2 li a {
     cursor: pointer;
 }
 
-.user-option{
-
-.user-option{
 .user-option {
 
     position: absolute;
     /*right:50px;*/
+
     padding-top: 12.5px;
     height: auto;
     -webkit-transition: opacity 300ms, visibility 10ms;
@@ -1357,6 +1323,7 @@ ul.social-footer2 li a {
 [title=".0.5"]::before {
     content: "\f123\f006\f006\f006\f006"
 }
+
 [title=".1.0"]::before {
     content: "\f005\f006\f006\f006\f006"
 }

@@ -41,4 +41,11 @@ public class CourseModel {
             return con.createQuery(sql).executeAndFetch(Course.class);
         }
     }
+
+    public static List<Course> getTop10NewestCourse(){
+        final String sql = "select * from vw_Top10NewestCourse";
+        try (Connection con = DBUtils.getConnection()){
+            return con.createQuery(sql).executeAndFetch(Course.class);
+        }
+    }
 }
