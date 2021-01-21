@@ -121,7 +121,7 @@
                 <img class="user-icon " src="${pageContext.request.contextPath}/public/ImgLogo/user-logo.png">
                 <div class="user-opton-dropdown">
                     <div class="user-option " aria-labelledby="navbarDropdown">
-                        <a class="user-option-item" href="#">About me</a><br>
+                        <a class="user-option-item" href="${pageContext.request.contextPath}/Account/Profile">About me</a><br>
                         <a class="user-option-item" href="javascript: $('#frmlogout').submit();">Logout <i
                                 class="fa fa-sign-out" aria-hidden="true"></i></a><br>
                         <a class=user-option-item" href="#">Something else here</a><br>

@@ -966,7 +966,15 @@ ul.social-footer2 li a {
     margin-bottom: 0px;
     margin-top: 0px;
 }
+.label-mess{
+    position: absolute;
+    left: 0;
+    font-family: 'Yusei Magic', sans-serif;
+    font-size:15px;
+    margin-left: 25px;
+    color: #ff8d1e;
 
+}
 .login-message {
     font-family: 'Nunito', sans-serif;
     text-align: center;

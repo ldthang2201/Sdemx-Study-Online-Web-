@@ -178,8 +178,6 @@
                                             <span class="profile-input-span">Comfirm password :</span>
                                             <input class="profile-input"  type="password" placeholder="Comfirm password"><br>
                                         </div>
-
-
                                     </form>
                                 </div>
 
@@ -192,49 +190,59 @@
                                             <h4>Add information about yourself</h4>
                                         </div>
                                     </div>
-                                    <form id="FrmAccount " class="container" method="post"    >
-                                        <div class="row d-flex align-items-center  mt-3">
+                                    <div id="FrmAccount " class="container"    >
+                                        <div class="row mt-3 ml-3"> <h5>Change Password</h5></div>
+                                        <div class="row d-flex align-items-center  mt-4">
                                             <span class="profile-input-span ">Password :</span>
-                                            <input  class="profile-input" type="password" name="password" PLACEHOLDER="Password"><br>
+                                            <input id="account-pwc" class="profile-input" type="password" name="password" PLACEHOLDER="Password"><br>
                                         </div>
                                         <div class="row d-flex align-items-center mt-3">
                                             <span class="profile-input-span">Comfirm password :</span>
-                                            <input class="profile-input"  type="password" placeholder="Comfirm password"><br>
+                                            <input id="account-comfirm-pwc" class="profile-input"  type="password" placeholder="Comfirm password"><br>
                                         </div>
                                         <div class="row d-flex align-items-center mt-3">
                                             <span class="profile-input-span">New password :</span>
-                                            <input class="profile-input"  type="password" placeholder="New password" name="newpassword"><br>
+                                            <input id="account-new-pwc" class="profile-input"  type="password" placeholder="New password" name="newpassword"><br>
                                         </div>
                                         <div class="row d-flex justify-content-end  mr-5 mt-3">
-                                                <button class="  btn-pwc btn btn-primary" >Submit</button>
+                                                <div id="account-mess" class="col-sm-9" style="color: red;"> </div>
+
+                                            <button class="  btn-pwc btn btn-primary col-sm-3" >Submit</button>
                                         </div>
-                                        <input type="hidden" name="action" value="PasswordChange">
+<%--                                        <input type="hidden" name="action" value="PasswordChange">--%>
                                         <script>
 
                                             // $('#FrmAccount').on('submit', function (e) {
                                             // e.preventDefault();
-                                            // $('#FrmAccount').off('submit').submit();
+                                            // // $('#FrmAccount').off('submit').submit();
                                             //       })
-                                            $('.btn-pwc').on('click',()=>{
-                                                // var request=new XMLHttpRequest();
-                                                // request.open("POST", "http://localhost:8080/SdemxStudyOnline/Account/Profile?action=+PasswordChange", true);
-                                                // request.send();
-                                                // console.log("aaaaaaaa")
-                                                $.ajax('/Account/Profile?action=PasswordChange', {
-                                                    type: 'POST',  // http method
-                                                    data: { myData: 'This is my data.' },  // data to submit
-                                                    success: function (data, status, xhr) {
-                                                       console.log("susesssssssssssssssssssssssssssssssss")
-                                                    },
-                                                    error: function (jqXhr, textStatus, errorMessage) {
-                                                         console.log("errorrrrrrrrrrrrrrrrrrrrrrr")
-                                                    }
-                                                });
-                                            })
+
+                                            $('.btn-pwc').click(
+                                                ()=>{
+                                                    // console.log($('#account-pwc').val())
+                                                    // console.log($('#account-new-pwc').val())
+                                                    $.ajax({
+                                                        url: '${pageContext.request.contextPath}/Account/PasswordChange',
+                                                        data: jQuery.param({
+                                                            action:"PasswordChange",
+                                                            password:$('#account-pwc').val(),
+                                                            comfirmpassword:$('#account-comfirm-pwc').val(),
+                                                            newpassword:$('#account-new-pwc').val(),
+                                                        }),
+                                                        processData: false,
+                                                        contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                                                        type: 'POST',
+                                                        success: function(data){
+                                                            console.log(data);
+                                                            $('#account-mess').text(data);
+                                                        }
+                                                    });
+                                                }
+                                            )
+
 
                                         </script>
-
-                                    </form>
+                                    </div>
                                 </div>
 
                             </main>

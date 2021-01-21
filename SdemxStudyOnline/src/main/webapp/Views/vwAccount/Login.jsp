@@ -85,28 +85,31 @@
             </div>
         </div>
         <div class="form sign-up form-signup">
-
             <form method="post" id="frmRegister" action="signup">
                 <h2>Sign Up</h2>
             <label class="label-signup">
-                <input type="text" class="input-signup"  placeholder ="Name" name="name">
+                <label class="label-mess" id="name-mess"></label>
+                <input id="input-name" type="text" class="input-signup"  placeholder ="Name" name="name">
             </label>
                 <label class="label-signup">
-                    <input type="text" class="input-signup"  placeholder ="UserName" name="username">
+                    <label class="label-mess" id="username-mess"></label>
+                    <input id="input-username" type="text" class="input-signup"  placeholder ="UserName" name="username">
                 </label>
             <label class="label-signup">
-                <input  type="text" class="input-signup" placeholder ="Email" name="email">
+                    <label class="label-mess" id="email-mess"></label>
+                <input  id="input-email" type="text" class="input-signup" placeholder ="Email" name="email">
             </label>
             <label class="label-signup">
-                <input type="text" id="datepicker" class="input-signup"  placeholder ="BirthDay" name="dob"></p>
+                <label class="label-mess" id="dob-mess"></label>
+                <input id="input-dob" type="text"  class="input-signup datepicker"  placeholder ="BirthDay" name="dob"></p>
             </label>
             <label class="label-password">
-
-                <input type="password" class="input-signup"  placeholder ="Password" name="password">
+                <label class="label-mess" id="password-mess"></label>
+                <input id="input-password" type="password" class="input-signup"  placeholder ="Password" name="password">
             </label>
             <label class="label-signup">
-
-                <input type="password" class="input-signup" placeholder="Confirm Password">
+                <label class="label-mess" id="cpassword-mess"></label>
+                <input id="input-comfirmpassword" type="password" class="input-signup" placeholder="Confirm Password">
             </label>
             <button  class="btn-signup" type="submit">Sign Up </button>
             <p class="Policy-agree">By signing up, you agree to our Terms of Use and Privacy Policy. </p>
@@ -125,8 +128,8 @@
         }
     );
 
-    $('#datepicker').on('click', function() {
-        $("#datepicker").datetimepicker({
+    $('.datepicker').on('click', function() {
+        $(".datepicker").datetimepicker({
             format: 'd/m/Y',
             timepicker: false,
             mask: true,
@@ -146,27 +149,42 @@
 
     $('#frmRegister').on('submit', function (e) {
         e.preventDefault();
-        var form =document.getElementById('frmRegister');//retrieve the form as a DOM element
+        $.ajax({
+            url: '${pageContext.request.contextPath}/Account/Signup',
+            data: jQuery.param({
+                action:"Signup",
+                name:$('#input-name').val(),
+                username:$('#input-username').val(),
+                password:$('#input-password').val(),
+                email:$('#input-email').val(),
+                dob:$('#input-dob').val(),
+                comfirmpassword:$('#input-comfirmpassword').val()
+            }),
+            processData: false,
+            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+            type: 'POST',
+            success: function(data){
 
-        var input = document.createElement('input');//prepare a new input DOM element
-        input.setAttribute('name', "action");//set the param name
-        input.setAttribute('value', 'Signup');//set the value
-        input.setAttribute('type', 'text')//set the type, like "hidden" or other
+               if(data.includes("Email"))
+               {
+                   if(!$('#email-mess').text())$('#email-mess').text("Invalid Email");
+               }
+               else {
+                   $('#email-mess').text("")
+               }
 
-        form.appendChild(input);
-        // const username = $('#txtUsername').val();
-        // if (username.length === 0) {
-        //     alert('Invalid username.');
-        //     return;
-        // }
-        $('#frmRegister').off('submit').submit();
 
-        <%--$.getJSON('${pageContext.request.contextPath}/Account/IsAvailable?user=' + username, function (data) {--%>
-        <%--    if (data === true) {--%>
-        <%--    } else {--%>
-        <%--        alert('Not available.');--%>
-        <%--    }--%>
-        <%--});--%>
+                if(data.includes("Username")){
+                    if(!$('#username-mess').text())$('#username-mess').text("Username already exists");
+                }
+                else {
+                    $('#username-mess').text("")
+                }
+            }
+        });
+
+
+
     });
 
 
