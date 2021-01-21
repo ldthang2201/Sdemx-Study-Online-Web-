@@ -11,7 +11,7 @@
  Target Server Version : 100414
  File Encoding         : 65001
 
- Date: 20/01/2021 18:37:58
+ Date: 21/01/2021 13:40:40
 */
 
 SET NAMES utf8mb4;
@@ -276,6 +276,32 @@ from branch, category, course LEFT JOIN feedback on course.courID=feedback.courI
 where branch.branchID=category.branchID and category.catID=course.catID and (DATEDIFF(NOW(),dateUpload)<=7)
 GROUP BY course.courID, title, branch.branchID, teacherID, prices, sale, dateUpload, views, premium
 ORDER BY dateUpload DESC LIMIT 10 ;
+
+-- ----------------------------
+-- Function structure for f_CalcDateUpload
+-- ----------------------------
+DROP FUNCTION IF EXISTS `f_CalcDateUpload`;
+delimiter ;;
+CREATE FUNCTION `f_CalcDateUpload`(`id` int)
+ RETURNS int(10)
+BEGIN
+	RETURN (select DATEDIFF(now(),dateUpload) FROM course where courID = id);
+END
+;;
+delimiter ;
+
+-- ----------------------------
+-- Function structure for f_countNumberRegisterByCourID
+-- ----------------------------
+DROP FUNCTION IF EXISTS `f_countNumberRegisterByCourID`;
+delimiter ;;
+CREATE FUNCTION `f_countNumberRegisterByCourID`(`id` int)
+ RETURNS int(10)
+BEGIN
+	RETURN (select count(dateRegister) from watchlist where courID = id);
+END
+;;
+delimiter ;
 
 -- ----------------------------
 -- Procedure structure for sp_addNewCourse
