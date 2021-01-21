@@ -11,7 +11,7 @@
  Target Server Version : 100414
  File Encoding         : 65001
 
- Date: 21/01/2021 13:40:40
+ Date: 21/01/2021 16:19:54
 */
 
 SET NAMES utf8mb4;
@@ -200,7 +200,7 @@ CREATE TABLE `user`  (
 -- ----------------------------
 INSERT INTO `user` VALUES (0, 'sdsd', 'dsd', 'sdsd', 'dsd', '2021-01-18', NULL, 3, 0);
 INSERT INTO `user` VALUES (1, 'admin', 'admin', NULL, NULL, NULL, NULL, 1, 0);
-INSERT INTO `user` VALUES (2, 'ldthang', 'leducthang', 'Le Duc Thang', 'ldthang2201@gmail.com', '2021-01-16', NULL, 2, 0);
+INSERT INTO `user` VALUES (2, 'ldthang', 'ksldajlksjdilkjalsfd', 'Le Duc Thang', 'ldthang2201@gmail.com', '2021-01-16', NULL, 2, 0);
 INSERT INTO `user` VALUES (3, 'tnthanh', 'trannhatthanh', 'Tran Nhat Thanh', 'thanh@gmail.com', '2021-01-17', NULL, 3, 0);
 INSERT INTO `user` VALUES (4, 'hhelomoinguoi', 'leducthangsad', 'Le Duc Thang', 'ldthang@email', '2000-01-01', NULL, 3, 0);
 INSERT INTO `user` VALUES (5, 'testusername', 'leducthangsad', 'Le Duc Thang', 'ldthang@email', '2000-01-01', NULL, 3, 0);
@@ -232,7 +232,6 @@ INSERT INTO `watchlist` VALUES (4, 2, '2021-01-20');
 INSERT INTO `watchlist` VALUES (4, 3, '2021-01-20');
 INSERT INTO `watchlist` VALUES (4, 12, '2021-01-20');
 INSERT INTO `watchlist` VALUES (4, 31, '2021-01-06');
-INSERT INTO `watchlist` VALUES (5, 1, '2021-01-20');
 
 -- ----------------------------
 -- Table structure for wishlist
@@ -241,6 +240,7 @@ DROP TABLE IF EXISTS `wishlist`;
 CREATE TABLE `wishlist`  (
   `userID` int(11) NOT NULL,
   `courID` int(11) NOT NULL,
+  `dateLike` date NULL DEFAULT NULL,
   PRIMARY KEY (`userID`, `courID`) USING BTREE,
   INDEX `FK_wishlist_course`(`courID`) USING BTREE,
   CONSTRAINT `FK_wishlist_course` FOREIGN KEY (`courID`) REFERENCES `course` (`courID`) ON DELETE RESTRICT ON UPDATE RESTRICT,
@@ -379,16 +379,44 @@ end
 delimiter ;
 
 -- ----------------------------
+-- Procedure structure for sp_ChangePassword
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `sp_ChangePassword`;
+delimiter ;;
+CREATE PROCEDURE `sp_ChangePassword`(IN uID int(11),newPass varchar(255))
+begin
+update `user`
+set `password` = newPass
+where userID=uID;
+end
+;;
+delimiter ;
+
+-- ----------------------------
+-- Procedure structure for sp_ViewAllCategoryByBranchID
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `sp_ViewAllCategoryByBranchID`;
+delimiter ;;
+CREATE PROCEDURE `sp_ViewAllCategoryByBranchID`(IN id int(11))
+begin
+	select * 
+	from category 
+	where branchID=id;
+end
+;;
+delimiter ;
+
+-- ----------------------------
 -- Procedure structure for sp_ViewAllCourseByBranchID
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `sp_ViewAllCourseByBranchID`;
 delimiter ;;
-CREATE PROCEDURE `sp_ViewAllCourseByBranchID`(IN id int(11))
+CREATE PROCEDURE `sp_ViewAllCourseByBranchID`(IN id int(11), lm int(11), ofs int(11))
 begin
 	select course.courID, title, course.catID, branch.branchID, teacherID, tiniDes,prices,sale,dateUpload,views,premium,avg(rate) as rate, count(rate) as numRate
 	from branch, category, course LEFT JOIN feedback on course.courID=feedback.courID
-	where branch.branchID=category.branchID and category.catID=course.catID and branch.branchID= id
-	group by course.courID, title, branch.branchID, course.catID, teacherID, tiniDes,prices,sale,dateUpload,views,premium;
+	where branch.branchID=category.branchID and category.catID=course.catID and branch.branchID= id 
+	group by course.courID, title, branch.branchID, course.catID, teacherID, tiniDes,prices,sale,dateUpload,views,premium limit lm OFFSET ofs;
 end
 ;;
 delimiter ;
@@ -398,12 +426,12 @@ delimiter ;
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `sp_ViewAllCourseByCatID`;
 delimiter ;;
-CREATE PROCEDURE `sp_ViewAllCourseByCatID`(IN id int(11))
+CREATE PROCEDURE `sp_ViewAllCourseByCatID`(IN id int(11), lm int(11), ofs int (11))
 begin
 	select course.courID, title, course.catID, branch.branchID, teacherID, tiniDes,prices,sale,dateUpload,views,premium,avg(rate) as rate, count(rate) as numRate
 	from branch, category, course LEFT JOIN feedback on course.courID=feedback.courID
 	where branch.branchID=category.branchID and category.catID=course.catID and course.catID = id
-	group by course.courID, title, branch.branchID, course.catID, teacherID, tiniDes,prices,sale,dateUpload,views,premium;
+	group by course.courID, title, branch.branchID, course.catID, teacherID, tiniDes,prices,sale,dateUpload,views,premium limit lm OFFSET ofs;
 end
 ;;
 delimiter ;
@@ -420,6 +448,20 @@ BEGIN
 	WHERE branch.branchID=category.branchID and category.catID=course.catID and course.courID=id
 	GROUP BY course.courID, title, course.catID, branch.branchID, teacherID, tiniDes, prices,fullDes,dateUpload,lastUpdate,views,`status`,`language`;
 END
+;;
+delimiter ;
+
+-- ----------------------------
+-- Triggers structure for table course
+-- ----------------------------
+DROP TRIGGER IF EXISTS `tg_UpdateWatchList_WishList`;
+delimiter ;;
+CREATE TRIGGER `tg_UpdateWatchList_WishList` BEFORE DELETE ON `course` FOR EACH ROW begin
+	declare courseID int;
+	set courseID = old.courID;
+	delete from watchlist where courID = courseID;
+	delete from wishlist where courID = courseID;
+end
 ;;
 delimiter ;
 
