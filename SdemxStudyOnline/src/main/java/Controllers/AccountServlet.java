@@ -26,7 +26,7 @@ public class AccountServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String path = request.getPathInfo();
         String action = request.getParameter("action");
-        System.out.println(action);
+
         switch (action) {
             case "Login":
                 postLogin(request, response);
@@ -120,6 +120,9 @@ public class AccountServlet extends HttpServlet {
                 break;
             case "/Signup" :
                 ServletUtils.forward("/Views/vwAccount/Signup.jsp", request, response);
+                break;
+            case "/Profile" :
+                ServletUtils.forward("/Views/vwAccount/Profile.jsp", request, response);
                 break;
             default:
                 ServletUtils.redirect("/NotFound", request, response);
