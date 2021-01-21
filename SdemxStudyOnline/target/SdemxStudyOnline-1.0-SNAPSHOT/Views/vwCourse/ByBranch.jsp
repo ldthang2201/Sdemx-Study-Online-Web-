@@ -15,6 +15,13 @@
     <jsp:body>
         <div class="container">
             <div class="row">
+                <a class="btn btn-outline-info ml-3 mr-3" style="border-radius: 20px" href="${pageContext.request.contextPath}/Course/Branch?id=${lstCat.get(0).branchID}">${titleBranch}</a>
+                <c:forEach var="c" items="${lstCat}">
+                    <a class="btn btn-outline-info ml-3 mr-3" style="border-radius: 20px" href="${pageContext.request.contextPath}/Course/Category?id=${c.catID}">${c.catName}</a>
+                </c:forEach>
+
+            </div>
+            <div class="row">
                 <p class="h1">${titleBranch} Courses</p>
             </div>
             <div class="row">
@@ -40,6 +47,7 @@
                     </c:otherwise>
                 </c:choose>
             </div>
+
         </div>
     </jsp:body>
 </t:main>

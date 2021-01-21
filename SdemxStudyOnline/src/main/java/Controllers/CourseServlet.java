@@ -1,5 +1,6 @@
 package Controllers;
 
+import Beans.Category;
 import Beans.Course;
 import Models.CategoryModel;
 import Models.CourseModel;
@@ -46,6 +47,8 @@ public class CourseServlet extends HttpServlet {
                 request.setAttribute("lstCourse",lstCourByBranchID);
                 String titleContent = CategoryModel.getBranchNameByBranchID(branchID);
                 request.setAttribute("titleBranch",titleContent);
+                List<Category> lstCatByBranchID = CategoryModel.getAllCategoryByBranchID(branchID);
+                request.setAttribute("lstCat",lstCatByBranchID);
                 ServletUtils.forward("/Views/vwCourse/ByBranch.jsp", request, response);
                 break;
             default:
