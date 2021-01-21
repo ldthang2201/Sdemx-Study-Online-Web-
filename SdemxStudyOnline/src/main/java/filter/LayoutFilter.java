@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.List;
 
-@WebFilter(filterName = "LayoutFilter", urlPatterns = "/*")
+@WebFilter(filterName = "LayoutFilter" )
 public class LayoutFilter implements Filter {
     public void destroy() {
     }

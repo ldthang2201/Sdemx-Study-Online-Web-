@@ -22,14 +22,5 @@ public class ServletUtils {
             response.sendRedirect(url);
         }
     }
-    public static String getpatch(     String url, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        String urlreferer = request.getHeader("referer");;
-        String patch = request.getScheme() + "://" +   // "http" + "://
-                request.getServerName() +       // "myhost"
-                ":" + request.getServerPort(); //port
-        String rqpatch=urlreferer.replace(patch,"");
-        return rqpatch;
-
-        }
     }

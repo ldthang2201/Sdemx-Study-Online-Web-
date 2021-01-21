@@ -37,6 +37,8 @@ public class AccountServlet extends HttpServlet {
             case "Logout":
                 postLogout(request, response);
                 break;
+            case"PasswordChange":
+                postPasswordChange(request,response);
             default:
                 ServletUtils.redirect("/NotFound", request, response);
                 break;
@@ -90,9 +92,12 @@ public class AccountServlet extends HttpServlet {
 
                 HttpSession session = request.getSession();
                 session.setAttribute("auth", true);
+                String url=new String();
                 session.setAttribute("authUser", user.get());
-                String url = (String) session.getAttribute("retUrl");
-
+                if((String)session.getAttribute("retUrl")!=null) {
+                    url = (String) session.getAttribute("retUrl");
+                    System.out.println(url);
+                }
 //                set cookie
                 Cookie cookie = new Cookie("User",user.get().getUsername());
                 cookie.setMaxAge(60 * 60 * 24);
@@ -112,11 +117,26 @@ public class AccountServlet extends HttpServlet {
         }
     }
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    private void postPasswordChange(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
+
+        User rquser = (User) session.getAttribute("authUser");
+        Optional<User> user = UserModel.findByUserName(rquser.getUsername());
+
+        if(user.get().getPassword().equals(rquser.getPassword())){
+            System.out.println("aaaaaaaaaaaaaaaaaaaa");
+        }
+
+    }
+        protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String path = request.getPathInfo();
         switch (path){
             case "/Login":
-                ServletUtils.forward("/Views/vwAccount/Login.jsp", request, response);
+                HttpSession session=request.getSession();
+                boolean auth =(boolean) session.getAttribute("auth");
+
+                if(!auth)ServletUtils.forward("/Views/vwAccount/Login.jsp", request, response);
+                else ServletUtils.forward("/Views/vwAccount/Profile.jsp", request, response);
                 break;
             case "/Signup" :
                 ServletUtils.forward("/Views/vwAccount/Signup.jsp", request, response);

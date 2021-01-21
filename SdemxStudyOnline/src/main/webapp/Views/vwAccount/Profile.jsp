@@ -105,6 +105,13 @@
         border-bottom:1px solid powderblue;
         font-weight: bold;
      }
+    .btn-pwc{
+        background: #34e5eb;
+
+        width: 150px;
+
+    }
+
 </style>
 <t:main>
     <jsp:body>
@@ -113,7 +120,8 @@
         <html>
            <body>
                     <div class=" container profile-body " style="max-width: 80%;min-width: 80%" >
-                        <div class="row">
+
+                        <div class="row" >
                             <nav  class="profile-navbar col-sm-3  ">
                                 <img class="profile-navbar-item profile-avatar d-flex justify-content-center " src="${pageContext.request.contextPath}/public/ImgLogo/user-logo.png">
                                <p class="profile-name profile-navbar-item" >nguyễn văn tí</p>
@@ -133,45 +141,101 @@
                                     <a class="profile-navbar-item ">Notifications</a>
                                 </div>
                             </nav>
-                            <main class="profile-main col-sm-9 ">
-                                <div class="profile-header">
-                                    <div class="row d-flex justify-content-center ">
-                                        <h2 > Public profile</h2>
+
+                            <main class="profile-main col-sm-9 " >
+                                <div class="Profile" style="display: none">
+                                    <div class="profile-header">
+                                        <div class="row d-flex justify-content-center ">
+                                            <h2 > Public profile</h2>
+                                        </div>
+                                        <div class="row  justify-content-center ">
+                                            <h4>Add information about yourself</h4>
+                                        </div>
                                     </div>
-                                    <div class="row  justify-content-center ">
-                                        <h4>Add information about yourself</h4>
-                                    </div>
+                                    <form id="frmprofile  " class="">
+                                        <div class="row d-flex align-items-center">
+                                            <span class="col-sm-3" >User name :</span>
+                                            <span  class="  col-sm" type="text" style=" margin-right: 100px;"  >User</span><br>
+                                        </div>
+
+                                        <div class="row d-flex align-items-center">
+                                            <span class="profile-input-span">Name :</span>
+                                            <input  class="profile-input" type="text" name="name" placeholder="Name"><br>
+                                        </div>
+                                        <div class="row d-flex align-items-center">
+                                            <span class="profile-input-span">Email :</span>
+                                            <input  class="profile-input" type="text" name="email" PLACEHOLDER="Email"><br>
+                                        </div>
+                                        <div class="row d-flex align-items-center">
+                                            <span class="profile-input-span">Birthday :</span>
+                                            <input class="profile-input"  type="text" id="datepicker" name="birthday" placeholder ="BirthDay"><br>
+                                        </div>
+                                        <div class="row d-flex align-items-center">
+                                            <span class="profile-input-span">Password :</span>
+                                            <input  class="profile-input" type="password" name="password" PLACEHOLDER="Password"><br>
+                                        </div>
+                                        <div class="row d-flex align-items-center">
+                                            <span class="profile-input-span">Comfirm password :</span>
+                                            <input class="profile-input"  type="password" placeholder="Comfirm password"><br>
+                                        </div>
+
+
+                                    </form>
                                 </div>
 
-                                <form id="frmprofile container" class="">
-                                    <div class="row d-flex align-items-center">
-                                        <span class="col-sm-3" >User name :</span>
-                                        <span  class="  col-sm" type="text" style=" margin-right: 100px;"  >User</span><br>
+                                <div class="account">
+                                    <div class="profile-header">
+                                        <div class="row d-flex justify-content-center ">
+                                            <h2 > Public profile</h2>
+                                        </div>
+                                        <div class="row  justify-content-center ">
+                                            <h4>Add information about yourself</h4>
+                                        </div>
                                     </div>
+                                    <form id="FrmAccount " class="container" method="post"    >
+                                        <div class="row d-flex align-items-center  mt-3">
+                                            <span class="profile-input-span ">Password :</span>
+                                            <input  class="profile-input" type="password" name="password" PLACEHOLDER="Password"><br>
+                                        </div>
+                                        <div class="row d-flex align-items-center mt-3">
+                                            <span class="profile-input-span">Comfirm password :</span>
+                                            <input class="profile-input"  type="password" placeholder="Comfirm password"><br>
+                                        </div>
+                                        <div class="row d-flex align-items-center mt-3">
+                                            <span class="profile-input-span">New password :</span>
+                                            <input class="profile-input"  type="password" placeholder="New password" name="newpassword"><br>
+                                        </div>
+                                        <div class="row d-flex justify-content-end  mr-5 mt-3">
+                                                <button class="  btn-pwc btn btn-primary" >Submit</button>
+                                        </div>
+                                        <input type="hidden" name="action" value="PasswordChange">
+                                        <script>
 
-                                    <div class="row d-flex align-items-center">
-                                        <span class="profile-input-span">Name :</span>
-                                        <input  class="profile-input" type="text" name="name" placeholder="Name"><br>
-                                    </div>
-                                    <div class="row d-flex align-items-center">
-                                        <span class="profile-input-span">Email :</span>
-                                        <input  class="profile-input" type="text" name="email" PLACEHOLDER="Email"><br>
-                                    </div>
-                                    <div class="row d-flex align-items-center">
-                                        <span class="profile-input-span">Birthday :</span>
-                                        <input class="profile-input"  type="text" id="datepicker" name="birthday" placeholder ="BirthDay"><br>
-                                    </div>
-                                    <div class="row d-flex align-items-center">
-                                        <span class="profile-input-span">Password :</span>
-                                        <input  class="profile-input" type="password" name="password" PLACEHOLDER="Password"><br>
-                                    </div>
-                                    <div class="row d-flex align-items-center">
-                                        <span class="profile-input-span">Comfirm password :</span>
-                                        <input class="profile-input"  type="password" placeholder="Comfirm password"><br>
-                                    </div>
+                                            // $('#FrmAccount').on('submit', function (e) {
+                                            // e.preventDefault();
+                                            // $('#FrmAccount').off('submit').submit();
+                                            //       })
+                                            $('.btn-pwc').on('click',()=>{
+                                                // var request=new XMLHttpRequest();
+                                                // request.open("POST", "http://localhost:8080/SdemxStudyOnline/Account/Profile?action=+PasswordChange", true);
+                                                // request.send();
+                                                // console.log("aaaaaaaa")
+                                                $.ajax('/Account/Profile?action=PasswordChange', {
+                                                    type: 'POST',  // http method
+                                                    data: { myData: 'This is my data.' },  // data to submit
+                                                    success: function (data, status, xhr) {
+                                                       console.log("susesssssssssssssssssssssssssssssssss")
+                                                    },
+                                                    error: function (jqXhr, textStatus, errorMessage) {
+                                                         console.log("errorrrrrrrrrrrrrrrrrrrrrrr")
+                                                    }
+                                                });
+                                            })
 
+                                        </script>
 
-                                </form>
+                                    </form>
+                                </div>
 
                             </main>
                         </div>

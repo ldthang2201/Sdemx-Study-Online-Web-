@@ -11,7 +11,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
-@WebFilter(filterName = "SessionFilter", urlPatterns = "/*")
+@WebFilter(filterName = "SessionFilter")
 public class SessionFilter implements Filter {
     public void destroy () {
     }
