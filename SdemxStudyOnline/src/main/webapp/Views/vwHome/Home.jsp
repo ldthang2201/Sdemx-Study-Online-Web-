@@ -79,6 +79,11 @@
                                         </small></del></span>
                                                 </c:when>
                                             </c:choose>
+                                            <div class="mt-2">
+                                                <c:if test="${c.getNumberofRegiterByCourID() < 10}"><span class="best-seller">Best seler</span></c:if>
+                                                <c:if test="${c.calcDateUpdate() < 7 }"><span class="best-seller">New</span></c:if>
+                                                <c:if test="${c.premium}"><span class="best-seller">Premium</span> </c:if>
+                                            </div>
                                             <span></span>
                                         </div>
                                     </div>
@@ -123,8 +128,13 @@
                                         </small></del></span>
                                                 </c:when>
                                             </c:choose>
-                                            <span></span>
                                         </div>
+                                        <div>
+                                            <c:if test="${c.getNumberofRegiterByCourID() > 10}"><span class="best-seller">Best seler</span></c:if>
+                                            <c:if test="${c.calcDateUpdate() < 7 }"><span class="best-seller">New</span></c:if>
+                                            <c:if test="${c.premium}"><span class="best-seller">Premium</span> </c:if>
+                                        </div>
+
                                     </div>
                                 </a>
                             </div>
@@ -153,10 +163,13 @@
             <div class="row">
                 <div class="col-sm div-register" style="min-width: 300px; text-align: center">
                     <h3>Become a Instructor</h3>
-                    <p>Top instructors from around the world teach millions of students on Sdemx. Become a instructor now.</p>
-                    <a href="" class="btn btn-register-slide" style="background-color: #ff8d1e; color: white">Start Teaching</a>
+                    <p>Top instructors from around the world teach millions of students on Sdemx. Become a instructor
+                        now.</p>
+                    <a href="" class="btn btn-register-slide" style="background-color: #ff8d1e; color: white">Start
+                        Teaching</a>
                 </div>
-                <div class="col-sm div-img-teacher" style="position: relative"><img src="${pageContext.request.contextPath}/public/Picture/teacher.jpg" class="img-teacher"></div>
+                <div class="col-sm div-img-teacher" style="position: relative"><img
+                        src="${pageContext.request.contextPath}/public/Picture/teacher.jpg" class="img-teacher"></div>
             </div>
         </div>
         <div class="space"></div>

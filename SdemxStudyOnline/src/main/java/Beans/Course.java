@@ -259,4 +259,8 @@ public class Course {
         return (int)(prices * sale);
     }
 
+    public int calcDateUpdate(){
+        return CourseModel.calcDateUpload(this.courID);
+    }
+
 }

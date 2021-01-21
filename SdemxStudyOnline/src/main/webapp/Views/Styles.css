@@ -848,6 +848,10 @@ ul.social-footer2 li a {
     .div-img-teacher{
         display: none;
     }
+
+    #frmlogout{
+        display:none
+    }
 }
 
 @media all and (max-width: 1104px) {
@@ -970,56 +974,6 @@ ul.social-footer2 li a {
     color: red;
     margin-top: 10px;
     margin-bottom: 10px;
-}
-
-.user-info {
-    font-size: medium;
-    text-align: center;
-    cursor: pointer;
-    font-weight: bold;
-
-}
-
-.user-icon {
-    width: 35px;
-    height: 35px;
-    border-radius: 50%;
-    margin: 0 auto;
-}
-
-.user-icon:hover {
-    cursor: pointer;
-}
-
-.user-option {
-
-    position: absolute;
-    /*right:50px;*/
-    padding-top: 12.5px;
-    height: auto;
-    -webkit-transition: opacity 300ms, visibility 10ms;
-    transition: opacity 300ms, visibility 10ms;
-    background-color: lightskyblue;
-    display: none;
-    /*box-shadow: 2px 2px 2px 2px black;*/
-
-}
-
-.user-option-div:hover .user-option {
-    display: block;
-}
-
-
-.user-option-dropdown {
-    position: relative;
-    display: inline-block;
-}
-
-
-.user-option-item {
-    font-size: medium;
-    margin-top: 5px;
-    margin-bottom: 5px;
 }
 
 .btn-signin, .btn-signup {
@@ -1330,8 +1284,7 @@ ul.social-footer2 li a {
     width: 200px;
 }
 
-.acc-info{
-    display: flex;
+#frmlogout{
     width: 200px;
 }
 /*#endregion*/
@@ -1419,5 +1372,56 @@ ul.social-footer2 li a {
 .div-register{
     bottom: -1000px;
     transition: bottom 2s;
+}
+/*#endregion*/
+
+/*#region Account-dropdown*/
+.user-info {
+    font-size: medium;
+    text-align: center;
+    cursor: pointer;
+    font-weight: bold;
+
+}
+
+.user-icon {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    margin: 0 auto;
+}
+
+.user-icon:hover {
+    cursor: pointer;
+}
+
+.user-option-div:hover .user-dropdown{
+    display:block
+}
+
+.user-dropdown{
+    position:absolute;
+    top: 50px;
+    display:none;
+    box-shadow:0px 5px 8px #888888;
+    border-radius: 0 0 15px 15px;
+}
+
+.user-option {
+    border:none;
+}
+/*#endregion*/
+
+/*#region spe-tag*/
+.best-seller{
+    font-size: 10px;
+    font-weight: 500;
+    color:black;
+    background-color: gold;
+    height: 20px;
+    width: fit-content;
+    padding-left: 5px;
+    padding-right: 5px;
+    border-radius: 15%;
 }
 /*#endregion*/

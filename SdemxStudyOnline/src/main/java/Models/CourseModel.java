@@ -29,7 +29,14 @@ public class CourseModel {
     }
 
     public static int getNumberofRegisterByCourID(int id){
-        final  String sql = "select count(*) from watchlist where courID=:courID";
+        final  String sql = "select f_countNumberRegisterByCourID(:courID)";
+        try (Connection con = DBUtils.getConnection()){
+            return con.createQuery(sql).addParameter("courID",id).executeScalar(int.class);
+        }
+    }
+
+    public static int calcDateUpload(int id){
+        final String sql = "select f_CalcDateUpload(:courID)";
         try (Connection con = DBUtils.getConnection()){
             return con.createQuery(sql).addParameter("courID",id).executeScalar(int.class);
         }

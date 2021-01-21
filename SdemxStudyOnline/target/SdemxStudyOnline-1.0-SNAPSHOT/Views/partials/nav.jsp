@@ -45,24 +45,29 @@
             <i class="fa fa-search " aria-hidden="true "></i></button>
         <c:choose>
             <c:when test="${auth}">
-                <div class="acc-info">
-<%--                    <div style="   margin: 0 auto;" class="user-option-div">--%>
-<%--                        <img class="user-icon " src="${pageContext.request.contextPath}/public/ImgLogo/user-logo.png">--%>
-<%--                        <div class="user-opton-dropdown">--%>
-<%--                            <div class="user-option " aria-labelledby="navbarDropdown">--%>
-<%--                                <a class="user-option-item" href="#">About me</a><br>--%>
-<%--                                <a class="user-option-item" href="javascript: $('#frmlogout').submit();">Logout <i--%>
-<%--                                        class="fa fa-sign-out" aria-hidden="true"></i></a><br>--%>
-<%--                                <a class=user-option-item" href="#">Something else here</a><br>--%>
-<%--                            </div>--%>
-<%--                        </div>--%>
-<%--                    </div>--%>
-<%--                    <a class="user-info">Hi! ${authUser.name}</a>--%>
-                    <form method="post" id="frmlogout" action="${pageContext.request.contextPath}/Account/Logout">
-                        <input type="hidden" name="action" value="Logout">
-                        <a class="btn"><button type="submit">Logout</button></a>
-                    </form>
-                </div>
+                <form method="post" id="frmlogout" class="ml-3"
+                      action="${pageContext.request.contextPath}/Account/Logout">
+                    <input type="hidden" name="action" value="Logout">
+                    <div style="   margin: 0 auto;" class="user-option-div">
+                        <img class="user-icon " src="${pageContext.request.contextPath}/public/ImgLogo/user-logo.png">
+                        <a class="user-info">Hi! ${authUser.name}</a>
+                        <div class="user-dropdown">
+                                <%--                            <div class="user-option" aria-labelledby="navbarDropdown">--%>
+                                <%--                                <a class="user-option-item list-group bar-item-list" href="#">About me</a>--%>
+                                <%--                                <a class="user-option-item" href="#">Something else here</a>--%>
+                                <%--                                <a class="user-option-item" href="javascript: $('#frmlogout').submit();">Logout <i--%>
+                                <%--                                        class="fa fa-sign-out" aria-hidden="true"></i></a>--%>
+                                <%--                            </div>--%>
+                            <div class="list-group">
+                                <a href="#" class="list-group-item list-group-item-action user-option">About me</a>
+                                <a href="#" class="list-group-item list-group-item-action user-option">Something else here</a>
+                                <a href="javascript: $('#frmlogout').submit();" class="list-group-item list-group-item-action user-option">Logout</a>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </form>
                 <script>$('#frmlogout').on('submit', function (e) {
                     e.preventDefault();
                     $('#frmlogout').off('submit').submit();
