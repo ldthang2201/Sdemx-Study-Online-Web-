@@ -29,49 +29,20 @@ public class AccountServlet extends HttpServlet {
         System.out.println(action);
         switch (action) {
             case "Login":
-               postLogin(request, response);
+                postLogin(request, response);
                 break;
             case "Signup" :
                 postRegister(request, response);
                 break;
             case "Logout":
-//                postLogout(request, response);
-                break;
-            default:
-                ServletUtils.redirect("/NotFound", request, response);
-                break;
-        }
-        switch (path) {
-            case "/Logout":
                 postLogout(request, response);
                 break;
-
-        }
-    }
-
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String path = request.getPathInfo();
-
-        switch (path){
-            case "/Login":
-            case "/login":
-                ServletUtils.forward("/Views/vwAccount/Login.jsp", request, response);
-                break;
-            case "/signup" :
-            case "/Signup" :
-                ServletUtils.forward("/Views/vwAccount/Signup.jsp", request, response);
-                break;
-//            case"/Logout":
-//            case"/logout":
-//                 String url = request.getHeader("referer");
-//                if (url == null) url = "/Home";
-//                ServletUtils.forward(url, request, response);
-//                break;
             default:
                 ServletUtils.redirect("/NotFound", request, response);
                 break;
         }
     }
+
     private void postRegister(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String password = request.getParameter("password");
         String bcryptHashString = BCrypt.withDefaults().hashToString(12, password.toCharArray());
@@ -102,14 +73,9 @@ public class AccountServlet extends HttpServlet {
         String patch = request.getScheme() + "://" +   // "http" + "://
                 request.getServerName() +       // "myhost"
                 ":" + request.getServerPort(); //port
-        System.out.println(patch);
         String rqpatch=url.replace(patch,"");
-        System.out.println(rqpatch );
 
-//        System.out.println(url);
         if (url == null) url = "/Home";
-//
-//
         ServletUtils.redirect(rqpatch, request, response);
 
     }
@@ -118,7 +84,7 @@ public class AccountServlet extends HttpServlet {
         String password = request.getParameter("password");
 
         Optional<User> user = UserModel.findByUserName(username);
-         if (user.isPresent()) {
+        if (user.isPresent()) {
             BCrypt.Result result = BCrypt.verifyer().verify(password.toCharArray(), user.get().getPassword());
             if (result.verified) {
 
@@ -143,6 +109,21 @@ public class AccountServlet extends HttpServlet {
             request.setAttribute("hasError", true);
             request.setAttribute("errorMessage", "Invalid login.");
             ServletUtils.forward("/Views/vwAccount/Login.jsp", request, response);
+        }
+    }
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String path = request.getPathInfo();
+        switch (path){
+            case "/Login":
+                ServletUtils.forward("/Views/vwAccount/Login.jsp", request, response);
+                break;
+            case "/Signup" :
+                ServletUtils.forward("/Views/vwAccount/Signup.jsp", request, response);
+                break;
+            default:
+                ServletUtils.redirect("/NotFound", request, response);
+                break;
         }
     }
 }

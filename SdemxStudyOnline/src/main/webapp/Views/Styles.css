@@ -412,7 +412,7 @@ body {
     background-color: #D8CCFF;
 }
 
-.card-title {
+.card-title-course {
     font-weight: 600;
     height: 45px;
     overflow: hidden;
@@ -1071,8 +1071,6 @@ ul.social-footer2 li a {
     font-size: 1rem;
     position: relative;
     padding-bottom: 10px;
-
-
 }
 
 .social-text::after {
@@ -1332,6 +1330,10 @@ ul.social-footer2 li a {
     width: 200px;
 }
 
+.acc-info{
+    display: flex;
+    width: 200px;
+}
 /*#endregion*/
 
 /*#region Star-rating*/

@@ -60,7 +60,7 @@
                                             src="${pageContext.request.contextPath}/public/course/${c.courID}/main.jpg">
                                     </div>
                                     <div class="card-conent">
-                                        <div class="card-title">${c.title}</div>
+                                        <div class="card-title card-title-course">${c.title}</div>
                                         <p class="card-subtitle text-muted">${c.getBranchNameByBranchID()}</p>
                                         <p class="card-subtitle text-muted">${c.getTeacherNameByTeacherID()}</p>
                                         <div>
@@ -69,7 +69,7 @@
                                             <span class="card-subtitle text-muted">(${c.numRate})</span>
                                         </div>
                                         <div>
-                                            <span class="card-title"><fmt:formatNumber
+                                            <span class="card-title card-title-course"><fmt:formatNumber
                                                     value="${c.getFinalPrice()}"/><small>&nbsp;<ins>đ</ins>
                                         </small></span>
                                             <c:choose>
@@ -104,7 +104,7 @@
                                             src="${pageContext.request.contextPath}/public/course/${c.courID}/main.jpg">
                                     </div>
                                     <div class="card-conent">
-                                        <div class="card-title">${c.title}</div>
+                                        <div class="card-title card-title-course">${c.title}</div>
                                         <p class="card-subtitle text-muted">${c.getBranchNameByBranchID()}</p>
                                         <p class="card-subtitle text-muted">${c.getTeacherNameByTeacherID()}</p>
                                         <div>
@@ -113,7 +113,7 @@
                                             <span class="card-subtitle text-muted">(${c.numRate})</span>
                                         </div>
                                         <div>
-                                            <span class="card-title"><fmt:formatNumber
+                                            <span class="card-title card-title-course"><fmt:formatNumber
                                                     value="${c.getFinalPrice()}"/><small>&nbsp;<ins>đ</ins>
                                         </small></span>
                                             <c:choose>

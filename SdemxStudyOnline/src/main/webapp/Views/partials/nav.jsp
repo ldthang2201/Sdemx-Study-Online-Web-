@@ -17,9 +17,13 @@
                         <c:forEach var="b" items="${filterlstBranch}">
                             <div class="col-sm-3 pl-3">
                                 <ul style="list-style-type: none;">
-                                    <li class="title-list"><a href="${pageContext.request.contextPath}/Course/Branch?id=${b.branchID}" class="title-list">${b.getBranchName()}</a></li>
+                                    <li class="title-list"><a
+                                            href="${pageContext.request.contextPath}/Course/Branch?id=${b.branchID}"
+                                            class="title-list">${b.getBranchName()}</a></li>
                                     <c:forEach var="cat" items="${b.getLstCategory()}">
-                                        <li><a href="${pageContext.request.contextPath}/Course/Category?id=${cat.getCatID()}" class="cat-list"> ${cat.getCatName()}</a></li>
+                                        <li>
+                                            <a href="${pageContext.request.contextPath}/Course/Category?id=${cat.getCatID()}"
+                                               class="cat-list"> ${cat.getCatName()}</a></li>
                                     </c:forEach>
                                 </ul>
                             </div>
@@ -39,46 +43,44 @@
         <a href="#" class="btnShopping ml-3 mr-3 "><i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
         <button type="button" class="btnSearchMobile mr-3 " id="btnSearchMobile" onclick="openfrmSearchMobile()">
             <i class="fa fa-search " aria-hidden="true "></i></button>
-        <c:choose><c:when test="${auth}">
-            <div style="   margin: 0 auto;" class="user-option-div">
-                <img class="user-icon " src="${pageContext.request.contextPath}/public/ImgLogo/user-logo.png" >
-                <div class="user-opton-dropdown">
-                    <div class="user-option " aria-labelledby="navbarDropdown">
-                        <a class="user-option-item" href="#">About me</a><br>
-                        <a class="user-option-item" href="javascript: $('#frmlogout').submit();">Logout <i class="fa fa-sign-out" aria-hidden="true"></i></a><br>
-                        <a class=user-option-item" href="#">Something else here</a><br>
-                    </div>
+        <c:choose>
+            <c:when test="${auth}">
+                <div class="acc-info">
+<%--                    <div style="   margin: 0 auto;" class="user-option-div">--%>
+<%--                        <img class="user-icon " src="${pageContext.request.contextPath}/public/ImgLogo/user-logo.png">--%>
+<%--                        <div class="user-opton-dropdown">--%>
+<%--                            <div class="user-option " aria-labelledby="navbarDropdown">--%>
+<%--                                <a class="user-option-item" href="#">About me</a><br>--%>
+<%--                                <a class="user-option-item" href="javascript: $('#frmlogout').submit();">Logout <i--%>
+<%--                                        class="fa fa-sign-out" aria-hidden="true"></i></a><br>--%>
+<%--                                <a class=user-option-item" href="#">Something else here</a><br>--%>
+<%--                            </div>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                    <a class="user-info">Hi! ${authUser.name}</a>--%>
+                    <form method="post" id="frmlogout" action="${pageContext.request.contextPath}/Account/Logout">
+                        <input type="hidden" name="action" value="Logout">
+                        <a class="btn"><button type="submit">Logout</button></a>
+                    </form>
                 </div>
-            </div>
-            <a class="user-info">Hi! ${authUser.name}</a>
-                <form method="post" id="frmlogout" action="${pageContext.request.contextPath}/Account/Logout">
-                    <input type="hidden" name="action" value="Logout">
-                </form>
-            <script>$('#frmlogout').on('submit', function (e) {
-                e.preventDefault();
-                $('#frmlogout').off('submit').submit();
-
-
-            })</script>
-        </c:when>
-        <c:otherwise>
-
-                <a href= "/SdemxStudyOnline/Account/Login">
+                <script>$('#frmlogout').on('submit', function (e) {
+                    e.preventDefault();
+                    $('#frmlogout').off('submit').submit();
+                })</script>
+            </c:when>
+            <c:otherwise>
+                <a href="${pageContext.request.contextPath}/Account/Login">
                     <button class="btnLogin ml-2">Log in
                         <i class="fa fa-sign-in" aria-hidden="true"></i>
                     </button>
                 </a>
-
-
-            <a href="/SdemxStudyOnline/Account/Signup">
-                <button class="btnSignup ml-2 mr-3">Sign up
-                    <i class="fa fa-user-plus" aria-hidden="true"></i>
-                </button>
-
-            </a>
-        </c:otherwise>
+                <a href="${pageContext.request.contextPath}/Account/Signup">
+                    <button class="btnSignup ml-2 mr-3">Sign up
+                        <i class="fa fa-user-plus" aria-hidden="true"></i>
+                    </button>
+                </a>
+            </c:otherwise>
         </c:choose>
-
     </div>
 </div>
 <!--#endregion-->
@@ -86,26 +88,58 @@
 <div class="fade-bars">&nbsp;</div>
 <div class="list-group bar-item" id="bar-item">
     <c:forEach var="b" items="${filterlstBranch}">
-        <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between" onclick="openBranch(${b.getBranchID()})">
+        <div class="list-group-item list-group-item-action d-flex justify-content-between"
+             onclick="openBranch(${b.getBranchID()})">
             <span>${b.getBranchName()}</span>
             <span><i class="fa fa-caret-right" aria-hidden="true"></i></span>
-        </a>
+        </div>
         <div class="list-group bar-item-list" id="${b.getBranchID()}">
-            <a href="#" class="list-group-item list-group-item-action bar-btnReturn" onclick="closeBranch(${b.getBranchID()})">
+            <a href="#" class="list-group-item list-group-item-action bar-btnReturn"
+               onclick="closeBranch(${b.getBranchID()})">
                 <i class="fa fa-caret-left" aria-hidden="true"></i> Menu
             </a>
-            <a href="#" class="list-group-item list-group-item-action font-weight-bold">
-                    All ${b.getBranchName()}
+            <a href="${pageContext.request.contextPath}/Course/Branch?id=${b.branchID}"
+               class="list-group-item list-group-item-action font-weight-bold">
+                All ${b.getBranchName()}
             </a>
             <c:forEach var="c" items="${b.getLstCategory()}">
-                <a href="#" class="list-group-item list-group-item-action">
-                    ${c.getCatName()}
+                <a href="${pageContext.request.contextPath}/Course/Category?id=${c.catID}"
+                   class="list-group-item list-group-item-action">
+                        ${c.getCatName()}
                 </a>
             </c:forEach>
         </div>
     </c:forEach>
-    <a href="" class="list-group-item list-group-item-action" style="color: #0040ff">Log in</a>
-    <a href="" class="list-group-item list-group-item-action" style="color: #0040ff">Sign up</a>
+    <c:choose>
+        <c:when test="${auth}">
+            <div style="   margin: 0 auto;" class="user-option-div">
+                <img class="user-icon " src="${pageContext.request.contextPath}/public/ImgLogo/user-logo.png">
+                <div class="user-opton-dropdown">
+                    <div class="user-option " aria-labelledby="navbarDropdown">
+                        <a class="user-option-item" href="#">About me</a><br>
+                        <a class="user-option-item" href="javascript: $('#frmlogout').submit();">Logout <i
+                                class="fa fa-sign-out" aria-hidden="true"></i></a><br>
+                        <a class=user-option-item" href="#">Something else here</a><br>
+                    </div>
+                </div>
+            </div>
+            <a class="list-group-item list-group-item-action user-info">Hi! ${authUser.name}</a>
+            <form method="post" id="frmlogout" action="${pageContext.request.contextPath}/Account/Logout">
+                <input type="hidden" name="action" value="Logout">
+            </form>
+            <script>$('#frmlogout').on('submit', function (e) {
+                e.preventDefault();
+                $('#frmlogout').off('submit').submit();
+            })</script>
+        </c:when>
+        <c:otherwise>
+            <a href="${pageContext.request.contextPath}/Account/Login" class="list-group-item list-group-item-action"
+               style="color: #0040ff">Log in</a>
+            <a href="${pageContext.request.contextPath}/Account/Signup" class="list-group-item list-group-item-action"
+               style="color: #0040ff">Sign up</a>
+        </c:otherwise>
+    </c:choose>
+
 </div>
 <div class="space">&nbsp;</div>
 <!--#endregion Bar-item-->
