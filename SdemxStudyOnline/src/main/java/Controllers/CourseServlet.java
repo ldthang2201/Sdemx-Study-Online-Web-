@@ -28,6 +28,9 @@ public class CourseServlet extends HttpServlet {
             case "/Detail":
                 int id = Integer.parseInt(request.getParameter("id"));
                 Optional<Course> c = CourseModel.getCourseDetailsById(id);
+                int cID = CourseModel.getCatIDByCourID(id);
+                List<Course> lstTop5Course = CourseModel.getTop5CourseByCourID(id,cID);
+                request.setAttribute("lst5Course",lstTop5Course);
                 if (c.isPresent()) {
                     request.setAttribute("course", c.get());
                     ServletUtils.forward("/Views/vwCourse/Detail.jsp", request, response);

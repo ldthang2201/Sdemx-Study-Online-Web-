@@ -86,6 +86,17 @@ public class Course {
         this.numRate = numRate;
     }
 
+    //Constructor for Top4
+    public Course(int courID, String title, int prices, float sale, Date lastUpdate, int views, int numRegister) {
+        this.courID = courID;
+        this.title = title;
+        this.prices = prices;
+        this.sale = sale;
+        this.lastUpdate = lastUpdate;
+        this.views = views;
+        this.numRegister = numRegister;
+    }
+
     public int getCourID() {
         return courID;
     }
@@ -273,6 +284,11 @@ public class Course {
 
     public List<Feedback> lstFeedbackByCourID(){
         return CourseModel.getAllFeedbackByCourID(this.courID);
+    }
+
+    public float calcRateByCourID(){
+        float rate = CourseModel.getRateByCourID(this.courID);
+        return (float)(Math.round(rate*10.0)/10.0);
     }
 
 }

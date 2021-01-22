@@ -105,4 +105,32 @@ public class CourseModel {
                     .executeAndFetch(Feedback.class);
         }
     }
+
+    public static List<Course> getTop5CourseByCourID(int courID, int catID) {
+        final String sql= "call sp_getTop5CourseByCourID(:courID,:catID)";
+        try(Connection con = DBUtils.getConnection()){
+            return con.createQuery(sql)
+                    .addParameter("courID",courID)
+                    .addParameter("catID",catID)
+                    .executeAndFetch(Course.class);
+        }
+    }
+
+    public static int getCatIDByCourID (int courID){
+        final String sql = "select catID from course where courID=:courID";
+        try(Connection con = DBUtils.getConnection()){
+            return con.createQuery(sql)
+                    .addParameter("courID",courID)
+                    .executeScalar(int.class);
+        }
+    }
+
+    public static float getRateByCourID(int courID){
+        final String sql = "select f_calcRateByCourID(:courID)";
+        try(Connection con = DBUtils.getConnection()){
+            return con.createQuery(sql)
+                    .addParameter("courID",courID)
+                    .executeScalar(float.class);
+        }
+    }
 }

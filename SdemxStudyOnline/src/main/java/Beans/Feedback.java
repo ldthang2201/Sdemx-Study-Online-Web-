@@ -1,5 +1,7 @@
 package Beans;
 
+import Models.UserModel;
+
 import java.util.Date;
 
 public class Feedback {
@@ -68,5 +70,9 @@ public class Feedback {
 
     public void setFateDeedback(Date dateFeedback) {
         this.dateFeedback = dateFeedback;
+    }
+
+    public String getUserFullNameByUserID(){
+        return UserModel.getUserFullnameByUserID(this.userID);
     }
 }
