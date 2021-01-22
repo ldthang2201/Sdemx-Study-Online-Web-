@@ -11,7 +11,7 @@
  Target Server Version : 100414
  File Encoding         : 65001
 
- Date: 22/01/2021 15:31:08
+ Date: 22/01/2021 21:24:54
 */
 
 SET NAMES utf8mb4;
@@ -102,7 +102,7 @@ CREATE TABLE `course`  (
   `tiniDes` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `prices` int(255) NOT NULL,
   `sale` decimal(10, 2) NOT NULL DEFAULT 1,
-  `fullDes` varchar(1000) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `fullDes` varchar(10000) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `dateUpload` date NULL DEFAULT NULL,
   `lastUpdate` date NULL DEFAULT NULL,
   `views` int(255) NULL DEFAULT 0,
@@ -120,13 +120,13 @@ CREATE TABLE `course`  (
 -- Records of course
 -- ----------------------------
 INSERT INTO `course` VALUES (1, 'Introducing ID Hardware 1', 1, 2, 'this is tinyDes', 1500000, 1.00, 'this is full Des', '2021-01-16', '2021-01-16', 645716, b'1', b'0', 'English');
-INSERT INTO `course` VALUES (2, 'PLC Programming From Scratch (PLC I)', 1, 2, 'This course will give a person with no prior experience the basic tools necessary to create a PLC program from scratch.', 1000000, 0.90, NULL, '2021-01-16', '2021-01-16', 544886, b'1', b'0', 'English');
-INSERT INTO `course` VALUES (3, 'Practical PLC Programming (PLC II)', 1, 2, 'This course will give an intermediate-level student the experience necessary to originate complex, logical solutions.', 1000000, 1.00, NULL, '2021-01-16', '2021-01-16', 76794, b'1', b'0', 'English');
-INSERT INTO `course` VALUES (4, 'Introducing ID Hardware 2 ', 1, 2, NULL, 1500000, 1.00, NULL, '2021-01-16', '2021-01-16', 597076, b'1', b'0', 'English');
-INSERT INTO `course` VALUES (5, 'Learn Ethical Hacking From Scratch', 2, 2, 'Become an ethical hacker that can hack computer systems like black hat hackers and secure them like security experts.', 2000000, 1.00, NULL, '2021-01-17', '2021-01-17', 596873, b'1', b'0', 'English');
-INSERT INTO `course` VALUES (6, 'Network Security A-Z : Computer Networking + Cybersecurity', 2, 2, 'Become a PRO in Cyber Security, Computer Networking, Web Application Penetration Testing, Ethical Hacking and Bug Bounty', 2250000, 1.00, NULL, '2021-01-17', '2021-01-17', 172521, b'1', b'0', 'English');
-INSERT INTO `course` VALUES (7, 'The Complete Cyber Security Course : Hackers Exposed!', 2, 2, 'Volume 1 : Become a Cyber Security Specialist, Learn How to Stop Hackers, Prevent Hacking, Learn IT Security & INFOSEC', 1850000, 1.00, NULL, '2021-01-17', '2021-01-17', 158244, b'1', b'0', 'English');
-INSERT INTO `course` VALUES (8, 'The Complete Cyber Security Course : Network Security!', 2, 2, 'Volume 2 : Network Security, WiFi Security, WiFi Hackers, Firewalls, Wireshark, Secure Networking. + Password Managers\r\n', 1850000, 1.00, NULL, '2021-01-17', '2021-01-17', 955699, b'1', b'0', 'English');
+INSERT INTO `course` VALUES (2, 'PLC Programming From Scratch (PLC I)', 1, 2, 'This course will give a person with no prior experience the basic tools necessary to create a PLC program from scratch.', 1000000, 0.90, '<div><p>Interested in the field of Machine Learning?&nbsp;Then this course is for you!</p>\r\n    <p>This course has been designed by two professional Data Scientists so that we can share our knowledge and help you learn complex theory,&nbsp;algorithms, and coding libraries in a simple way.</p>\r\n    <p>We will walk you step-by-step into the World of Machine Learning. With every tutorial, you will develop new skills and improve your understanding of this challenging yet lucrative sub-field of Data Science.</p>\r\n    <p>This course is&nbsp;fun and exciting, but at the same time, we dive deep into Machine Learning. It is structured the following way:</p>\r\n    <ul><li><p>Part 1 - Data Preprocessing</p> </li> <li><p>Part 2 - Regression: Simple Linear Regression, Multiple Linear Regression,&nbsp;Polynomial&nbsp;Regression,&nbsp;SVR, Decision Tree Regression,&nbsp;Random Forest Regression</p></li></ul><p>Moreover, the course is packed with practical exercises that are based on real-life&nbsp;examples. So not only will you learn the theory, but you will also get some hands-on practice building your own models.</p><p>And as a bonus, this course includes both&nbsp;Python and R&nbsp;code templates which you can download and use on your own projects.</p></div>', '2021-01-16', '2021-01-16', 544886, b'1', b'0', 'English');
+INSERT INTO `course` VALUES (3, 'Practical PLC Programming (PLC II)', 1, 2, 'This course will give an intermediate-level student the experience necessary to originate complex, logical solutions.', 1000000, 1.00, '<div><p>Interested in the field of Machine Learning?&nbsp;Then this course is for you!</p>\r\n    <p>This course has been designed by two professional Data Scientists so that we can share our knowledge and help you learn complex theory,&nbsp;algorithms, and coding libraries in a simple way.</p>\r\n    <p>We will walk you step-by-step into the World of Machine Learning. With every tutorial, you will develop new skills and improve your understanding of this challenging yet lucrative sub-field of Data Science.</p>\r\n    <p>This course is&nbsp;fun and exciting, but at the same time, we dive deep into Machine Learning. It is structured the following way:</p>\r\n    <ul><li><p>Part 1 - Data Preprocessing</p> </li> <li><p>Part 2 - Regression: Simple Linear Regression, Multiple Linear Regression,&nbsp;Polynomial&nbsp;Regression,&nbsp;SVR, Decision Tree Regression,&nbsp;Random Forest Regression</p></li></ul><p>Moreover, the course is packed with practical exercises that are based on real-life&nbsp;examples. So not only will you learn the theory, but you will also get some hands-on practice building your own models.</p><p>And as a bonus, this course includes both&nbsp;Python and R&nbsp;code templates which you can download and use on your own projects.</p></div>', '2021-01-16', '2021-01-16', 76794, b'1', b'0', 'English');
+INSERT INTO `course` VALUES (4, 'Introducing ID Hardware 2 ', 1, 2, NULL, 1500000, 1.00, '<div><p>Interested in the field of Machine Learning?&nbsp;Then this course is for you!</p>\r\n    <p>This course has been designed by two professional Data Scientists so that we can share our knowledge and help you learn complex theory,&nbsp;algorithms, and coding libraries in a simple way.</p>\r\n    <p>We will walk you step-by-step into the World of Machine Learning. With every tutorial, you will develop new skills and improve your understanding of this challenging yet lucrative sub-field of Data Science.</p>\r\n    <p>This course is&nbsp;fun and exciting, but at the same time, we dive deep into Machine Learning. It is structured the following way:</p>\r\n    <ul><li><p>Part 1 - Data Preprocessing</p> </li> <li><p>Part 2 - Regression: Simple Linear Regression, Multiple Linear Regression,&nbsp;Polynomial&nbsp;Regression,&nbsp;SVR, Decision Tree Regression,&nbsp;Random Forest Regression</p></li></ul><p>Moreover, the course is packed with practical exercises that are based on real-life&nbsp;examples. So not only will you learn the theory, but you will also get some hands-on practice building your own models.</p><p>And as a bonus, this course includes both&nbsp;Python and R&nbsp;code templates which you can download and use on your own projects.</p></div>', '2021-01-16', '2021-01-16', 597076, b'1', b'0', 'English');
+INSERT INTO `course` VALUES (5, 'Learn Ethical Hacking From Scratch', 2, 2, 'Become an ethical hacker that can hack computer systems like black hat hackers and secure them like security experts.', 2000000, 1.00, '<div><p>Interested in the field of Machine Learning?&nbsp;Then this course is for you!</p>\r\n    <p>This course has been designed by two professional Data Scientists so that we can share our knowledge and help you learn complex theory,&nbsp;algorithms, and coding libraries in a simple way.</p>\r\n    <p>We will walk you step-by-step into the World of Machine Learning. With every tutorial, you will develop new skills and improve your understanding of this challenging yet lucrative sub-field of Data Science.</p>\r\n    <p>This course is&nbsp;fun and exciting, but at the same time, we dive deep into Machine Learning. It is structured the following way:</p>\r\n    <ul><li><p>Part 1 - Data Preprocessing</p> </li> <li><p>Part 2 - Regression: Simple Linear Regression, Multiple Linear Regression,&nbsp;Polynomial&nbsp;Regression,&nbsp;SVR, Decision Tree Regression,&nbsp;Random Forest Regression</p></li></ul><p>Moreover, the course is packed with practical exercises that are based on real-life&nbsp;examples. So not only will you learn the theory, but you will also get some hands-on practice building your own models.</p><p>And as a bonus, this course includes both&nbsp;Python and R&nbsp;code templates which you can download and use on your own projects.</p></div>', '2021-01-17', '2021-01-17', 596873, b'1', b'0', 'English');
+INSERT INTO `course` VALUES (6, 'Network Security A-Z : Computer Networking + Cybersecurity', 2, 2, 'Become a PRO in Cyber Security, Computer Networking, Web Application Penetration Testing, Ethical Hacking and Bug Bounty', 2250000, 1.00, '<div><p>Interested in the field of Machine Learning?&nbsp;Then this course is for you!</p>\r\n    <p>This course has been designed by two professional Data Scientists so that we can share our knowledge and help you learn complex theory,&nbsp;algorithms, and coding libraries in a simple way.</p>\r\n    <p>We will walk you step-by-step into the World of Machine Learning. With every tutorial, you will develop new skills and improve your understanding of this challenging yet lucrative sub-field of Data Science.</p>\r\n    <p>This course is&nbsp;fun and exciting, but at the same time, we dive deep into Machine Learning. It is structured the following way:</p>\r\n    <ul><li><p>Part 1 - Data Preprocessing</p> </li> <li><p>Part 2 - Regression: Simple Linear Regression, Multiple Linear Regression,&nbsp;Polynomial&nbsp;Regression,&nbsp;SVR, Decision Tree Regression,&nbsp;Random Forest Regression</p></li></ul><p>Moreover, the course is packed with practical exercises that are based on real-life&nbsp;examples. So not only will you learn the theory, but you will also get some hands-on practice building your own models.</p><p>And as a bonus, this course includes both&nbsp;Python and R&nbsp;code templates which you can download and use on your own projects.</p></div>', '2021-01-17', '2021-01-17', 172521, b'1', b'0', 'English');
+INSERT INTO `course` VALUES (7, 'The Complete Cyber Security Course : Hackers Exposed!', 2, 2, 'Volume 1 : Become a Cyber Security Specialist, Learn How to Stop Hackers, Prevent Hacking, Learn IT Security & INFOSEC', 1850000, 1.00, '<div><p>Interested in the field of Machine Learning?&nbsp;Then this course is for you!</p>\r\n    <p>This course has been designed by two professional Data Scientists so that we can share our knowledge and help you learn complex theory,&nbsp;algorithms, and coding libraries in a simple way.</p>\r\n    <p>We will walk you step-by-step into the World of Machine Learning. With every tutorial, you will develop new skills and improve your understanding of this challenging yet lucrative sub-field of Data Science.</p>\r\n    <p>This course is&nbsp;fun and exciting, but at the same time, we dive deep into Machine Learning. It is structured the following way:</p>\r\n    <ul><li><p>Part 1 - Data Preprocessing</p> </li> <li><p>Part 2 - Regression: Simple Linear Regression, Multiple Linear Regression,&nbsp;Polynomial&nbsp;Regression,&nbsp;SVR, Decision Tree Regression,&nbsp;Random Forest Regression</p></li></ul><p>Moreover, the course is packed with practical exercises that are based on real-life&nbsp;examples. So not only will you learn the theory, but you will also get some hands-on practice building your own models.</p><p>And as a bonus, this course includes both&nbsp;Python and R&nbsp;code templates which you can download and use on your own projects.</p></div>', '2021-01-17', '2021-01-17', 158244, b'1', b'0', 'English');
+INSERT INTO `course` VALUES (8, 'The Complete Cyber Security Course : Network Security!', 2, 2, 'Volume 2 : Network Security, WiFi Security, WiFi Hackers, Firewalls, Wireshark, Secure Networking. + Password Managers\r\n', 1850000, 1.00, '<div><p>Interested in the field of Machine Learning?&nbsp;Then this course is for you!</p>\r\n    <p>This course has been designed by two professional Data Scientists so that we can share our knowledge and help you learn complex theory,&nbsp;algorithms, and coding libraries in a simple way.</p>\r\n    <p>We will walk you step-by-step into the World of Machine Learning. With every tutorial, you will develop new skills and improve your understanding of this challenging yet lucrative sub-field of Data Science.</p>\r\n    <p>This course is&nbsp;fun and exciting, but at the same time, we dive deep into Machine Learning. It is structured the following way:</p>\r\n    <ul><li><p>Part 1 - Data Preprocessing</p> </li> <li><p>Part 2 - Regression: Simple Linear Regression, Multiple Linear Regression,&nbsp;Polynomial&nbsp;Regression,&nbsp;SVR, Decision Tree Regression,&nbsp;Random Forest Regression</p></li></ul><p>Moreover, the course is packed with practical exercises that are based on real-life&nbsp;examples. So not only will you learn the theory, but you will also get some hands-on practice building your own models.</p><p>And as a bonus, this course includes both&nbsp;Python and R&nbsp;code templates which you can download and use on your own projects.</p></div>', '2021-01-17', '2021-01-17', 955699, b'1', b'0', 'English');
 INSERT INTO `course` VALUES (9, 'Understanding Macroeconomics for University and Business', 3, 2, 'Explaining the economics of fiscal policy, money creation, and monetary policy', 800000, 0.90, NULL, '2021-01-17', '2021-01-17', 850292, b'1', b'0', 'English');
 INSERT INTO `course` VALUES (10, 'The Circular Economy', 3, 2, 'What and Where Are the Opportunities for Entrepreneurs?', 1200000, 1.00, NULL, '2021-01-17', '2021-01-17', 223419, b'1', b'0', 'English');
 INSERT INTO `course` VALUES (11, 'The Complete Investment Banking Course 2021', 4, 2, 'The #1 Course to Land a Job in Investment Banking. IPOs, Bonds, M&A, Trading, LBOs, Valuation: Everything is included!', 1050000, 1.00, NULL, '2021-01-17', '2021-01-17', 75391, b'1', b'0', 'English');
@@ -162,7 +162,8 @@ CREATE TABLE `feedback`  (
   `userID` int(11) NOT NULL,
   `courID` int(11) NOT NULL,
   `fullfeedback` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `rate` decimal(5, 1) NOT NULL,
+  `rate` float(5, 1) NOT NULL,
+  `dateFeedback` date NULL DEFAULT NULL,
   PRIMARY KEY (`feedbackID`) USING BTREE,
   INDEX `FK_feedback_course`(`courID`) USING BTREE,
   INDEX `FK_feedback_user`(`userID`) USING BTREE,
@@ -173,9 +174,9 @@ CREATE TABLE `feedback`  (
 -- ----------------------------
 -- Records of feedback
 -- ----------------------------
-INSERT INTO `feedback` VALUES (1, 3, 1, 'Good', 4.5);
-INSERT INTO `feedback` VALUES (2, 2, 1, 'Not Bad', 4.0);
-INSERT INTO `feedback` VALUES (3, 3, 2, 'BAD', 3.0);
+INSERT INTO `feedback` VALUES (1, 3, 1, 'Good', 4.5, '2021-01-22');
+INSERT INTO `feedback` VALUES (2, 2, 1, 'Not Bad', 4.0, '2021-01-22');
+INSERT INTO `feedback` VALUES (3, 3, 2, 'BAD', 3.0, '2021-01-22');
 
 -- ----------------------------
 -- Table structure for user
@@ -206,6 +207,7 @@ INSERT INTO `user` VALUES (5, 'testusername', 'leducthangsad', 'Le Duc Thang', '
 INSERT INTO `user` VALUES (6, 'teacher1', 'leducthangsad', 'teacher no 1', 'ldthang@email', '2000-01-01', NULL, 2, 0);
 INSERT INTO `user` VALUES (7, 'ldthang', '$2a$12$8MS4tRdTqMWGo07dM7ubUuiaiuLufcyzalQdBM8c5KYScQ9mw1See', 'Le Duc Thang', 'ldthang2201@gmail.com', '2021-01-07', NULL, 3, 0);
 INSERT INTO `user` VALUES (8, 'ldt', '$2a$12$4rU9iUgJh2fCnD7YFE.pLO/HQvQO7LSECNZxOiHFUdksyYOBrQRcC', 'ldt', 'ldtsfd', '2021-01-07', NULL, 3, 0);
+INSERT INTO `user` VALUES (134, 'ldthang7410', '$2a$12$SibwPFLq.h3hjLbtASCFJ.kxwIk0G8f5Gs9m23y0AHgGyZ37Wq/7u', 'Le Duc Thang', '18110201@student.hcmute.edu.vn', '2021-01-07', NULL, 3, 0);
 
 -- ----------------------------
 -- Table structure for watchlist
@@ -315,6 +317,21 @@ CREATE FUNCTION `f_CalcDateUpload`(`id` int)
  RETURNS int(10)
 BEGIN
 	RETURN (select DATEDIFF(now(),dateUpload) FROM course where courID = id);
+END
+;;
+delimiter ;
+
+-- ----------------------------
+-- Function structure for f_calcRateByCourID
+-- ----------------------------
+DROP FUNCTION IF EXISTS `f_calcRateByCourID`;
+delimiter ;;
+CREATE FUNCTION `f_calcRateByCourID`(`id` int)
+ RETURNS int(10)
+BEGIN
+	RETURN (select avg(rate)
+					from course LEFT JOIN feedback on course.courID=feedback.courID
+					where course.courID=id);
 END
 ;;
 delimiter ;
@@ -438,6 +455,36 @@ end
 delimiter ;
 
 -- ----------------------------
+-- Procedure structure for sp_getAllFeedbackByCourID
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `sp_getAllFeedbackByCourID`;
+delimiter ;;
+CREATE PROCEDURE `sp_getAllFeedbackByCourID`(IN id int(11))
+begin
+	select *
+	from feedback
+	where courID=id;
+end
+;;
+delimiter ;
+
+-- ----------------------------
+-- Procedure structure for sp_getTop5CourseByCourID
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `sp_getTop5CourseByCourID`;
+delimiter ;;
+CREATE PROCEDURE `sp_getTop5CourseByCourID`(IN coID INT(11), caID INT(11))
+BEGIN
+	select course.courID, title,prices,sale, lastUpdate,views, count(dateRegister) as numRegister
+	from course LEFT JOIN watchlist on course.courID=watchlist.courID
+	where course.catID=caID and course.courID<>coID
+	GROUP BY course.courID, title,prices,sale, lastUpdate
+	ORDER BY numRegister DESC LIMIT 5;
+END
+;;
+delimiter ;
+
+-- ----------------------------
 -- Procedure structure for sp_ViewAllCategoryByBranchID
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `sp_ViewAllCategoryByBranchID`;
@@ -488,10 +535,10 @@ DROP PROCEDURE IF EXISTS `sp_ViewDetailCourseByID`;
 delimiter ;;
 CREATE PROCEDURE `sp_ViewDetailCourseByID`(IN id INT(11))
 BEGIN
-  SELECT course.courID, title, course.catID, branch.branchID, teacherID, tiniDes, prices,fullDes,dateUpload,lastUpdate,views,`status`,`language`, avg(rate) as rate, count(rate) as numRate,(select count(*) from watchlist where courID=id) as NumRegister
+  SELECT course.courID, title, course.catID, branch.branchID, teacherID, tiniDes, prices,sale,fullDes,dateUpload,lastUpdate,views,`status`,premium,`language`, avg(rate) as rate, count(rate) as numRate,(select count(*) from watchlist where courID=id) as NumRegister
 	FROM branch, category, course LEFT JOIN feedback on course.courID=feedback.courID 
 	WHERE branch.branchID=category.branchID and category.catID=course.catID and course.courID=id
-	GROUP BY course.courID, title, course.catID, branch.branchID, teacherID, tiniDes, prices,fullDes,dateUpload,lastUpdate,views,`status`,`language`;
+	GROUP BY  course.courID, title, course.catID, branch.branchID, teacherID, tiniDes, prices,sale,fullDes,dateUpload,lastUpdate,views,`status`,premium,`language`;
 END
 ;;
 delimiter ;
