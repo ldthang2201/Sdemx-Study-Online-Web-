@@ -2,6 +2,7 @@ package Controllers;
 
 import Beans.Category;
 import Beans.Course;
+import Beans.Feedback;
 import Models.CategoryModel;
 import Models.CourseModel;
 import Utility.ServletUtils;
@@ -71,7 +72,7 @@ public class CourseServlet extends HttpServlet {
 
                 int curPage1 = 1;
                 if (request.getParameter("page") != null) {
-                    curPage = Integer.parseInt(request.getParameter("page"));
+                    curPage1 = Integer.parseInt(request.getParameter("page"));
                 }
 
                 final int LIMIT1 = 6;

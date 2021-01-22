@@ -1,21 +1,25 @@
 package Beans;
 
+import java.util.Date;
+
 public class Feedback {
     int feedbackID;
     int userID;
     int courID;
     String fullfeedback;
     float rate;
+    Date dateFeedback;
 
     public Feedback() {
     }
 
-    public Feedback(int feedbackID, int userID, int courID, String fullfeedback, float rate) {
+    public Feedback(int feedbackID, int userID, int courID, String fullfeedback, float rate, Date dateFeedback) {
         this.feedbackID = feedbackID;
         this.userID = userID;
         this.courID = courID;
         this.fullfeedback = fullfeedback;
         this.rate = rate;
+        this.dateFeedback = dateFeedback;
     }
 
     public int getFeedbackID() {
@@ -56,5 +60,13 @@ public class Feedback {
 
     public void setRate(float rate) {
         this.rate = rate;
+    }
+
+    public Date getDateFeedback() {
+        return dateFeedback;
+    }
+
+    public void setFateDeedback(Date dateFeedback) {
+        this.dateFeedback = dateFeedback;
     }
 }

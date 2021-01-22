@@ -3,6 +3,7 @@ package Models;
 import Beans.Branch;
 import Beans.Category;
 import Beans.Course;
+import Beans.Feedback;
 import Utility.DBUtils;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
@@ -93,6 +94,15 @@ public class CourseModel {
             return con.createQuery(sql)
                     .addParameter("catID",id)
                     .executeScalar(int.class);
+        }
+    }
+
+    public static List<Feedback> getAllFeedbackByCourID(int id){
+        final String sql = "call sp_getAllFeedbackByCourID(:courID)";
+        try(Connection con = DBUtils.getConnection()){
+            return con.createQuery(sql)
+                    .addParameter("courID", id)
+                    .executeAndFetch(Feedback.class);
         }
     }
 }

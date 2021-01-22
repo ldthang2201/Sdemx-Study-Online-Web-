@@ -28,7 +28,7 @@ public class Course {
     float rate;
     int numRate;
     int numRegister;
-
+    List<Feedback> lstFeedback;
     public Course() {
     }
 
@@ -261,6 +261,18 @@ public class Course {
 
     public int calcDateUpdate(){
         return CourseModel.calcDateUpload(this.courID);
+    }
+
+    public List<Feedback> getLstFeedback() {
+        return CourseModel.getAllFeedbackByCourID(this.courID);
+    }
+
+    public void setLstFeedback(List<Feedback> lstFeedback) {
+        this.lstFeedback = lstFeedback;
+    }
+
+    public List<Feedback> lstFeedbackByCourID(){
+        return CourseModel.getAllFeedbackByCourID(this.courID);
     }
 
 }
