@@ -19,8 +19,11 @@ public class AuthenticationFIlter implements Filter {
         HttpSession session=rq.getSession();
         boolean auth =(boolean) session.getAttribute("auth");
          if(!auth){
-             session.setAttribute("retUrl",rq.getRequestURI());
-              ServletUtils.redirect("/Account/Login",rq,(HttpServletResponse)resp);
+//             System.out.println("rq uri"+rq.getRequestURI());
+//             session.setAttribute("retUrl",rq.getRequestURI());
+             session.setAttribute("retUrl","/Account/Profile");
+             rq.setAttribute("retUrl","/Account/Profile");
+              ServletUtils.forward("/Account/Login",rq,(HttpServletResponse)resp);
             return;
         }
 

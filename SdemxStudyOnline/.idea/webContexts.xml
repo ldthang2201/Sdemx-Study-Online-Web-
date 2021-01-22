@@ -6,6 +6,7 @@
         <entry key="file://$PROJECT_DIR$/src/main/webapp/Views/partials/footer.jsp" value="file://$PROJECT_DIR$/src/main/webapp/Views/partials" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/Views/partials/nav.jsp" value="file://$PROJECT_DIR$/src/main/webapp/Views/partials" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/Views/vwAccount/Login.jsp" value="file://$PROJECT_DIR$/src/main/webapp/Views/vwAccount" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/Views/vwAccount/Profile.jsp" value="file://$PROJECT_DIR$/src/main/webapp/Views/vwAccount" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/Views/vwHome/Home.jsp" value="file://$PROJECT_DIR$/src/main/webapp/Views/vwHome" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/Tag/main.tag" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/Tag" />
       </map>

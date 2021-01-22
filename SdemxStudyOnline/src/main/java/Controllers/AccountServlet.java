@@ -28,13 +28,13 @@ import java.util.regex.Pattern;
 
 @WebServlet(name = "AccountServlet", urlPatterns = "/Account/*")
 public class AccountServlet extends HttpServlet {
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 //        String path = request.getPathInfo();
         String action = request.getParameter("action");
             System.out.println(action);
         switch (action) {
             case "Login":
-
                 postLogin(request, response);
                 break;
             case "Signup" :
@@ -43,21 +43,28 @@ public class AccountServlet extends HttpServlet {
             case "Logout":
                 postLogout(request, response);
                 break;
+            case "LogoutHome":
+                System.out.println(request.getHeader("referer"));
+                request.setAttribute("retUrl","/Home");
+                postLogout(request, response);
+                break;
             case"PasswordChange":
                 postPasswordChange(request,response);
+
             default:
+
                 ServletUtils.redirect("/NotFound", request, response);
                 break;
         }
     }
 
-        public static final Pattern VALID_EMAIL_ADDRESS_REGEX =
-            Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
+    public static final Pattern VALID_EMAIL_ADDRESS_REGEX = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
 
     public static boolean validateEmail(String emailStr) {
         Matcher matcher = VALID_EMAIL_ADDRESS_REGEX.matcher(emailStr);
         return matcher.find();
     }
+
     private void postRegister(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String password = request.getParameter("password");
         String bcryptHashString = BCrypt.withDefaults().hashToString(12, password.toCharArray());
@@ -111,7 +118,6 @@ public class AccountServlet extends HttpServlet {
 
     }
 
-
     private void postLogout(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         session.setAttribute("auth",false);
@@ -121,8 +127,11 @@ public class AccountServlet extends HttpServlet {
                 request.getServerName() +       // "myhost"
                 ":" + request.getServerPort(); //port
         String rqpatch=url.replace(patch,"");
+            if(request.getAttribute("retUrl")!=null){
+             rqpatch   = (String)request.getAttribute("retUrl");
 
-        if (url == null) url = "/Home";
+            }
+        System.out.println(rqpatch);
         ServletUtils.redirect(rqpatch, request, response);
 
     }
@@ -145,10 +154,12 @@ public class AccountServlet extends HttpServlet {
 //                Cookie cookie = new Cookie("User",user.get().getUsername());
 //                cookie.setMaxAge(60 * 60 * 24);
 //                response.addCookie(cookie);
+
                  if ((String) session.getAttribute("retUrl")== null) url = "/Home";
                 else {
                     url = (String) session.getAttribute("retUrl");
                 }
+//                System.out.println("redirect" + url);
                  ServletUtils.redirect(url, request, response);
             } else {
                 request.setAttribute("hasError", true);
@@ -165,10 +176,12 @@ public class AccountServlet extends HttpServlet {
     private void postPasswordChange(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         User rquser = (User) session.getAttribute("authUser");
+        String password = request.getParameter("password");
+
         Optional<User> user = UserModel.findByUserName(rquser.getUsername());
 //        System.out.println(request.getParameter("password"));
 
-        if(request.getParameter("newpassword")==""){
+        if(password==""){
             PrintWriter out = response.getWriter();
             response.setContentType("text/html");
             response.setHeader("errorMessage","New password is empty");
@@ -177,7 +190,7 @@ public class AccountServlet extends HttpServlet {
             return;
 
         }
-        if(!request.getParameter("password").equals(request.getParameter("comfirmpassword"))){
+        if(!password.equals(request.getParameter("comfirmpassword"))){
             PrintWriter out = response.getWriter();
             response.setContentType("text/html");
             response.setHeader("errorMessage"," Password not Match");
@@ -185,15 +198,31 @@ public class AccountServlet extends HttpServlet {
             out.close();
             return;
         };
+        BCrypt.Result result = BCrypt.verifyer().verify(password.toCharArray(), user.get().getPassword());
 
-        if(!user.get().getPassword().equals(request.getParameter("password"))){
+        if(!result.verified){
 //            System.out.println("nott     Matchhhhhhhhhhhhh");
+            System.out.println("userpass "+user.get().getPassword());
+            System.out.println("password "+request.getParameter("password").length());
             PrintWriter out = response.getWriter();
             response.setContentType("text/html");
             response.setHeader("errorMessage","Invalid password");
             out.println("Invalid password !!!!");
             out.close();
                         //xu ly thay doi password
+            return;
+        }
+
+        if(result.verified){
+//            System.out.println("nott     Matchhhhhhhhhhhhh");
+            PrintWriter out = response.getWriter();
+            response.setContentType("text/html");
+            response.setHeader("errorMessage","successfully");
+//            UserModel.ChangePassword((int)request.getParameter("Usera"),
+//                    request.getParameter("newpassword"));
+
+            out.println("Your password has been changed successfully! !!!!");
+            out.close();
             return;
         }
 
@@ -208,12 +237,16 @@ public class AccountServlet extends HttpServlet {
                 HttpSession session=request.getSession();
                 boolean auth =(boolean) session.getAttribute("auth");
                 session.setAttribute("retUrl",request.getAttribute("retUrl"));
-//                System.out.println("get request "+request.getAttribute("retUrl"));
+//                    System.out.print("get url");
+//                    System.out.println(request.getAttribute("retUrl"));
 //                if(request.getAttribute("retUrl")!=null)
 //                    ServletUtils.forward("/Views/vwAccount/Login.jsp", request, response)
                 if(!auth)
                     ServletUtils.forward("/Views/vwAccount/Login.jsp", request, response);
-              else ServletUtils.forward("/Views/vwAccount/Profile.jsp", request, response);
+              else{
+
+                    ServletUtils.forward("/Views/vwAccount/Profile.jsp", request, response);
+                }
                 break;
             case "/Signup" :
                 ServletUtils.forward("/Views/vwAccount/Signup.jsp", request, response);

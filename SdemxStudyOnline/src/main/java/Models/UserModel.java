@@ -47,4 +47,14 @@ public class UserModel {
                     .executeScalar(String.class);
         }
     }
+    public  static void ChangePassword(String Username,String newpassword){
+        final String sql =" call sp_ChangePassword(:Username,:newpassword)";
+        try(Connection con = DBUtils.getConnection()){
+                con.createQuery(sql)
+                        .addParameter("Username",Username)
+                        .addParameter("newpassword",newpassword)
+                        .executeUpdate();
+        }
+
+    }
 }
