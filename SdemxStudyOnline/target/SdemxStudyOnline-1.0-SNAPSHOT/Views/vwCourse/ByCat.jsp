@@ -27,13 +27,13 @@
                     <p class="h2 pl-3">${titleCat} Courses</p>
                 </div>
                 <div class="col-sm-1">
-                    <p class="text-mute pl-3 d-flex justify-content-end">${lstCourse.size()} results</p>
+                    <p class="text-mute pl-3 d-flex justify-content-end">${total} results</p>
                 </div>
             </div>
             <c:choose>
                 <c:when test="${lstCourse.size() == 0}">
                     <div class="row">
-                        <div>No Course in this Category! Sorry!!</div>
+                        <div class="h4 font-weight-bold m-5" style="height: 300px">No Course in this Category! Sorry!!</div>
                     </div>
                 </c:when>
                 <c:otherwise>
@@ -75,6 +75,58 @@
                     </c:forEach>
                 </c:otherwise>
             </c:choose>
+        </div>
+        <div class="d-flex justify-content-center mt-5 mb-3" style="width: 100%">
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+
+                    <c:choose>
+                        <c:when test="${curPage==1}">
+                            <li class="page-item disabled">
+                                <p class="page-link" aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </p>
+                            </li>
+                        </c:when>
+                        <c:otherwise>
+                            <li class="page-item">
+                                <a class="page-link" href="?id=${branchID}&page=${curPage-1}" aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                        </c:otherwise>
+                    </c:choose>
+
+                    <c:forEach var="p" items="${pages}">
+                        <c:choose>
+                            <c:when test="${curPage == p}">
+                                <li class="page-item active"><a class="page-link"
+                                                                href="?id=${catID}&page=${p}">${p}</a></li>
+                            </c:when>
+                            <c:otherwise>
+                                <li class="page-item"><a class="page-link" href="?id=${catID}&page=${p}">${p}</a>
+                                </li>
+                            </c:otherwise>
+                        </c:choose>
+                    </c:forEach>
+                    <c:choose>
+                        <c:when test="${curPage==nPages}">
+                            <li class="page-item disabled">
+                                <p class="page-link" aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </p>
+                            </li>
+                        </c:when>
+                        <c:otherwise>
+                            <li class="page-item">
+                                <a class="page-link" href="?id=${catID}&page=${curPage+1}" aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                        </c:otherwise>
+                    </c:choose>
+                </ul>
+            </nav>
         </div>
     </jsp:body>
 </t:main>

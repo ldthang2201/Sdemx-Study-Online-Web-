@@ -59,24 +59,6 @@ public class CategoryModel {
         }
     }
 
-    public static List<Course> getAllCourseByCatID(int id){
-        final String sql = "call sp_ViewAllCourseByCatID(:catID,10,0)";
-        try (Connection con = DBUtils.getConnection()){
-            return con.createQuery(sql)
-                    .addParameter("catID",id)
-                    .executeAndFetch(Course.class);
-        }
-    }
-
-    public static List<Course> getAllCourseByBranchID(int id){
-        final String sql = "call sp_ViewAllCourseByBranchID(:branchID,10,0)";
-        try(Connection con = DBUtils.getConnection()){
-            return con.createQuery(sql)
-                    .addParameter("branchID",id)
-                    .executeAndFetch(Course.class);
-        }
-    }
-
     public static List<Branch> getTop4MostSubBranch(){
         final String sql = "select * from Top4CategoriesMostSubc";
         try (Connection con = DBUtils.getConnection()){

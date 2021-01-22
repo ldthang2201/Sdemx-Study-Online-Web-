@@ -36,18 +36,63 @@ public class CourseServlet extends HttpServlet {
                 break;
             case "/Category":
                 int CatID = Integer.parseInt(request.getParameter("id"));
-                List<Course> lstCourByCatID = CategoryModel.getAllCourseByCatID(CatID);
+                int curPage = 1;
+                if (request.getParameter("page") != null) {
+                    curPage = Integer.parseInt(request.getParameter("page"));
+                }
+
+                final int LIMIT = 6;
+                int offset = (curPage - 1) * LIMIT;
+                System.out.println(offset);
+                int total = CourseModel.CountNoCourseByCatID(CatID);
+                int nPages=total/LIMIT;
+                System.out.println(nPages);
+                if(total % LIMIT > 0) nPages++;
+
+                int[] pages = new int[nPages];
+                for (int i = 0; i < nPages; i++) {
+                    pages[i] = i + 1;
+                }
+                request.setAttribute("pages", pages);
+                request.setAttribute("catID",CatID);
+                request.setAttribute("curPage",curPage);
+                request.setAttribute("nPages",nPages);
+                request.setAttribute("total",total);
+
+                List<Course> lstCourByCatID = CourseModel.getAllCourseByCatID(CatID, LIMIT, offset);
                 request.setAttribute("lstCourse", lstCourByCatID);
                 request.setAttribute("titleCat", CategoryModel.getCategoryNameByCatID(CatID));
-
                 List<Category> lstCatByBranchID2 = CategoryModel.getAllCategoryRelatedCatID(CatID);
                 request.setAttribute("lstCat", lstCatByBranchID2);
-
                 ServletUtils.forward("/Views/vwCourse/ByCat.jsp", request, response);
                 break;
             case "/Branch":
                 int branchID = Integer.parseInt(request.getParameter("id"));
-                List<Course> lstCourByBranchID = CategoryModel.getAllCourseByBranchID(branchID);
+
+                int curPage1 = 1;
+                if (request.getParameter("page") != null) {
+                    curPage = Integer.parseInt(request.getParameter("page"));
+                }
+
+                final int LIMIT1 = 6;
+                int offset1 = (curPage1 - 1) * LIMIT1;
+                System.out.println(offset1);
+                int total1 = CourseModel.CountNoCourseByBranchID(branchID);
+                int nPages1=total1/LIMIT1;
+                System.out.println(nPages1);
+                if(total1 % LIMIT1 > 0) nPages1++;
+
+                int[] pages1 = new int[nPages1];
+                for (int i = 0; i < nPages1; i++) {
+                    pages1[i] = i + 1;
+                }
+                request.setAttribute("pages", pages1);
+                request.setAttribute("branchID",branchID);
+                request.setAttribute("curPage",curPage1);
+                request.setAttribute("nPages",nPages1);
+                request.setAttribute("total",total1);
+
+                List<Course> lstCourByBranchID = CourseModel.getAllCourseByBranchID(branchID, LIMIT1, offset1);
                 request.setAttribute("lstCourse", lstCourByBranchID);
                 String titleContent = CategoryModel.getBranchNameByBranchID(branchID);
                 request.setAttribute("titleBranch", titleContent);

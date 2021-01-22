@@ -54,4 +54,45 @@ public class CourseModel {
             return con.createQuery(sql).executeAndFetch(Course.class);
         }
     }
+
+
+    public static List<Course> getAllCourseByCatID(int id, int limit, int offset){
+        final String sql = "call sp_ViewAllCourseByCatID(:catID,:limit,:offset)";
+        try (Connection con = DBUtils.getConnection()){
+            return con.createQuery(sql)
+                    .addParameter("catID",id)
+                    .addParameter("limit",limit)
+                    .addParameter("offset",offset)
+                    .executeAndFetch(Course.class);
+        }
+    }
+
+    public static List<Course> getAllCourseByBranchID(int id, int limit, int offset){
+        final String sql = "call sp_ViewAllCourseByBranchID(:branchID,:limit,:offset)";
+        try(Connection con = DBUtils.getConnection()){
+            return con.createQuery(sql)
+                    .addParameter("branchID",id)
+                    .addParameter("limit",limit)
+                    .addParameter("offset",offset)
+                    .executeAndFetch(Course.class);
+        }
+    }
+
+    public static int CountNoCourseByBranchID(int id){
+        final String sql = "select CountNoCourseByBranchID(:branchID)";
+        try(Connection con = DBUtils.getConnection()){
+            return con.createQuery(sql)
+                    .addParameter("branchID",id)
+                    .executeScalar(int.class);
+        }
+    }
+
+    public static int CountNoCourseByCatID(int id){
+        final String sql = "select CountNoCourseByCatID(:catID)";
+        try(Connection con = DBUtils.getConnection()){
+            return con.createQuery(sql)
+                    .addParameter("catID",id)
+                    .executeScalar(int.class);
+        }
+    }
 }
