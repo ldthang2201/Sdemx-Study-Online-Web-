@@ -92,4 +92,13 @@ public class CategoryModel {
         }
     }
 
+    public static List<Category> getAllCategoryRelatedCatID(int id){
+        final String sql = "call sp_getAllCategoryRelatedCatID(:catID)";
+        try (Connection con = DBUtils.getConnection()){
+            return con.createQuery(sql)
+                    .addParameter("catID",id)
+                    .executeAndFetch(Category.class);
+        }
+    }
+
 }

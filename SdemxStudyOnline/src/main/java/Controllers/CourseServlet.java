@@ -23,32 +23,36 @@ public class CourseServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String path = request.getPathInfo();
-        switch (path){
+        switch (path) {
             case "/Detail":
                 int id = Integer.parseInt(request.getParameter("id"));
                 Optional<Course> c = CourseModel.getCourseDetailsById(id);
-                if(c.isPresent()){
-                    request.setAttribute("course",c.get());
+                if (c.isPresent()) {
+                    request.setAttribute("course", c.get());
                     ServletUtils.forward("/Views/vwCourse/Detail.jsp", request, response);
                 } else {
-                    ServletUtils.redirect("/Home",request,response);
+                    ServletUtils.redirect("/Home", request, response);
                 }
                 break;
             case "/Category":
                 int CatID = Integer.parseInt(request.getParameter("id"));
                 List<Course> lstCourByCatID = CategoryModel.getAllCourseByCatID(CatID);
-                request.setAttribute("lstCourse",lstCourByCatID);
-                request.setAttribute("titleCat",CategoryModel.getCategoryNameByCatID(CatID));
+                request.setAttribute("lstCourse", lstCourByCatID);
+                request.setAttribute("titleCat", CategoryModel.getCategoryNameByCatID(CatID));
+
+                List<Category> lstCatByBranchID2 = CategoryModel.getAllCategoryRelatedCatID(CatID);
+                request.setAttribute("lstCat", lstCatByBranchID2);
+
                 ServletUtils.forward("/Views/vwCourse/ByCat.jsp", request, response);
                 break;
             case "/Branch":
                 int branchID = Integer.parseInt(request.getParameter("id"));
                 List<Course> lstCourByBranchID = CategoryModel.getAllCourseByBranchID(branchID);
-                request.setAttribute("lstCourse",lstCourByBranchID);
+                request.setAttribute("lstCourse", lstCourByBranchID);
                 String titleContent = CategoryModel.getBranchNameByBranchID(branchID);
-                request.setAttribute("titleBranch",titleContent);
+                request.setAttribute("titleBranch", titleContent);
                 List<Category> lstCatByBranchID = CategoryModel.getAllCategoryByBranchID(branchID);
-                request.setAttribute("lstCat",lstCatByBranchID);
+                request.setAttribute("lstCat", lstCatByBranchID);
                 ServletUtils.forward("/Views/vwCourse/ByBranch.jsp", request, response);
                 break;
             default:

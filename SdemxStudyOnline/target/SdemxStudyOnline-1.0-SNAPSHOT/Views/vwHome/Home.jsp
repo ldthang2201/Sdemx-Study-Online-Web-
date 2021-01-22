@@ -80,11 +80,13 @@
                                                 </c:when>
                                             </c:choose>
                                             <div class="mt-2">
-                                                <c:if test="${c.getNumberofRegiterByCourID() < 10}"><span class="best-seller">Best seler</span></c:if>
-                                                <c:if test="${c.calcDateUpdate() < 7 }"><span class="best-seller">New</span></c:if>
-                                                <c:if test="${c.premium}"><span class="best-seller">Premium</span> </c:if>
+                                                <c:if test="${c.getNumberofRegiterByCourID() > 10}"><span
+                                                        class="best-seller">Best seler</span></c:if>
+                                                <c:if test="${c.calcDateUpdate() < 7 }"><span
+                                                        class="best-seller">New</span></c:if>
+                                                <c:if test="${c.premium}"><span
+                                                        class="best-seller">Premium</span> </c:if>
                                             </div>
-                                            <span></span>
                                         </div>
                                     </div>
                                 </a>
@@ -130,8 +132,10 @@
                                             </c:choose>
                                         </div>
                                         <div>
-                                            <c:if test="${c.getNumberofRegiterByCourID() > 10}"><span class="best-seller">Best seler</span></c:if>
-                                            <c:if test="${c.calcDateUpdate() < 7 }"><span class="best-seller">New</span></c:if>
+                                            <c:if test="${c.getNumberofRegiterByCourID() > 10}"><span
+                                                    class="best-seller">Best seler</span></c:if>
+                                            <c:if test="${c.calcDateUpdate() < 7 }"><span
+                                                    class="best-seller">New</span></c:if>
                                             <c:if test="${c.premium}"><span class="best-seller">Premium</span> </c:if>
                                         </div>
 
@@ -147,14 +151,16 @@
             <div class="space mt-2 h2">Top Categories</div>
             <div class="row ml-3">
                 <c:forEach var="b" items="${lstMSB}">
-                    <div class="card card-category m-2" style="width: 22%;height: 400px">
-                        <a href="${pageContext.request.contextPath}/Course/Branch?id=${b.branchID}">
-                            <img src="${pageContext.request.contextPath}/public/category/${b.branchID}/main.jpg"
-                                 class="card-img-top card-img-top-category" alt="${b.branchName}">
-                            <div class="card-body">
-                                <p class="card-text h5">${b.branchName}</p>
-                            </div>
-                        </a>
+                    <div class="col-sm-3">
+                        <div class="card card-category m-2" style="width: 22%;height: 400px">
+                            <a href="${pageContext.request.contextPath}/Course/Branch?id=${b.branchID}">
+                                <img src="${pageContext.request.contextPath}/public/category/${b.branchID}/main.jpg"
+                                     class="card-img-top card-img-top-category" alt="${b.branchName}">
+                                <div class="card-body">
+                                    <p class="card-text h5">${b.branchName}</p>
+                                </div>
+                            </a>
+                        </div>
                     </div>
                 </c:forEach>
             </div>

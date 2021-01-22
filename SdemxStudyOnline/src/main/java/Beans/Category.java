@@ -1,5 +1,7 @@
 package Beans;
 
+import Models.CategoryModel;
+
 public class Category {
     int catID;
     String catName;
@@ -36,5 +38,9 @@ public class Category {
 
     public void setBranchID(int branchID) {
         this.branchID = branchID;
+    }
+
+    public String getBranchName(){
+        return CategoryModel.getBranchNameByBranchID(this.branchID);
     }
 }
