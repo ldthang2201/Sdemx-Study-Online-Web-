@@ -52,17 +52,13 @@
                         <img class="user-icon " src="${pageContext.request.contextPath}/public/ImgLogo/user-logo.png">
                         <a class="user-info">Hi! ${authUser.name}</a>
                         <div class="user-dropdown">
-                                <%--                            <div class="user-option" aria-labelledby="navbarDropdown">--%>
-                                <%--                                <a class="user-option-item list-group bar-item-list" href="#">About me</a>--%>
-                                <%--                                <a class="user-option-item" href="#">Something else here</a>--%>
-                                <%--                                <a class="user-option-item" href="javascript: $('#frmlogout').submit();">Logout <i--%>
-                                <%--                                        class="fa fa-sign-out" aria-hidden="true"></i></a>--%>
-                                <%--                            </div>--%>
                             <div class="list-group">
-                                <a href="${pageContext.request.contextPath}/Account/Profile" class="list-group-item list-group-item-action user-option">About me</a>
-                                <a href="#" class="list-group-item list-group-item-action user-option">Something else here</a>
-                                <a href="javascript: $('#frmlogout').submit();" class="list-group-item list-group-item-action user-option">Logout</a>
-
+                                <a href="${pageContext.request.contextPath}/Account/Profile"
+                                   class="list-group-item list-group-item-action user-option">About me</a>
+                                <a href="#" class="list-group-item list-group-item-action user-option">Something else
+                                    here</a>
+                                <a href="javascript: $('#frmlogout').submit();"
+                                   class="list-group-item list-group-item-action user-option">Logout</a>
                             </div>
                         </div>
 
@@ -117,25 +113,11 @@
     </c:forEach>
     <c:choose>
         <c:when test="${auth}">
-            <div style="   margin: 0 auto;" class="user-option-div">
-                <img class="user-icon " src="${pageContext.request.contextPath}/public/ImgLogo/user-logo.png">
-                <div class="user-opton-dropdown">
-                    <div class="user-option " aria-labelledby="navbarDropdown">
-                        <a class="user-option-item" href="${pageContext.request.contextPath}/Account/Profile">About me</a><br>
-                        <a class="user-option-item" href="javascript: $('#frmlogout').submit();">Logout <i
-                                class="fa fa-sign-out" aria-hidden="true"></i></a><br>
-                        <a class=user-option-item" href="#">Something else here</a><br>
-                    </div>
-                </div>
+            <div class="user-option-div d-flex align-items-center justify-content-start">
+                <img class="user-icon " style="width: 40px; margin-left:10px;margin-right: 20px"
+                     src="${pageContext.request.contextPath}/public/ImgLogo/user-logo.png">
+                <a class="user-info" href="${pageContext.request.contextPath}/Account/Profile">Hi! ${authUser.name}</a>
             </div>
-            <a class="list-group-item list-group-item-action user-info">Hi! ${authUser.name}</a>
-            <form method="post" id="frmlogout" action="${pageContext.request.contextPath}/Account/Logout">
-                <input type="hidden" name="action" value="Logout">
-            </form>
-            <script>$('#frmlogout').on('submit', function (e) {
-                e.preventDefault();
-                $('#frmlogout').off('submit').submit();
-            })</script>
         </c:when>
         <c:otherwise>
             <a href="${pageContext.request.contextPath}/Account/Login" class="list-group-item list-group-item-action"

@@ -130,13 +130,10 @@
                                     <a class="profile-navbar-item ">My courses</a>
                                 </div>
                                 <div class="profile-navbar-option">
-                                    <a class="profile-navbar-item ">Account</a>
+                                    <a class="profile-navbar-item ">Change Password</a>
                                 </div>
                                 <div class="profile-navbar-option">
-                                    <a class="profile-navbar-item ">Photo</a>
-                                </div>
-                                <div class="profile-navbar-option">
-                                    <a class="profile-navbar-item ">Notifications</a>
+                                    <a class="profile-navbar-item ">Logout</a>
                                 </div>
                             </nav>
 

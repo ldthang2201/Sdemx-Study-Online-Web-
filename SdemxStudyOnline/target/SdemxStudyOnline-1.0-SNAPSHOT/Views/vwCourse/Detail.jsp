@@ -90,15 +90,14 @@
             </div>
         </div>
         <div class="container mt-5">
-            <div class="row h3 font-weight-bold">${course.courID} Student feedback ${course.lstFeedbackByCourID().size()}</div>
-<%--            <c:forEach var="f" items="${course.lstFeedbackByCourID()}">--%>
-<%--                <div>${course.lstFeedbackByCourID().size()}</div>--%>
-<%--                <div class="row">--%>
-<%--                    <div class="col-sm-1">--%>
-<%--                        <img class="user-icon" src="${pageContext.request.contextPath}/public/ImgLogo/user-logo.png">--%>
-<%--                    </div>--%>
-<%--                </div>--%>
-<%--            </c:forEach>--%>
+            <div class="row h3 font-weight-bold"> Student feedback</div>
+            <c:forEach var="f" items="${course.lstFeedbackByCourID()}">
+                <div class="row">
+                    <div class="col-sm-1">
+                        <img style="width: 100px; height: 100px; border-radius: 50%" src="${pageContext.request.contextPath}/public/ImgLogo/user-logo.png">
+                    </div>
+                </div>
+            </c:forEach>
 
         </div>
     </jsp:body>
