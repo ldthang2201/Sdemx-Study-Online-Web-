@@ -139,7 +139,8 @@
 <t:main>
     <jsp:body>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script>
-
+        <script src='https://cdn.jsdelivr.net/jquery.cloudinary/1.0.18/jquery.cloudinary.js' type='text/javascript'></script>
+        <script src="https://widget.cloudinary.com/global/all.js" type="text/javascript"></script>
         <html>
            <body>
                     <div class=" container profile-body " style="max-width: 80%;min-width: 80%" >
@@ -168,7 +169,7 @@
                                 </div>
                             </nav>
                             <main class="profile-main col-sm-9 " >
-                                <div class="Profile" style="display: block">
+                                <div class="Profile" style="display: none">
                                     <div class="profile-header">
                                         <div class="row d-flex justify-content-center mt-2">
                                             <h2 > Public profile</h2>
@@ -244,6 +245,49 @@
                                     </div>
                                 </div>
 
+                                <div class="Upload-avatar">
+                                    <form id="frmUpload"action="">
+<%--                                        <input type="file" id="myFile" name="filename"><br>--%>
+                                        <button  id="upload">upload</button>
+
+                                    </form>
+                                    <img id="uploadimage" style="width: 200px;height: 200px">
+                                    <script>
+                                        $(function() {
+                                            // Configure Cloudinary
+                                            // with the credentials on
+                                            // your Cloudinary dashboard
+                                            $.cloudinary.config({ cloud_name: 'dajneem23',
+                                                api_key: '295818925833263'
+                                            });
+                                            // Upload button
+                                            var uploadButton = $('#upload');
+                                            // Upload-button event
+                                            uploadButton.on('click', function(e){
+                                                // Initiate upload
+                                                    $('#frmUpload').on('submit',(e)=>{
+                                                        e.preventDefault();
+                                                })
+                                                cloudinary.openUploadWidget({ cloud_name: 'dajneem23',
+                                                        upload_preset:'jt0vztyy',
+                                                        tags: ['cgal']},
+                                                    function(error, result) {
+                                                        if(error) console.log(error);
+                                                        // If NO error, log image data to console
+                                                        var id = result[0].public_id;
+                                                        console.log(processImage(id));
+                                                    });
+                                            });
+                                        })
+                                        function processImage(id) {
+                                            var options = {
+                                                client_hints: true,
+                                            };
+                                            return $('#uploadimage').attr('src',$.cloudinary.url(id, options) )
+                                        }
+                                    </script>
+                                </div>
+
                             </main>
                         </div>
 
@@ -300,6 +344,7 @@
 
 
         </script>
+        <script src="${pageContext.request.contextPath}/lib/jquery.fileupload.js"></script>
     </jsp:body>
 </t:main>
 
