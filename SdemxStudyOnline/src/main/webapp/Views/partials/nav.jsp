@@ -59,7 +59,7 @@
                                 <%--                                        class="fa fa-sign-out" aria-hidden="true"></i></a>--%>
                                 <%--                            </div>--%>
                             <div class="list-group">
-                                <a href="#" class="list-group-item list-group-item-action user-option">About me</a>
+                                <a href="${pageContext.request.contextPath}/Account/Profile" class="list-group-item list-group-item-action user-option">About me</a>
                                 <a href="#" class="list-group-item list-group-item-action user-option">Something else here</a>
                                 <a href="javascript: $('#frmlogout').submit();" class="list-group-item list-group-item-action user-option">Logout</a>
 
