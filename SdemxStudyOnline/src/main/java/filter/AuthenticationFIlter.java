@@ -20,11 +20,10 @@ public class AuthenticationFIlter implements Filter {
         boolean auth =(boolean) session.getAttribute("auth");
          if(!auth){
              session.setAttribute("retUrl",rq.getRequestURI());
-             System.out.println(rq.getRequestURI());
-
-             ServletUtils.redirect("/Account/Login",rq,(HttpServletResponse)resp);
+              ServletUtils.redirect("/Account/Login",rq,(HttpServletResponse)resp);
             return;
         }
+
 
         chain.doFilter(req, resp);
     }

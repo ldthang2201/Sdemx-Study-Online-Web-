@@ -23,7 +23,10 @@
         <url-pattern>/Account/Profile</url-pattern>
     </filter-mapping>
 
-
+    <filter-mapping>
+        <filter-name>LoginFilter</filter-name>
+        <url-pattern>/Account/Login</url-pattern>
+    </filter-mapping>
 
 
 </web-app>

@@ -100,7 +100,7 @@
                     <c:forEach var="p" items="${pages}">
                         <c:choose>
                             <c:when test="${curPage == p}">
-                                <li class="page-item active"><a class="page-link"
+                                <li class="page-item active" style="z-index: 0"><a class="page-link"
                                                                 href="?id=${catID}&page=${p}">${p}</a></li>
                             </c:when>
                             <c:otherwise>
