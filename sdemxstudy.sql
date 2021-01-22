@@ -11,7 +11,7 @@
  Target Server Version : 100414
  File Encoding         : 65001
 
- Date: 22/01/2021 10:59:03
+ Date: 22/01/2021 15:31:08
 */
 
 SET NAMES utf8mb4;
@@ -275,6 +275,36 @@ from branch, category, course LEFT JOIN feedback on course.courID=feedback.courI
 where branch.branchID=category.branchID and category.catID=course.catID and (DATEDIFF(NOW(),dateUpload)<=7)
 GROUP BY course.courID, title, branch.branchID, teacherID, prices, sale, dateUpload, views, premium
 ORDER BY dateUpload DESC LIMIT 10 ;
+
+-- ----------------------------
+-- Function structure for CountNoCourseByBranchID
+-- ----------------------------
+DROP FUNCTION IF EXISTS `CountNoCourseByBranchID`;
+delimiter ;;
+CREATE FUNCTION `CountNoCourseByBranchID`(`id` int(10))
+ RETURNS int(11)
+BEGIN
+	RETURN (select count(*)
+					from course, category
+					where course.catID=category.catID and category.branchID=id);
+END
+;;
+delimiter ;
+
+-- ----------------------------
+-- Function structure for CountNoCourseByCatID
+-- ----------------------------
+DROP FUNCTION IF EXISTS `CountNoCourseByCatID`;
+delimiter ;;
+CREATE FUNCTION `CountNoCourseByCatID`(`id` int)
+ RETURNS int(10)
+BEGIN
+	RETURN (select count(*)
+					from course, category
+					where course.catID=category.catID and course.catID=id);
+END
+;;
+delimiter ;
 
 -- ----------------------------
 -- Function structure for f_CalcDateUpload
