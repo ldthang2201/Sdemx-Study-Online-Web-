@@ -11,7 +11,7 @@
  Target Server Version : 100414
  File Encoding         : 65001
 
- Date: 21/01/2021 16:19:54
+ Date: 22/01/2021 10:59:03
 */
 
 SET NAMES utf8mb4;
@@ -119,7 +119,6 @@ CREATE TABLE `course`  (
 -- ----------------------------
 -- Records of course
 -- ----------------------------
-INSERT INTO `course` VALUES (0, 'test Course', 1, 2, NULL, 1320000, 1.00, NULL, '2021-01-16', '2021-01-16', 130519, b'1', b'0', 'English');
 INSERT INTO `course` VALUES (1, 'Introducing ID Hardware 1', 1, 2, 'this is tinyDes', 1500000, 1.00, 'this is full Des', '2021-01-16', '2021-01-16', 645716, b'1', b'0', 'English');
 INSERT INTO `course` VALUES (2, 'PLC Programming From Scratch (PLC I)', 1, 2, 'This course will give a person with no prior experience the basic tools necessary to create a PLC program from scratch.', 1000000, 0.90, NULL, '2021-01-16', '2021-01-16', 544886, b'1', b'0', 'English');
 INSERT INTO `course` VALUES (3, 'Practical PLC Programming (PLC II)', 1, 2, 'This course will give an intermediate-level student the experience necessary to originate complex, logical solutions.', 1000000, 1.00, NULL, '2021-01-16', '2021-01-16', 76794, b'1', b'0', 'English');
@@ -199,7 +198,7 @@ CREATE TABLE `user`  (
 -- Records of user
 -- ----------------------------
 INSERT INTO `user` VALUES (0, 'sdsd', 'dsd', 'sdsd', 'dsd', '2021-01-18', NULL, 3, 0);
-INSERT INTO `user` VALUES (1, 'admin', 'admin', NULL, NULL, NULL, NULL, 1, 0);
+INSERT INTO `user` VALUES (1, 'admin', 'admin', 'Administrator', NULL, NULL, NULL, 1, 0);
 INSERT INTO `user` VALUES (2, 'ldthang', 'ksldajlksjdilkjalsfd', 'Le Duc Thang', 'ldthang2201@gmail.com', '2021-01-16', NULL, 2, 0);
 INSERT INTO `user` VALUES (3, 'tnthanh', 'trannhatthanh', 'Tran Nhat Thanh', 'thanh@gmail.com', '2021-01-17', NULL, 3, 0);
 INSERT INTO `user` VALUES (4, 'hhelomoinguoi', 'leducthangsad', 'Le Duc Thang', 'ldthang@email', '2000-01-01', NULL, 3, 0);
@@ -388,6 +387,22 @@ begin
 update `user`
 set `password` = newPass
 where userID=uID;
+end
+;;
+delimiter ;
+
+-- ----------------------------
+-- Procedure structure for sp_getAllCategoryRelatedCatID
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `sp_getAllCategoryRelatedCatID`;
+delimiter ;;
+CREATE PROCEDURE `sp_getAllCategoryRelatedCatID`(IN id int(11))
+begin
+	select *
+	from category
+	where branchID=(select branchID
+									from category
+									where catID = id);
 end
 ;;
 delimiter ;
