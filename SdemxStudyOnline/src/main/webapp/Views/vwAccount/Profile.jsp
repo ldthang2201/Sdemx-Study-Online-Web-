@@ -107,9 +107,7 @@
      }
     .btn-pwc{
         background: #34e5eb;
-
         width: 150px;
-
     }
 
 </style>

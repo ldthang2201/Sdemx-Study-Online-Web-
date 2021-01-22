@@ -34,6 +34,7 @@ public class AccountServlet extends HttpServlet {
             System.out.println(action);
         switch (action) {
             case "Login":
+
                 postLogin(request, response);
                 break;
             case "Signup" :
@@ -67,30 +68,47 @@ public class AccountServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
         response.setContentType("text/html");
         String outResponce= new String();
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-        try {
-            dob = formatter.parse(request.getParameter("dob"));
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
+        int rule = 0;
         Optional<User> finduser = UserModel.findByUserName(username);
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+
+            if(request.getParameter("dob")==""){
+                response.setHeader("errorMessage","Invalid birthday !!!");
+                outResponce+="birthday";
+            }else {
+                try {
+                    dob = formatter.parse(request.getParameter("dob"));
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            }
            if(finduser.isPresent()){
-              System.out.println("thanh cong");
-               outResponce+=" Username";
+                outResponce+=" Username";
           }
-        if(!validateEmail(email)){
+            if(password==""){
+               response.setHeader("errorMessage","password empty !!!");
+               outResponce+="pempty";
+           }
+         if(!validateEmail(email)){
             response.setHeader("errorMessage","Invalid Email !!!");
             outResponce+=" Email ";
-
+        }
+        if(!password.equals(request.getParameter("comfirmpassword"))){
+            response.setHeader("errorMessage","Invalid comfirm password !!!");
+            outResponce+=" Comfirm ";
         }
 
-        int rule = 0;
-//        User user = new User(-1, username, bcryptHashString, name, email, dob, rule,0,"-1");
-//        UserModel.add(user);
+
+        if(outResponce.length()<=0)  {
+            User user = new User(-1, username, bcryptHashString, name, email, dob, rule,0,"-1");
+            UserModel.add(user);
+//            ServletUtils.redirect("/Home", request, response);
+            outResponce+=" Succes ";
+        }
+
         out.println(outResponce);
         out.close();
-        ServletUtils.redirect("/Home", request, response);
+
     }
 
 
@@ -116,21 +134,22 @@ public class AccountServlet extends HttpServlet {
         if (user.isPresent()) {
             BCrypt.Result result = BCrypt.verifyer().verify(password.toCharArray(), user.get().getPassword());
             if (result.verified) {
-
                 HttpSession session = request.getSession();
-                session.setAttribute("auth", true);
                 String url=new String();
+                session.setAttribute("auth", true);
                 session.setAttribute("authUser", user.get());
-                if((String)session.getAttribute("retUrl")!=null) {
+//                if((String)session.getAttribute("retUrl")!=null) {
+//                    url = (String) session.getAttribute("retUrl");
+//                }
+//                set cookie
+//                Cookie cookie = new Cookie("User",user.get().getUsername());
+//                cookie.setMaxAge(60 * 60 * 24);
+//                response.addCookie(cookie);
+                 if ((String) session.getAttribute("retUrl")== null) url = "/Home";
+                else {
                     url = (String) session.getAttribute("retUrl");
                 }
-//                set cookie
-                Cookie cookie = new Cookie("User",user.get().getUsername());
-                cookie.setMaxAge(60 * 60 * 24);
-                response.addCookie(cookie);
-
-                if (url == null) url = "/Home";
-                ServletUtils.redirect(url, request, response);
+                 ServletUtils.redirect(url, request, response);
             } else {
                 request.setAttribute("hasError", true);
                 request.setAttribute("errorMessage", "Invalid password.");
@@ -181,14 +200,20 @@ public class AccountServlet extends HttpServlet {
 
 
     }
-        protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String path = request.getPathInfo();
         switch (path){
             case "/Login":
                 HttpSession session=request.getSession();
                 boolean auth =(boolean) session.getAttribute("auth");
-                if(!auth)ServletUtils.forward("/Views/vwAccount/Login.jsp", request, response);
-                else ServletUtils.forward("/Views/vwAccount/Profile.jsp", request, response);
+                session.setAttribute("retUrl",request.getAttribute("retUrl"));
+//                System.out.println("get request "+request.getAttribute("retUrl"));
+//                if(request.getAttribute("retUrl")!=null)
+//                    ServletUtils.forward("/Views/vwAccount/Login.jsp", request, response)
+                if(!auth)
+                    ServletUtils.forward("/Views/vwAccount/Login.jsp", request, response);
+              else ServletUtils.forward("/Views/vwAccount/Profile.jsp", request, response);
                 break;
             case "/Signup" :
                 ServletUtils.forward("/Views/vwAccount/Signup.jsp", request, response);

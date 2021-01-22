@@ -111,7 +111,9 @@
                 <label class="label-mess" id="cpassword-mess"></label>
                 <input id="input-comfirmpassword" type="password" class="input-signup" placeholder="Confirm Password">
             </label>
+                <div id="succes-mess"  > Sign Up Succes</div>
             <button  class="btn-signup" type="submit">Sign Up </button>
+
             <p class="Policy-agree">By signing up, you agree to our Terms of Use and Privacy Policy. </p>
             </form>
         </div>
@@ -164,22 +166,37 @@
             contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
             type: 'POST',
             success: function(data){
-
                if(data.includes("Email"))
                {
                    if(!$('#email-mess').text())$('#email-mess').text("Invalid Email");
                }
-               else {
-                   $('#email-mess').text("")
-               }
-
+               else $('#email-mess').text("")
 
                 if(data.includes("Username")){
                     if(!$('#username-mess').text())$('#username-mess').text("Username already exists");
                 }
-                else {
-                    $('#username-mess').text("")
+                else $('#username-mess').text("");
+
+                if(data.includes("birthday")){
+                    if(!$('#dob-mess').text())$('#dob-mess').text("Invalid birthday");
                 }
+                else $('#dob-mess').text("");
+
+                if(data.includes("pempty")){
+                    if(!$('#password-mess').text())$('#password-mess').text("Password cannot be empty ");
+                }
+                else {
+                    $('#password-mess').text("");
+                    if(data.includes("Comfirm")){
+                        if(!$('#cpassword-mess').text())$('#cpassword-mess').text("Password not match ");
+                    }
+                    else $('#cpassword-mess').text("");
+                }
+                if(data.includes("Succes")){
+                 if( $('#succes-mess').css('visibility')=='hidden') $('#succes-mess').css('visibility','visible');
+                }
+                else $('#succes-mess').css('visibility','hidden');
+
             }
         });
 
