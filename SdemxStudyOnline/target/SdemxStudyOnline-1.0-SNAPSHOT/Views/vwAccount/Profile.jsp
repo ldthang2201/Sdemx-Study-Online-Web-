@@ -158,6 +158,9 @@
                                     <a id="changepassword"class="profile-navbar-item   ">Change Password</a>
                                 </div>
                                 <div class="profile-navbar-option">
+                                    <a id="changeavatar"class="profile-navbar-item   ">Change avatar</a>
+                                </div>
+                                <div class="profile-navbar-option">
                                     <a id="logout" href="javascript: $('#frmprofilelogout').submit();" h class="profile-navbar-item   ">Logout</a>
                                     <form  method="post" id="frmprofilelogout">
                                         <script>$('#frmprofilelogout').on('submit', function (e) {
@@ -169,7 +172,7 @@
                                 </div>
                             </nav>
                             <main class="profile-main col-sm-9 " >
-                                <div class="Profile" style="display: none">
+                                <div class="Profile" style="display: block">
                                     <div class="profile-header">
                                         <div class="row d-flex justify-content-center mt-2">
                                             <h2 > Public profile</h2>
@@ -245,7 +248,7 @@
                                     </div>
                                 </div>
 
-                                <div class="Upload-avatar">
+                                <div class="ChangeAvatar" style="display: none">
                                     <form id="frmUpload"action="">
 <%--                                        <input type="file" id="myFile" name="filename"><br>--%>
                                         <button  id="upload">upload</button>
@@ -330,6 +333,7 @@
 
             $('#profile').click(
                 ()=>{
+                    $('.ChangeAvatar').css('display','none')
                     $('.Account').css('display','none');
                     $('.Profile').css('display','block');
                 }
@@ -337,11 +341,20 @@
 
             $('#changepassword').click(
                 ()=>{
+                    $('.ChangeAvatar').css('display','none')
                     $('.Profile').css('display','none');
                     $('.Account').css('display','block');
                 }
             )
 
+            $('#changeavatar').click(
+                ()=>{
+                    $('.Profile').css('display','none');
+                    $('.Account').css('display','none');
+                    $('.ChangeAvatar').css('display','block')
+
+                }
+            )
 
         </script>
         <script src="${pageContext.request.contextPath}/lib/jquery.fileupload.js"></script>
