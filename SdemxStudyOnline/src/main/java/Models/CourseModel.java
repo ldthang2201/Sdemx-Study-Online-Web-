@@ -34,6 +34,26 @@ public class CourseModel {
             return con.createQuery(sql).addParameter("courID", id).executeScalar(int.class);
         }
     }
+    public static void buyCourse(int courseID,int userID){
+        final String sql="call add_WatchList(:userID,:courID) ";
+        try (Connection con = DBUtils.getConnection()) {
+             con.createQuery(sql).addParameter("courID", courseID)
+                     .addParameter("userID",userID)
+                    .executeUpdate();
+        }
+
+
+    }
+    public static void likeCourse(int courseID,int userID){
+        final String sql="call add_removeWishList(:userID, :courID) ";
+        try (Connection con = DBUtils.getConnection()) {
+            con.createQuery(sql).addParameter("courID", courseID)
+                    .addParameter("userID",userID)
+                    .executeUpdate();
+        }
+
+
+    }
 
     public static int calcDateUpload(int id) {
         final String sql = "select f_CalcDateUpload(:courID)";

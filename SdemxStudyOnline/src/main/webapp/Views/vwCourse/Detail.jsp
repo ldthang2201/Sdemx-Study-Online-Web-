@@ -47,6 +47,9 @@
                 font-size: 16px;
                 font-weight: bold;
             }
+            #btn-like:focus{
+                background-color: red !important;
+            }
         </style>
         <div class="container-detail">
             <div class="container">
@@ -55,23 +58,121 @@
                         <div class="video mt-5">
                             Video here
                         </div>
-                        <form action="#" class="d-flex justify-content-around" style="width: 100%">
-                            <button type="button" class="btn btn-register mt-3 mb-4">
-                                Buy now
-                            </button>
-                            <c:choose>
-                                <c:when test="${checkLike}">
-                                    <button type="button" class="btn btn-danger mt-3 mb-4">
-                                        Wishlisted <i class="fa fa-heart" aria-hidden="true"></i>
-                                    </button>
-                                </c:when>
-                                <c:otherwise>
-                                    <button type="button" class="btn btn-outline-danger mt-3 mb-4">
-                                        Wishlisted <i class="fa fa-heart" aria-hidden="true"></i>
-                                    </button>
-                                </c:otherwise>
-                            </c:choose>
-                        </form>
+                        <div class="d-flex justify-content-around" style="width: 100%">
+                            <form method="POST"  id="frmbuy"   >
+                                <c:choose>
+                                    <c:when test="${!auth}">
+                                        <button id="btn-buy" type="button" class="btn btn-register mt-3 mb-4">
+                                            Buy now
+                                        </button>
+                                        <input type="hidden" name="action" value="buy">
+                                        <input id="inputCourseId" type="hidden" name="CourseId" value="">
+                                        <script>
+                                            $('#inputCourseId').val($('#courseID').text());
+
+                                            $('#btn-buy').on('click',()=>{
+                                                console.log("submit");
+                                                $('#frmbuy').submit();
+                                            })
+                                            $('#frmbuy').on("submit",(e)=>{
+                                                e.preventDefault()
+                                                $('#frmbuy').off('submit').submit();
+                                            })
+                                        </script>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <button id="btn-buy" type="button" class="btn btn-register mt-3 mb-4">
+                                            Buy now
+                                        </button>
+                                        <script>
+                                            $('#btn-buy').click(
+                                                () => {
+                                                    $.ajax({
+                                                        url: '${pageContext.request.contextPath}/Course/Buy',
+                                                        data: jQuery.param({
+                                                            action: "buy",
+                                                            CourseId:$('#courseID').text(),
+                                                        }),
+                                                        processData: false,
+                                                        contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                                                        type: 'POST',
+                                                        success: function (data) {
+
+
+                                                        }
+                                                    });
+
+                                                }
+                                            )
+                                        </script>
+                                    </c:otherwise>
+                                </c:choose>
+                            </form>
+                            <form method="POST"  id="frmlike"  >
+                                <c:choose>
+                                    <c:when test="${!auth}">
+                                        <button  id="btn-dislike" type="button" class="btn btn-outline-danger mt-3 mb-4">
+                                            Wishlisted <i class="fa fa-heart" aria-hidden="true"></i>
+                                        </button>
+                                        <input type="hidden" name="action" value="like" >
+                                        <input id="inputlike" type="hidden" name="CourseId" value="" >
+                                        <script>
+                                            $('#inputlike').val(${course.courID});
+                                                <%--console.log(${course.courID})--%>
+                                            $('#btn-dislike').on('click',()=>{
+                                                console.log("submit");
+                                                $('#frmlike').submit();
+                                            })
+                                            $('#frmlike').on("submit",(e)=>{
+                                                e.preventDefault()
+                                                $('#frmlike').off('submit').submit();
+                                            })
+                                        </script>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <c:choose>
+                                            <c:when test="${checkLike}">
+                                                <button id="btn-like" type="button" class="btn btn-danger mt-3 mb-4">
+                                                    Wishlisted <i class="fa fa-heart" aria-hidden="true"></i>
+                                                </button>
+
+                                            </c:when>
+                                            <c:otherwise>
+                                                <button  id="btn-like" type="button" class="btn btn-outline-danger mt-3 mb-4">
+                                                    Wishlisted <i class="fa fa-heart" aria-hidden="true"></i>
+                                                </button>
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </c:otherwise>
+                                </c:choose>
+
+                                <script>
+                                    $('#btn-like').click(
+                                        () => {
+                                            $.ajax({
+                                                url: '${pageContext.request.contextPath}/Course/Like',
+                                                data: jQuery.param({
+                                                    action: "like",
+                                                    like:"dislike"  ,
+                                                    CourseId:${course.courID},
+                                                }),
+                                                processData: false,
+                                                contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                                                type: 'POST',
+                                                success: function (data) {
+                                                    console.log("submit")
+                                                }
+                                            });
+                                            $('#btn-like').toggleClass('btn-outline-danger');
+                                            $('#btn-like').toggleClass('btn-danger');
+                                        }
+                                    )
+                                </script>
+                                <a id="courseID" style="display:none;" >${course.getCourID()}</a>
+
+                            </form>
+                        </div>
+
                     </div>
                     <div class="col-md">
                         <div class="detail-category mt-5">

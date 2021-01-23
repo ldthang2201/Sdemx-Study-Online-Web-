@@ -21,10 +21,59 @@ import java.util.Optional;
 @WebServlet(name = "CourseServlet", urlPatterns = "/Course/*")
 public class CourseServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String action = request.getParameter("action");
+            System.out.println(action);
+            switch (action){
+                case "buy":
+//                    postBuy(request,response);
+                    break;
+                case "like":
+                    postLike(request,response);
+                    break;
+                default:
+                    ServletUtils.redirect("/NotFound", request, response);
+                    break;
+
+            }
+    }
+         private void postBuy(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        User user = (User)session.getAttribute("authUser");
+        int userid=user.getId();
+        boolean auth= (boolean)session.getAttribute("auth");
+         String courseId = (String)request.getParameter("CourseId");
+//        System.out.print("user");
+//        System.out.println(user);
+//        System.out.print(("auth "));
+//       System.out.println(auth);
+       if(!auth){
+           ServletUtils.redirect("/Account/Login", request, response);
+       }
+        else {
+            CourseModel.buyCourse(Integer.parseInt(courseId),userid);
+       }
 
     }
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+         private void postLike(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+             HttpSession session = request.getSession();
+             User user = (User)session.getAttribute("authUser");
+             int userid=user.getId();
+             boolean auth= (boolean)session.getAttribute("auth");
+             String courseId = (String)request.getParameter("CourseId");
+                System.out.print("user");
+                System.out.println(user);
+                System.out.print(("auth "));
+               System.out.println(auth);
+             if(!auth){
+                 ServletUtils.redirect("/Account/Login", request, response);
+             }
+             else {
+                 CourseModel.likeCourse(Integer.parseInt(courseId),userid);
+             }
+         }
+
+        protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String path = request.getPathInfo();
         switch (path) {
             case "/Detail":
