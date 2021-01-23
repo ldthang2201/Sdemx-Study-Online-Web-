@@ -187,7 +187,7 @@
                 else $('#dob-mess').text("");
 
                 if(data.includes("pempty")){
-                    if(!$('#password-mess').text())$('#password-mess').text("Password Invalid ");
+                    if(!$('#password-mess').text())$('#password-mess').text("Invalid Password  ");
                 }
                 else {
                     $('#password-mess').text("");
@@ -210,5 +210,27 @@
 
 
 </script>
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-app.js"></script>
 
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-analytics.js"></script>
+
+<script>
+    // Your web app's Firebase configuration
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    var firebaseConfig = {
+        apiKey: "AIzaSyCx1CYACjH1LkJzqsZMdmVNdOTKVcc2r08",
+        authDomain: "sdemxstudyonline.firebaseapp.com",
+        projectId: "sdemxstudyonline",
+        storageBucket: "sdemxstudyonline.appspot.com",
+        messagingSenderId: "861086264482",
+        appId: "1:861086264482:web:3e78252588846be1fa3bfb",
+        measurementId: "G-GKFSJYDF5Z"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    firebase.analytics();
+</script>
 </html>

@@ -153,7 +153,6 @@
                                                 url: '${pageContext.request.contextPath}/Course/Like',
                                                 data: jQuery.param({
                                                     action: "like",
-                                                    like:"dislike"  ,
                                                     CourseId:${course.courID},
                                                 }),
                                                 processData: false,

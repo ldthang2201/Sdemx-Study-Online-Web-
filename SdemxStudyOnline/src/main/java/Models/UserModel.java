@@ -28,13 +28,14 @@ public class UserModel {
 
     public static void add(User user) {
 
-        final String sql = "call sp_AddNewStudentUser(:username, :password, :name, :email, :dob);";
+        final String sql = "call sp_AddNewStudentUser(:username, :password, :name, :email, :dob,:phone);";
         try (Connection con = DBUtils.getConnection()) {
             con.createQuery(sql)
                     .addParameter("username", user.getUsername())
                     .addParameter("password", user.getPassword())
                     .addParameter("name", user.getName())
                     .addParameter("email", user.getEmail())
+                    .addParameter("phone",user.getPhone())
                     .addParameter("dob", user.getDob())
                     .executeUpdate();
         }
