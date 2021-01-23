@@ -110,7 +110,7 @@ public class AccountServlet extends HttpServlet {
 
 
         if(outResponce.length()<=0)  {
-            User user = new User(-1, username, bcryptHashString, name, email, dob, rule,0,"-1");
+            User user = new User(-1, username, bcryptHashString, name, email,0, dob, rule,0,"-1");
             UserModel.add(user);
 //            ServletUtils.redirect("/Home", request, response);
             outResponce+=" Succes ";

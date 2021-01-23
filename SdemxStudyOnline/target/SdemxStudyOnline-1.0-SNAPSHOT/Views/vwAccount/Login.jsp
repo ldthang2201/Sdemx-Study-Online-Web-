@@ -99,6 +99,10 @@
                     <label class="label-mess" id="email-mess"></label>
                 <input  id="input-email" type="text" class="input-signup" placeholder ="Email" name="email">
             </label>
+                <label class="label-signup">
+                    <label class="label-mess" id="phone-mess"></label>
+                    <input  id="input-phone" type="text" class="input-signup" placeholder ="Phone number" name="email">
+                </label>
             <label class="label-signup">
                 <label class="label-mess" id="dob-mess"></label>
                 <input id="input-dob" type="text"  class="input-signup datepicker"  placeholder ="BirthDay" name="dob"></p>
@@ -183,7 +187,7 @@
                 else $('#dob-mess').text("");
 
                 if(data.includes("pempty")){
-                    if(!$('#password-mess').text())$('#password-mess').text("Password cannot be empty ");
+                    if(!$('#password-mess').text())$('#password-mess').text("Password Invalid ");
                 }
                 else {
                     $('#password-mess').text("");

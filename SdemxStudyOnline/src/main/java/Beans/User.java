@@ -9,11 +9,12 @@ public class User {
     String avatar;
     int rule;
     int premium;
+    int phone;
 
     public User() {
     }
 
-    public User(int UserID, String username, String password, String fullName ,String email, Date dob, int rule,int premium,String avatar) {
+    public User(int UserID, String username, String password, String fullName ,String email,int phone, Date dob, int rule,int premium,String avatar) {
         this.UserID = UserID;
         this.username = username;
         this.password = password;
@@ -23,6 +24,7 @@ public class User {
         this.dob = dob;
         this.rule = rule;
         this.premium=premium;
+        this.phone=phone;
     }
 
     public int getId() {
@@ -94,6 +96,8 @@ public class User {
     public void setPremium(int id) {
         this.premium = premium;
     }
+    public int getPhone(){return phone;}
+    public void setPhone(int phone){ this.phone=phone;}
 
     @Override
     public String toString() {
