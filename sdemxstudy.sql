@@ -11,7 +11,7 @@
  Target Server Version : 100414
  File Encoding         : 65001
 
- Date: 23/01/2021 10:20:06
+ Date: 23/01/2021 20:39:06
 */
 
 SET NAMES utf8mb4;
@@ -192,22 +192,18 @@ CREATE TABLE `user`  (
   `avatar` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `rule` int(11) NOT NULL COMMENT '1- admin; 2- teacher; 3-student',
   `premium` int(3) NOT NULL DEFAULT 0,
+  `phone` varchar(12) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`userID`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES (0, 'sdsd', 'dsd', 'sdsd', 'dsd', '2021-01-18', NULL, 3, 0);
-INSERT INTO `user` VALUES (1, 'admin', 'newpassword', 'Administrator', NULL, NULL, NULL, 1, 0);
-INSERT INTO `user` VALUES (2, 'ldthang', 'ksldajlksjdilkjalsfd', 'Le Duc Thang', 'ldthang2201@gmail.com', '2021-01-16', NULL, 2, 0);
-INSERT INTO `user` VALUES (3, 'tnthanh', 'trannhatthanh', 'Tran Nhat Thanh', 'thanh@gmail.com', '2021-01-17', NULL, 3, 0);
-INSERT INTO `user` VALUES (4, 'hhelomoinguoi', 'leducthangsad', 'Le Duc Thang', 'ldthang@email', '2000-01-01', NULL, 3, 0);
-INSERT INTO `user` VALUES (5, 'testusername', 'leducthangsad', 'Le Duc Thang', 'ldthang@email', '2000-01-01', NULL, 3, 0);
-INSERT INTO `user` VALUES (6, 'teacher1', 'leducthangsad', 'teacher no 1', 'ldthang@email', '2000-01-01', NULL, 2, 0);
-INSERT INTO `user` VALUES (7, 'ldthang', '$2a$12$8MS4tRdTqMWGo07dM7ubUuiaiuLufcyzalQdBM8c5KYScQ9mw1See', 'Le Duc Thang', 'ldthang2201@gmail.com', '2021-01-07', NULL, 3, 0);
-INSERT INTO `user` VALUES (8, 'ldt', '$2a$12$4rU9iUgJh2fCnD7YFE.pLO/HQvQO7LSECNZxOiHFUdksyYOBrQRcC', 'ldt', 'ldtsfd', '2021-01-07', NULL, 3, 0);
-INSERT INTO `user` VALUES (134, 'ldthang7410', '$2a$12$SibwPFLq.h3hjLbtASCFJ.kxwIk0G8f5Gs9m23y0AHgGyZ37Wq/7u', 'Le Duc Thang', '18110201@student.hcmute.edu.vn', '2021-01-07', NULL, 3, 0);
+INSERT INTO `user` VALUES (1, 'admin', 'newpassword', 'Administrator', NULL, NULL, NULL, 1, 0, NULL);
+INSERT INTO `user` VALUES (2, 'ldthang', 'ksldajlksjdilkjalsfd', 'Le Duc Thang', 'ldthang2201@gmail.com', '2021-01-16', NULL, 2, 0, NULL);
+INSERT INTO `user` VALUES (3, 'tnthanh', 'trannhatthanh', 'Tran Nhat Thanh', 'thanh@gmail.com', '2021-01-17', NULL, 3, 0, NULL);
+INSERT INTO `user` VALUES (7, 'ldthang', '$2a$12$8MS4tRdTqMWGo07dM7ubUuiaiuLufcyzalQdBM8c5KYScQ9mw1See', 'Le Duc Thang', 'ldthang2201@gmail.com', '2021-01-07', NULL, 3, 0, NULL);
+INSERT INTO `user` VALUES (8, 'ldt', '$2a$12$4rU9iUgJh2fCnD7YFE.pLO/HQvQO7LSECNZxOiHFUdksyYOBrQRcC', 'ldt', 'ldtsfd', '2021-01-07', NULL, 3, 0, NULL);
 
 -- ----------------------------
 -- Table structure for watchlist
@@ -228,16 +224,6 @@ CREATE TABLE `watchlist`  (
 -- ----------------------------
 INSERT INTO `watchlist` VALUES (2, 1, '2021-01-18');
 INSERT INTO `watchlist` VALUES (3, 1, '2021-01-18');
-INSERT INTO `watchlist` VALUES (4, 1, '2021-01-20');
-INSERT INTO `watchlist` VALUES (4, 2, '2021-01-20');
-INSERT INTO `watchlist` VALUES (4, 3, '2021-01-20');
-INSERT INTO `watchlist` VALUES (4, 12, '2021-01-20');
-INSERT INTO `watchlist` VALUES (4, 31, '2021-01-06');
-INSERT INTO `watchlist` VALUES (134, 2, '2021-01-23');
-INSERT INTO `watchlist` VALUES (134, 5, '2021-01-23');
-INSERT INTO `watchlist` VALUES (134, 8, '2021-01-23');
-INSERT INTO `watchlist` VALUES (134, 10, '2021-01-23');
-INSERT INTO `watchlist` VALUES (134, 12, '2021-01-23');
 
 -- ----------------------------
 -- Table structure for wishlist
@@ -256,14 +242,7 @@ CREATE TABLE `wishlist`  (
 -- ----------------------------
 -- Records of wishlist
 -- ----------------------------
-INSERT INTO `wishlist` VALUES (4, 2, '2021-01-23');
 INSERT INTO `wishlist` VALUES (8, 15, '2021-01-23');
-INSERT INTO `wishlist` VALUES (134, 1, '2021-01-23');
-INSERT INTO `wishlist` VALUES (134, 2, '2021-01-23');
-INSERT INTO `wishlist` VALUES (134, 5, '2021-01-23');
-INSERT INTO `wishlist` VALUES (134, 9, '2021-01-23');
-INSERT INTO `wishlist` VALUES (134, 25, '2021-01-23');
-INSERT INTO `wishlist` VALUES (134, 30, '2021-01-23');
 
 -- ----------------------------
 -- View structure for top4categoriesmostsubc
@@ -447,7 +426,7 @@ delimiter ;
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `sp_AddNewStudentUser`;
 delimiter ;;
-CREATE PROCEDURE `sp_AddNewStudentUser`(IN uName varchar(20),pass varchar(255),fName varchar(50),uEmail varchar(255),doBirth date)
+CREATE PROCEDURE `sp_AddNewStudentUser`(IN uName varchar(20),pass varchar(255),fName varchar(50),uEmail varchar(255),doBirth date, phonenum varchar(12))
 begin
 DECLARE uID int(10);
 	SET uID = 0;
@@ -459,7 +438,7 @@ DECLARE uID int(10);
 	    select 'Username is already exists' as Error;
       rollback;
 	else
-	    INSERT into `user` values(uID,uName,pass,fName,uEmail,doBirth,null,3,0);
+	    INSERT into `user` values(uID,uName,pass,fName,uEmail,doBirth,null,3,0,phonenum);
 			select 'Add new user successful' as Infomation;
 			commit;
 	end if;
@@ -642,13 +621,29 @@ delimiter ;
 -- ----------------------------
 -- Triggers structure for table course
 -- ----------------------------
-DROP TRIGGER IF EXISTS `tg_UpdateWatchList_WishList`;
+DROP TRIGGER IF EXISTS `tg_UpdateWatchList_WishList_Feedback_WhenDeleteCourse`;
 delimiter ;;
-CREATE TRIGGER `tg_UpdateWatchList_WishList` BEFORE DELETE ON `course` FOR EACH ROW begin
+CREATE TRIGGER `tg_UpdateWatchList_WishList_Feedback_WhenDeleteCourse` BEFORE DELETE ON `course` FOR EACH ROW begin
 	declare courseID int;
 	set courseID = old.courID;
 	delete from watchlist where courID = courseID;
 	delete from wishlist where courID = courseID;
+	delete from feedback where courID = courseID;
+end
+;;
+delimiter ;
+
+-- ----------------------------
+-- Triggers structure for table user
+-- ----------------------------
+DROP TRIGGER IF EXISTS `tg_UpdateWatchList_WishList_Feedback_WhenDeleteUser`;
+delimiter ;;
+CREATE TRIGGER `tg_UpdateWatchList_WishList_Feedback_WhenDeleteUser` BEFORE DELETE ON `user` FOR EACH ROW begin
+	declare uID int;
+	set uID = old.userID;
+	delete from watchlist where userID = uID;
+	delete from wishlist where userID = uID;
+	delete from feedback where userID = uID;
 end
 ;;
 delimiter ;
