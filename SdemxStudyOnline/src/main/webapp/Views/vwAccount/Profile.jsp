@@ -186,7 +186,7 @@
 
                                         <div class="row d-flex align-items-center">
                                             <span class="profile-input-span">Name :</span>
-                                            <input id="Name" class=" profile-input " type="text" name="name" placeholder="Name" value=${authUser.name}><br>
+                                            <input id="Name" class=" profile-input " type="text" name="name" placeholder="Name" value=${authUser.fullname}><br>
                                         </div>
                                         <div class="row d-flex align-items-center">
                                             <span class="profile-input-span">Email :</span>

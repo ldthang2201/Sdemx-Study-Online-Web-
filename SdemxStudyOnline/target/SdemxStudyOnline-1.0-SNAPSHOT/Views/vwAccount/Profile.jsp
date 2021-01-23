@@ -186,7 +186,7 @@
 
                                         <div class="row d-flex align-items-center">
                                             <span class="profile-input-span">Name :</span>
-                                            <input id="Name" class=" profile-input " type="text" name="name" placeholder="Name" value=${authUser.name}><br>
+                                            <input id="Name" class=" profile-input " type="text" name="name" placeholder="Name" value=${authUser.fullname}><br>
                                         </div>
                                         <div class="row d-flex align-items-center">
                                             <span class="profile-input-span">Email :</span>
@@ -243,7 +243,20 @@
 
                                     </div>
                                 </div>
+                                <div class="MyCourse" style="display: none">
+                                    <div class="profile-header">
+                                        <div class="row d-flex justify-content-center mt-2">
+                                            <h2 > Public profile</h2>
+                                        </div>
+                                        <div class="row  justify-content-center mb-2">
+                                            <h4>Add or edit information about yourself</h4>
+                                        </div>
+                                    </div>
+                                    <div id="MyCourse" class="container"    >
+                                        <div class="row mt-3 ml-3 "> <h4 class="head-profile" style="margin-bottom: 5px">Your courses</h4></div>
 
+                                    </div>
+                                </div>
                             </main>
                         </div>
 
@@ -288,6 +301,7 @@
                 ()=>{
                     $('.Account').css('display','none');
                     $('.Profile').css('display','block');
+                    $('.MyCourse').css('display','none');
                 }
             )
 
@@ -295,9 +309,16 @@
                 ()=>{
                     $('.Profile').css('display','none');
                     $('.Account').css('display','block');
+                    $('.MyCourse').css('display','none');
                 }
             )
-
+            $('#Mycourses').click(
+                ()=>{
+                    $('.Profile').css('display','none');
+                    $('.Account').css('display','none');
+                    $('.MyCourse').css('display','block');
+                }
+            )
 
         </script>
     </jsp:body>

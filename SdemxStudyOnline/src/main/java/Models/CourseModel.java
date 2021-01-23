@@ -133,4 +133,22 @@ public class CourseModel {
                     .executeScalar(float.class);
         }
     }
+
+    public static List<Course> getMyWatchListByUserID(int id){
+        final String sql = "CALL sp_getMyWatchListByUserID(:userID)";
+        try(Connection con = DBUtils.getConnection()){
+            return con.createQuery(sql)
+                    .addParameter("userID",id)
+                    .executeAndFetch(Course.class);
+        }
+    }
+
+    public static List<Course> getMyWishListByUserID(int id){
+        final String sql = "CALL sp_getMyWishListByUserID(:userID)";
+        try(Connection con = DBUtils.getConnection()){
+            return con.createQuery(sql)
+                    .addParameter("userID",id)
+                    .executeAndFetch(Course.class);
+        }
+    }
 }
