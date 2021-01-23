@@ -25,6 +25,7 @@ import java.util.List;
 import java.net.URL;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import com.cloudinary.Cloudinary;
 
 @WebServlet(name = "AccountServlet", urlPatterns = "/Account/*")
 public class AccountServlet extends HttpServlet {
@@ -227,6 +228,10 @@ public class AccountServlet extends HttpServlet {
         }
 
 
+
+    }
+
+    private void postUploadImage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
 
