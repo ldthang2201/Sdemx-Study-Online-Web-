@@ -1,5 +1,7 @@
 package Controllers;
 
+import Beans.Course;
+import Models.CourseModel;
 import at.favre.lib.crypto.bcrypt.BCrypt;
 import Beans.Branch;
 import Beans.Category;
@@ -257,6 +259,13 @@ public class AccountServlet extends HttpServlet {
                 ServletUtils.forward("/Views/vwAccount/Signup.jsp", request, response);
                 break;
             case "/Profile" :
+                HttpSession session1 = request.getSession();
+                User curUser = (User) session1.getAttribute("authUser");
+                request.setAttribute("curUser",curUser);
+                List<Course> lstWatch = CourseModel.getMyWatchListByUserID(curUser.getId());
+                List<Course> lstWish = CourseModel.getMyWishListByUserID(curUser.getId());
+                request.setAttribute("lstWatch",lstWatch);
+                request.setAttribute("lstWish",lstWish);
                 ServletUtils.forward("/Views/vwAccount/Profile.jsp", request, response);
                 break;
             default:

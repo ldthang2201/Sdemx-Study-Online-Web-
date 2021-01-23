@@ -3,6 +3,7 @@ package Controllers;
 import Beans.Category;
 import Beans.Course;
 import Beans.Feedback;
+import Beans.User;
 import Models.CategoryModel;
 import Models.CourseModel;
 import Utility.ServletUtils;
@@ -12,6 +13,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
@@ -31,6 +33,10 @@ public class CourseServlet extends HttpServlet {
                 int cID = CourseModel.getCatIDByCourID(id);
                 List<Course> lstTop5Course = CourseModel.getTop5CourseByCourID(id,cID);
                 request.setAttribute("lst5Course",lstTop5Course);
+                HttpSession session1 = request.getSession();
+                User curUser = (User) session1.getAttribute("authUser");
+                boolean likeCourse = CourseModel.checkWistList(curUser.getId(),id);
+                request.setAttribute("checkLike",likeCourse);
                 if (c.isPresent()) {
                     request.setAttribute("course", c.get());
                     ServletUtils.forward("/Views/vwCourse/Detail.jsp", request, response);

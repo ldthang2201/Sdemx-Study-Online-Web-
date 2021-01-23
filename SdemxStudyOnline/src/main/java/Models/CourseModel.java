@@ -151,4 +151,14 @@ public class CourseModel {
                     .executeAndFetch(Course.class);
         }
     }
+
+    public static boolean checkWistList(int userID, int courID){
+        final String sql = "select f_checkWishList(:userID,:courID)";
+        try(Connection con = DBUtils.getConnection()){
+            return con.createQuery(sql)
+                    .addParameter("userID",userID)
+                    .addParameter("courID",courID)
+                    .executeScalar(boolean.class);
+        }
+    }
 }

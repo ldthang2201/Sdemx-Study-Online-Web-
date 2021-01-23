@@ -56,12 +56,21 @@
                             Video here
                         </div>
                         <form action="#" class="d-flex justify-content-around" style="width: 100%">
-                            <button type="submit" class="btn btn-register mt-3 mb-4">
+                            <button type="button" class="btn btn-register mt-3 mb-4">
                                 Buy now
                             </button>
-                            <button type="submit" class="btn btn-outline-danger mt-3 mb-4">
-                                Wishlisted <i class="fa fa-heart" aria-hidden="true"></i>
-                            </button>
+                            <c:choose>
+                                <c:when test="${checkLike}">
+                                    <button type="button" class="btn btn-danger mt-3 mb-4">
+                                        Wishlisted <i class="fa fa-heart" aria-hidden="true"></i>
+                                    </button>
+                                </c:when>
+                                <c:otherwise>
+                                    <button type="button" class="btn btn-outline-danger mt-3 mb-4">
+                                        Wishlisted <i class="fa fa-heart" aria-hidden="true"></i>
+                                    </button>
+                                </c:otherwise>
+                            </c:choose>
                         </form>
                     </div>
                     <div class="col-md">
@@ -110,7 +119,7 @@
         <div class="container mt-5">
             <div class="row h3 font-weight-bold mt-3"> Description</div>
             <div class="row ml-5">
-                ${course.fullDes}
+                    ${course.fullDes}
             </div>
             <div class="row h3 font-weight-bold mt-3">Courses Content</div>
             <div class="row h3 font-weight-bold mt-3">Another Courses</div>
