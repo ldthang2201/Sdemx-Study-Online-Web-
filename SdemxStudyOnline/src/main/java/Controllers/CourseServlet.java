@@ -25,7 +25,7 @@ public class CourseServlet extends HttpServlet {
             System.out.println(action);
             switch (action){
                 case "buy":
-//                    postBuy(request,response);
+                    postBuy(request,response);
                     break;
                 case "like":
                     postLike(request,response);
@@ -33,7 +33,6 @@ public class CourseServlet extends HttpServlet {
                 default:
                     ServletUtils.redirect("/NotFound", request, response);
                     break;
-
             }
     }
          private void postBuy(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
