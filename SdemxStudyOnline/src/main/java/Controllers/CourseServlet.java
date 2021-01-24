@@ -158,6 +158,10 @@ public class CourseServlet extends HttpServlet {
                 request.setAttribute("lstCat", lstCatByBranchID);
                 ServletUtils.forward("/Views/vwCourse/ByBranch.jsp", request, response);
                 break;
+//            case "/Search":
+//                List<Course> lstCourseSearch = CourseModel.searchCourse("")
+//                ServletUtils.forward("/Views/vwCourse/Search.jsp", request, response);
+//                break;
             default:
                 ServletUtils.redirect("/NotFound", request, response);
                 break;

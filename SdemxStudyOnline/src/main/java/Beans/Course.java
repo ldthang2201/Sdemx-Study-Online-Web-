@@ -13,7 +13,9 @@ public class Course {
     int courID;
     String title;
     int catID;
+    String catName;
     int branchID;
+    String branchName;
     int teacherID;
     String tiniDes;
     int prices;
@@ -114,6 +116,22 @@ public class Course {
         this.dateUpload = dateUpload;
         this.lastUpdate = lastUpdate;
         this.premium = premium;
+    }
+
+    //Constructor for search
+    public Course(int courID, String title, String catName, String branchName, int teacherID, String tiniDes, int prices, float sale, Date dateUpload, boolean premium, float rate, int numRate) {
+        this.courID = courID;
+        this.title = title;
+        this.catName = catName;
+        this.branchName = branchName;
+        this.teacherID = teacherID;
+        this.tiniDes = tiniDes;
+        this.prices = prices;
+        this.sale = sale;
+        this.dateUpload = dateUpload;
+        this.premium = premium;
+        this.rate = rate;
+        this.numRate = numRate;
     }
 
     public int getCourID() {
@@ -310,4 +328,19 @@ public class Course {
         return (float)(Math.round(rate*10.0)/10.0);
     }
 
+    public String getCatName() {
+        return catName;
+    }
+
+    public void setCatName(String catName) {
+        this.catName = catName;
+    }
+
+    public String getBranchName() {
+        return branchName;
+    }
+
+    public void setBranchName(String branchName) {
+        this.branchName = branchName;
+    }
 }

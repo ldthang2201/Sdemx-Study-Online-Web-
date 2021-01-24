@@ -203,4 +203,13 @@ public class CourseModel {
                     .executeUpdate();
         }
     }
+
+    public static List<Course> searchCourse(String search){
+        final String sql="call sp_SearchCourse(:search)";
+        try (Connection con = DBUtils.getConnection()){
+            return con.createQuery(sql)
+                    .addParameter("search",search)
+                    .executeAndFetch(Course.class);
+        }
+    }
 }
