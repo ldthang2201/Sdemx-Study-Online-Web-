@@ -8,6 +8,7 @@ import org.sql2o.Connection;
 import org.sql2o.Sql2o;
 
 import java.util.List;
+import java.util.Optional;
 
 public class CategoryModel {
 
@@ -83,4 +84,58 @@ public class CategoryModel {
         }
     }
 
+    public static Optional<Category> getCategoryByCatID(int id) {
+        final String sql = "select * from category where catID = :catID";
+        try (Connection con = DBUtils.getConnection()) {
+            List<Category> lstCat = con.createQuery(sql)
+                    .addParameter("catID", id)
+                    .executeAndFetch(Category.class);
+
+            if (lstCat.size() == 0) {
+                return Optional.empty();
+            }
+
+            return Optional.ofNullable(lstCat.get(0));
+        }
+    }
+
+    public static void addCategory(String catName, int branchID){
+        final String sql="call sp_AddNewCategory(:catName,:branchID)";
+        try(Connection con = DBUtils.getConnection()){
+            con.createQuery(sql)
+                    .addParameter("catName",catName)
+                    .addParameter("branchID",branchID)
+                    .executeUpdate();
+        }
+    }
+
+    public static void deleteCategory(int catID){
+        final String sql="call sp_DeleteCategory(:catID)";
+        try(Connection con = DBUtils.getConnection()){
+            con.createQuery(sql)
+                    .addParameter("catID",catID)
+                    .executeUpdate();
+        }
+    }
+    public static void updateCategory(int catID, String CatName){
+        final String sql="Update category set catName = :catName where catID = :catID";
+        try(Connection con = DBUtils.getConnection()){
+            con.createQuery(sql)
+                    .addParameter("catID",catID)
+                    .addParameter("catName",CatName)
+                    .executeUpdate();
+        }
+    }
+
+    public static boolean checkCourseByCatID(int catID){
+        final String sql = "select count(*) from course where catID=:catID";
+        int f;
+        try(Connection con = DBUtils.getConnection()){
+            f=con.createQuery(sql).addParameter("catID",catID).executeScalar(int.class);
+            if(f==0)
+                return true;
+            else
+                return false;
+        }
+    }
 }
