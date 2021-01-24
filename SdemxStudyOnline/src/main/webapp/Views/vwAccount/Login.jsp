@@ -115,7 +115,7 @@
                 <label class="label-mess" id="cpassword-mess"></label>
                 <input id="input-comfirmpassword" type="password" class="input-signup" placeholder="Confirm Password">
             </label>
-                <div id="succes-mess"  > Sign Up Succes</div>
+                <div id="succes-mess"  > Sign Up Succes!Please login</div>
             <button  class="btn-signup" type="submit">Sign Up </button>
 
             <p class="Policy-agree">By signing up, you agree to our Terms of Use and Privacy Policy. </p>
@@ -175,6 +175,11 @@
                    if(!$('#email-mess').text())$('#email-mess').text("Invalid Email");
                }
                else $('#email-mess').text("")
+                if(data.includes("exist"))
+                {
+                    if(!$('#email-mess').text())$('#email-mess').text("Email already exist!!!");
+                }
+                else $('#email-mess').text("")
 
                 if(data.includes("Username")){
                     if(!$('#username-mess').text())$('#username-mess').text("Username already exists");

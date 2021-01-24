@@ -26,6 +26,16 @@ public class UserModel {
             return Optional.ofNullable(list.get(0));
         }
     }
+    public static  int findByEmail(String email) {
+        final String sql = "select count(*) from `user` WHERE email=:email";
+
+        try (Connection con = DBUtils.getConnection()) {
+
+            return  con.createQuery(sql)
+                    .addParameter("email", email)
+                    .executeScalar(int.class);
+        }
+    }
 
     public static void add(User user) {
 

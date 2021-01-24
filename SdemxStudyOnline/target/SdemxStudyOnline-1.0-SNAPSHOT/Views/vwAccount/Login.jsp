@@ -175,6 +175,11 @@
                    if(!$('#email-mess').text())$('#email-mess').text("Invalid Email");
                }
                else $('#email-mess').text("")
+                if(data.includes("exist"))
+                {
+                    if(!$('#email-mess').text())$('#email-mess').text("Email already exist!!!");
+                }
+                else $('#email-mess').text("")
 
                 if(data.includes("Username")){
                     if(!$('#username-mess').text())$('#username-mess').text("Username already exists");

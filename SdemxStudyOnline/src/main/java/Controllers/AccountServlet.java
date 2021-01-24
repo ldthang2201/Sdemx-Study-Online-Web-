@@ -110,6 +110,11 @@ public class AccountServlet extends HttpServlet {
             response.setHeader("errorMessage","Invalid Email !!!");
             outResponce+=" Email ";
         }
+        if(UserModel.findByEmail(email)>1){
+            response.setHeader("errorMessage","Email already exist!!!");
+            outResponce+=" exist ";
+        }
+         System.out.println(UserModel.findByEmail(email));
         if(!password.equals(request.getParameter("comfirmpassword"))){
             response.setHeader("errorMessage","Invalid comfirm password !!!");
             outResponce+=" Comfirm ";
@@ -142,11 +147,8 @@ public class AccountServlet extends HttpServlet {
              rqpatch   = (String)request.getAttribute("retUrl");
 
             }
-        System.out.println(rqpatch);
-            System.out.println(rqpatch.length());
-            System.out.println("/SdemxStudyOnline/Account/Profile".length());
             if(rqpatch.equals("/SdemxStudyOnline/Account/Profile")){
-                System.out.println("aaaaaaaaa");
+
                 ServletUtils.redirect("/Home", request, response);
             }
         else  ServletUtils.redirect(rqpatch, request, response);
