@@ -5,6 +5,7 @@ import Beans.User;
 import org.sql2o.Connection;
 import Utility.DBUtils;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.ThreadLocalRandom;
@@ -40,6 +41,19 @@ public class UserModel {
                     .executeUpdate();
         }
     }
+    public static void update(String username, String email, Date dob ,String fullName,String phone) {
+
+        final String sql = " UPDATE user set email =:email , dob=:dob,fullname=:name,phone=:phone WHERE userName= :username";
+        try (Connection con = DBUtils.getConnection()) {
+            con.createQuery(sql)
+                    .addParameter("username",username)
+                    .addParameter("name", fullName)
+                    .addParameter("email",email)
+                    .addParameter("phone",phone)
+                    .addParameter("dob", dob)
+                    .executeUpdate();
+        }
+    }
 
     public static String getUserFullnameByUserID(int id) {
         final String sql = "select fullname from user where userID=:userID";
@@ -52,7 +66,7 @@ public class UserModel {
 
 
     public static void ChangePassword(String Username, String newpassword) {
-        final String sql = " call sp_ChangePassword(:Username,:newpassword)";
+        final String sql = " call sp_ChangePassword( :Username, :newpassword   ) ";
         try (Connection con = DBUtils.getConnection()) {
             con.createQuery(sql)
                     .addParameter("Username", Username)

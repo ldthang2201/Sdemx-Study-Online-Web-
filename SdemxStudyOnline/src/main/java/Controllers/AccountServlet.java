@@ -57,6 +57,10 @@ public class AccountServlet extends HttpServlet {
             case"Avatar":
                         postAvatar(request,response);
                         break;
+            case"update":
+                postUpdate(request,response);
+
+                break;
             default:
                 ServletUtils.redirect("/NotFound", request, response);
                 break;
@@ -113,9 +117,10 @@ public class AccountServlet extends HttpServlet {
 
 
         if(outResponce.length()<=0)  {
-            User user = new User(-1, username, bcryptHashString, name, email,"", dob, rule,0,"-1");
+            User user = new User(-1, username, bcryptHashString, name, email,"", dob, rule,0,"/SdemxStudyOnline/public/ImgLogo/user-logo.png");
             UserModel.add(user);
 //            ServletUtils.redirect("/Home", request, response);
+            UserModel.ChangeAvatar(user.getUsername(),"/SdemxStudyOnline/public/ImgLogo/user-logo.png");
             outResponce+=" Succes ";
         }
 
@@ -138,7 +143,13 @@ public class AccountServlet extends HttpServlet {
 
             }
         System.out.println(rqpatch);
-        ServletUtils.redirect(rqpatch, request, response);
+            System.out.println(rqpatch.length());
+            System.out.println("/SdemxStudyOnline/Account/Profile".length());
+            if(rqpatch.equals("/SdemxStudyOnline/Account/Profile")){
+                System.out.println("aaaaaaaaa");
+                ServletUtils.redirect("/Home", request, response);
+            }
+        else  ServletUtils.redirect(rqpatch, request, response);
 
     }
 
@@ -215,7 +226,7 @@ public class AccountServlet extends HttpServlet {
             response.setHeader("errorMessage","Invalid password");
             out.println("Invalid password !!!!");
             out.close();
-                        //xu ly thay doi password
+
             return;
         }
 
@@ -226,12 +237,60 @@ public class AccountServlet extends HttpServlet {
             response.setHeader("errorMessage","successfully");
 //            UserModel.ChangePassword((int)request.getParameter("Usera"),
 //                    request.getParameter("newpassword"));
+            System.out.println(request.getParameter("newpassword"));
+            String newpassword = BCrypt.withDefaults().hashToString(12, request.getParameter("newpassword").toCharArray());
 
+            UserModel.ChangePassword(rquser.getUsername(),newpassword );
             out.println("Your password has been changed successfully! !!!!");
             out.close();
             return;
         }
 
+
+
+    }
+    private void postUpdate(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        User rquser = (User) session.getAttribute("authUser");
+        String phone = request.getParameter("phone");
+        String email=request.getParameter("email");
+        String fullname = request.getParameter("fullname");
+        Date dob = new Date();
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        response.setContentType("text/html");
+        String outResponce= new String();
+        if(request.getParameter("dob")==""){
+            response.setHeader("errorMessage","Invalid birthday !!!");
+            PrintWriter out = response.getWriter();
+            response.setContentType("text/html");
+
+            outResponce+="birthday";
+            out.println("Invalid birthday");
+            out.close();
+
+        }else {
+            try {
+                dob = formatter.parse(request.getParameter("dob"));
+            } catch (ParseException e) {
+                PrintWriter out = response.getWriter();
+                response.setContentType("text/html");
+                response.setHeader("errorMessage","Invalid birthday !!!");
+                out.println("Invalid infomation");
+                out.close();
+                e.printStackTrace();
+                return;
+            }
+        }
+        if(outResponce.length()<=0)  {
+            PrintWriter out = response.getWriter();
+            response.setContentType("text/html");
+            response.setHeader("errorMessage","successfully");
+            UserModel.update(rquser.getUsername(),email,dob,fullname,phone);
+//            ServletUtils.redirect("/Home", request, response);
+//            UserModel.ChangeAvatar(user.getUsername(),\"/SdemxStudyOnline/public/ImgLogo/user-logo.png");
+            out.println("Your infomation has been changed successfully! !!!!");
+            out.close();
+        }
 
 
     }

@@ -17,7 +17,7 @@
     .profile-body {
         font-family: 'Yusei Magic', sans-serif;
         /*width: 60%;*/
-        height: 520px;
+        height: 600px;
         align-items: center;
         overflow: hidden;
         border: 1px solid powderblue;
@@ -208,7 +208,7 @@
                                 <h4>Add or edit information about yourself</h4>
                             </div>
                         </div>
-                        <form id="frmprofile " class="">
+
                             <div class="  row mt-3 ml-3"><h4 class="head-profile">Edit your profile here</h4></div>
                             <div class="row d-flex align-items-center mt-2">
                                 <span class="col-sm-3" style=" font-weight: 200;font-size: 20px;">User name :</span>
@@ -239,20 +239,46 @@
                                 <input class="profile-input" type="text" id="datepicker" name="birthday"
                                        value=${authUser.dob} placeholder="BirthDay"><br>
                             </div>
-                                <%--                                        <div class="row d-flex align-items-center">--%>
-                                <%--                                            <span class="profile-input-span">Password :</span>--%>
-                                <%--                                            <input  class="profile-input" type="password" name="password" PLACEHOLDER="Password"><br>--%>
-                                <%--                                        </div>--%>
-                                <%--                                        <div class="row d-flex align-items-center">--%>
-                                <%--                                            <span class="profile-input-span">Comfirm password :</span>--%>
-                                <%--                                            <input class="profile-input"  type="password" placeholder="Comfirm password"><br>--%>
-                                <%--                                        </div>--%>
+                        <div class="row d-flex align-items-center">
+                            <span class="profile-input-span">Phone :</span>
+                            <input class="profile-input" type="text" id="Phone"
+                                   value="" placeholder="Phone number"><br>
+                            <script> $('#Phone').val(`${authUser.phone}`)</script>
+                        </div>
+
                             <div class="row d-flex justify-content-end  mr-5 mt-3">
                                 <div id="profile-mess" class="col-sm-9 "
                                      style="text-align:center;color:red;position: absolute"></div>
-                                <button class="  btn-pwc btn btn-primary col-sm-3 mt-4">Save Change</button>
+                                <button id="btn-save" class="  btn-pwc btn btn-primary col-sm-3 mt-4">Save Change</button>
+                                <script>
+                                            $('#btn-save').on('click',()=>{
+
+                                                $('#frmprofile').on('submit', (e) => {
+                                                    e.preventDefault();
+                                                })
+
+                                                $.ajax({
+                                                    url: '${pageContext.request.contextPath}/Account/update',
+                                                    data: jQuery.param({
+                                                        action: "update",
+                                                        email:$('#Email').val(),
+                                                        dob:$('#datepicker').val(),
+                                                        fullname:$('#Name').val(),
+                                                        phone:$('#Phone').val()
+                                                    }),
+                                                    processData: false,
+                                                    contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                                                    type: 'POST',
+                                                    success: function (data) {
+                                                        console.log(data);
+                                                        $('#profile-mess').text(data);
+                                                    }
+                                                });
+
+                                            })
+                                </script>
                             </div>
-                        </form>
+
                     </div>
 
                     <div class="Account" style="display: none">
