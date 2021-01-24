@@ -45,6 +45,7 @@ public class CourseServlet extends HttpServlet {
 //        System.out.println(user);
 //        System.out.print(("auth "));
 //       System.out.println(auth);
+             session.setAttribute("checkBuy",true);
        if(!auth){
            ServletUtils.redirect("/Account/Login", request, response);
        }
@@ -84,6 +85,9 @@ public class CourseServlet extends HttpServlet {
                 HttpSession session1 = request.getSession();
                 User curUser = (User) session1.getAttribute("authUser");
                 boolean likeCourse = CourseModel.checkWistList(curUser.getId(),id);
+                boolean buyCourse =  CourseModel.checkBuy(curUser.getId(),id);
+                System.out.println(buyCourse);
+                request.setAttribute("checkBuy",buyCourse);
                 request.setAttribute("checkLike",likeCourse);
                 if (c.isPresent()) {
                     request.setAttribute("course", c.get());

@@ -50,13 +50,31 @@
             #btn-like:focus{
                 background-color: red !important;
             }
+            #btn-buy:focus{
+                background-color: #218838!important;
+            }
         </style>
+        <link rel="stylesheet" href="https://cdn.plyr.io/3.6.3/plyr.css" />
+
         <div class="container-detail">
             <div class="container">
-                <div class="row">
+                <div class="row ">
                     <div class="col-md-4">
-                        <div class="video mt-5">
-                            Video here
+                        <div class="   mt-5 video   plyr__video-embed" id="player">
+
+                                <iframe
+                                        src=""
+                                        allowfullscreen
+                                        allowtransparency
+                                        allow="autoplay" id="video"
+                                        class=" mt-5 "
+                                ></iframe>
+                                <script src="https://cdn.plyr.io/3.6.3/plyr.js"></script>
+
+                                <script>
+                                    const player = new Plyr('#player');
+                                </script>
+
                         </div>
                         <div class="d-flex justify-content-around" style="width: 100%">
                             <form method="POST"  id="frmbuy"   >
@@ -81,30 +99,45 @@
                                         </script>
                                     </c:when>
                                     <c:otherwise>
-                                        <button id="btn-buy" type="button" class="btn btn-register mt-3 mb-4">
-                                            Buy now
-                                        </button>
-                                        <script>
-                                            $('#btn-buy').click(
-                                                () => {
-                                                    $.ajax({
-                                                        url: '${pageContext.request.contextPath}/Course/Buy',
-                                                        data: jQuery.param({
-                                                            action: "buy",
-                                                            CourseId:$('#courseID').text(),
-                                                        }),
-                                                        processData: false,
-                                                        contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-                                                        type: 'POST',
-                                                        success: function (data) {
+                                       <c:choose>
+                                           <c:when test="${checkBuy}">
+                                               <button id="btn-buy" type="button" class="btn btn-success mt-3 mb-4">
+                                                   Buy now <i class="fa fa-check" aria-hidden="true"></i>
+                                               </button>
+                                                <script>
+                                                    $('#video').attr('src','https://www.youtube.com/embed/rwCJvSKzQkc')
+                                                </script>
+                                           </c:when>
+                                           <c:otherwise>
+                                               <button id="btn-buy" type="button" class="btn btn-register mt-3 mb-4">
+                                                   Buy now <i id="checkicon" class=" " aria-hidden="true"></i>
+                                               </button>
+                                               <script>
+                                                   $('#btn-buy').click(
+                                                       () => {
+                                                           $('#btn-buy').removeClass('btn-register ');
+                                                           $('#btn-buy').addClass('btn-success');
+                                                           $('#video').attr('src','https://www.youtube.com/embed/rwCJvSKzQkc')
+                                                           $('#checkicon').addClass('fa fa-check');
+                                                           $.ajax({
+                                                               url: '${pageContext.request.contextPath}/Course/Buy',
+                                                               data: jQuery.param({
+                                                                   action: "buy",
+                                                                   CourseId:$('#courseID').text(),
+                                                               }),
+                                                               processData: false,
+                                                               contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                                                               type: 'POST',
+                                                               success: function (data) {
+                                                               }
+                                                           });
 
+                                                       }
+                                                   )
+                                               </script>
+                                           </c:otherwise>
+                                       </c:choose>
 
-                                                        }
-                                                    });
-
-                                                }
-                                            )
-                                        </script>
                                     </c:otherwise>
                                 </c:choose>
                             </form>
@@ -276,6 +309,7 @@
                     </div>
                 </div>
             </c:forEach>
+
 
         </div>
     </jsp:body>

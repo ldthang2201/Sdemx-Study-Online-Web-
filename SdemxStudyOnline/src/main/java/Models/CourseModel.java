@@ -181,6 +181,15 @@ public class CourseModel {
                     .executeScalar(boolean.class);
         }
     }
+    public static boolean checkBuy(int userID, int courID){
+        final String sql = "SELECT count(*) from watchlist WHERE userID=:userID and courID=:courID";
+        try(Connection con = DBUtils.getConnection()){
+            return con.createQuery(sql)
+                    .addParameter("userID",userID)
+                    .addParameter("courID",courID)
+                    .executeScalar(boolean.class);
+        }
+    }
 
     public static List<Course> getTop3Course(){
         final String sql="select * from Top3Course";
