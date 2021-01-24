@@ -15,35 +15,53 @@
         <div class="container">
             <div class="space"></div>
             <div class="row">
-                <div id="carouselExampleIndicators" class="carousel slide ml-4" data-ride="carousel"
-                     style="z-index:0; position: relative; max-height: 500px; max-width: 500px">
-                    <ol class="carousel-indicators">
-                        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-                    </ol>
-                    <div class="carousel-inner">
-                        <div class="carousel-item active" style="height: 270px">
-                            <img src="${pageContext.request.contextPath}/public/Picture/1.jpg" class="d-block w-100"
-                                 alt="...">
+                <div class="row-md-8" style="position: relative">
+                    <div id="carouselExampleIndicators" class="carousel slide ml-4" data-ride="carousel"
+                         style="z-index:0; position: relative; max-width: 700px; min-width: 400px; max-height: 320px">
+                        <ol class="carousel-indicators">
+                            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                        </ol>
+                        <div class="carousel-inner">
+                            <div class="carousel-item active" style="height: 320px">
+                                <a href="${pageContext.request.contextPath}/Course/Detail?id=${lstBC.get(0).courID}">
+                                    <img src="${pageContext.request.contextPath}/public/course/${lstBC.get(0).courID}/main.jpg"
+                                         class="d-block w-100" alt="${lstBC.get(0).title}" style="object-fit: cover">
+                                </a>
+                            </div>
+                            <c:forEach var="c" begin="1" items="${lstBC}">
+                                <div class="carousel-item" style="height: 320px">
+                                    <a href="${pageContext.request.contextPath}/Course/Detail?id=${c.courID}">
+                                        <img src="${pageContext.request.contextPath}/public/course/${c.courID}/main.jpg"
+                                             class="d-block w-100" alt="${c.title}" style="object-fit: cover">
+                                    </a>
+                                </div>
+                            </c:forEach>
+
                         </div>
-                        <div class="carousel-item" style="height: 270px">
-                            <img src="${pageContext.request.contextPath}/public/Picture/2.jpg" class="d-block w-100"
-                                 alt="...">
-                        </div>
-                        <div class="carousel-item" style="height: 270px">
-                            <img src="${pageContext.request.contextPath}/public/Picture/3.jpg" class="d-block w-100"
-                                 alt="...">
-                        </div>
+                        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button"
+                           data-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button"
+                           data-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
                     </div>
-                    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Previous</span>
-                    </a>
-                    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Next</span>
-                    </a>
+                </div>
+                <div class="col-md">
+                    <ul class="list-news" style="max-height: 320px">
+                        <c:forEach var="n" begin="0" end="0" items="${lstNews}">
+                            <li class="list-news-item active">${n.title}</li>
+                        </c:forEach>
+                        <c:forEach var="n" begin="1" end="3" items="${lstNews}">
+                            <li class="list-news-item">${n.title}</li>
+                        </c:forEach>
+                        <li class="see-all">All news <i class="fa fa-chevron-right" aria-hidden="true"></i></li>
+                    </ul>
                 </div>
             </div>
             <div class="space mt-5 h2">Most Viewed Courses</div>

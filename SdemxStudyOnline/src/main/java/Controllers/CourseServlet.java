@@ -25,7 +25,7 @@ public class CourseServlet extends HttpServlet {
             System.out.println(action);
             switch (action){
                 case "buy":
-//                    postBuy(request,response);
+                    postBuy(request,response);
                     break;
                 case "like":
                     postLike(request,response);
