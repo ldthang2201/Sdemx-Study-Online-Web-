@@ -186,6 +186,11 @@
                     <div class="profile-navbar-option">
                         <a id="changeavatar" class="profile-navbar-item   ">Change avatar</a>
                     </div>
+                    <c:if test="${authUser.permission == 2}">
+                        <div class="profile-navbar-option">
+                            <a id="addnewCourse" class="profile-navbar-item ">Add New Course</a>
+                        </div>
+                    </c:if>
                     <div class="profile-navbar-option">
                         <a id="logout" href="javascript: $('#frmprofilelogout').submit();" h
                            class="profile-navbar-item   ">Logout</a>
@@ -529,6 +534,85 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="AddCourse" style="display: none">
+                        <div class="profile-header">
+                            <div class="row d-flex justify-content-center mt-2">
+                                <h2> Add New Course</h2>
+                            </div>
+                        </div>
+                        <div class="row ml-3">
+                            <div class="form-group">
+                                <label for="txttitle">Course title</label>
+                                <input type="text" autofocus class="form-control" id="txttitle" name="title">
+                            </div>
+                        </div>
+                        <div class="row ml-3">
+                            <div class="form-group">
+                                <label for="txtcatid">Category ID</label>
+                                <select class="form-control" id="txtcatid" name="catid">
+                                    <c:forEach var="c" items="${lstCat}">
+                                        <option>${c.catID}</option>
+                                    </c:forEach>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row ml-3">
+                            <div class="form-group">
+                                <label for="txttini">Tini Description</label>
+                                <input type="text" autofocus class="form-control" id="txttini" name="tinides">
+                            </div>
+                        </div>
+                        <div class="row ml-3">
+                            <div class="form-group">
+                                <label for="txtprice">Price</label>
+                                <input type="text" autofocus class="form-control" id="txtprice" name="prices">
+                            </div>
+                        </div>
+                        <div class="row ml-3">
+                            <div class="form-group">
+                                <label for="txtfulldes">Full Descripe</label>
+                                <textarea class="form-control" id="txtfulldes" rows="3" name="fulldes"></textarea>
+                            </div>
+                        </div>
+                        <div class="row ml-3">
+                            <div class="form-group">
+                                <label for="txtLanguage">Language</label>
+                                <input type="text" autofocus class="form-control" id="txtLanguage" name="language">
+                            </div>
+                        </div>
+                        <button id="addcourse" type="submit" class="btn btn-outline-success"  >
+                            <i class="fa fa-plus" aria-hidden="true"></i> Add
+                        </button>
+                        <script>
+                            $('#addcourse').on('click',()=>{
+
+                                // $('#frm').on('submit', (e) => {
+                                //     e.preventDefault();
+                                // })
+
+                                $.ajax({
+                                    url: '${pageContext.request.contextPath}/Account/update',
+                                    data: jQuery.param({
+                                        action: "AddCourse",
+                                        title:$('#txttitle').val(),
+                                        fulldes:$('#txtfulldes').val(),
+                                        tinides:$('#txttini').val(),
+                                        prices:$('#txtprice').val(),
+                                        language:$('#txtLanguage').val(),
+                                        catid:$('#txtcatid').val()
+                                    }),
+                                    processData: false,
+                                    contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                                    type: 'POST',
+                                    success: function (data) {
+                                    }
+                                });
+
+
+                            })
+                        </script>
+                    </div>
                 </main>
             </div>
 
@@ -592,6 +676,7 @@
                     $('.Profile').css('display', 'block');
                     $('.MyCourse').css('display', 'none')
                     $('.profile-body').css('height', '600px')
+                    $('.AddCoure').css('display', 'none')
                 }
             )
 
@@ -602,6 +687,7 @@
                     $('.Account').css('display', 'block');
                     $('.MyCourse').css('display', 'none')
                     $('.profile-body').css('height', '520px')
+                    $('.AddCoure').css('display', 'none')
                 }
             )
 
@@ -612,6 +698,7 @@
                     $('.ChangeAvatar').css('display', 'block')
                     $('.MyCourse').css('display', 'none')
                     $('.profile-body').css('height', '520px')
+                    $('.AddCoure').css('display', 'none')
                 }
             )
             $('#Mycourses').click(
@@ -621,6 +708,17 @@
                     $('.ChangeAvatar').css('display', 'none')
                     $('.MyCourse').css('display', 'block')
                     $('.profile-body').css('height', '880px')
+                    $('.AddCoure').css('display', 'none')
+                }
+            )
+            $('#addnewCourse').click(
+                () => {
+                    $('.Profile').css('display', 'none');
+                    $('.Account').css('display', 'none');
+                    $('.ChangeAvatar').css('display', 'none')
+                    $('.MyCourse').css('display', 'none')
+                    $('.profile-body').css('height', '880px')
+                    $('.AddCourse').css('display', 'block')
                 }
             )
 

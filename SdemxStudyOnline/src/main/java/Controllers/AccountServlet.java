@@ -59,7 +59,9 @@ public class AccountServlet extends HttpServlet {
                         break;
             case"update":
                 postUpdate(request,response);
-
+                break;
+            case "AddCourse":
+                addCourse(request,response);
                 break;
             default:
                 ServletUtils.redirect("/NotFound", request, response);
@@ -306,6 +308,19 @@ public class AccountServlet extends HttpServlet {
         UserModel.ChangeAvatar(username,url);
     }
 
+    private void addCourse(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        User rquser = (User) session.getAttribute("authUser");
+        String url =request.getParameter("url");
+        String title = request.getParameter("title");
+        int catID = Integer.parseInt(request.getParameter("catid"));
+        String language = request.getParameter("language");
+        String tiniDes = request.getParameter("tinides");
+        String fullDes = request.getParameter("fulldes");
+        int prices = Integer.parseInt(request.getParameter("prices")) ;
+        CourseModel.addNewCourse(title,catID,rquser.getId(),tiniDes,prices,fullDes,language);
+    }
+
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String path = request.getPathInfo();
         switch (path){
@@ -335,6 +350,8 @@ public class AccountServlet extends HttpServlet {
                 List<Course> lstWish = CourseModel.getMyWishListByUserID(curUser.getId());
                 request.setAttribute("lstWatch",lstWatch);
                 request.setAttribute("lstWish",lstWish);
+                List<Category> lstCat = CategoryModel.getCategory();
+                request.setAttribute("lstCat",lstCat);
                 ServletUtils.forward("/Views/vwAccount/Profile.jsp", request, response);
                 break;
             default:

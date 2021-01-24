@@ -188,4 +188,19 @@ public class CourseModel {
             return con.createQuery(sql).executeAndFetch(Course.class);
         }
     }
+
+    public static void addNewCourse(String title, int CatID, int TeacherID, String tiniDes, int prices, String fullDes,String language){
+        final String sql="call sp_addNewCourse(:title,:catID,:teacherID,:tiniDes,:prices,:fullDes,:language)";
+        try (Connection con = DBUtils.getConnection()){
+             con.createQuery(sql)
+                    .addParameter("title",title)
+                    .addParameter("catID",CatID)
+                    .addParameter("teacherID",TeacherID)
+                    .addParameter("tiniDes",tiniDes)
+                    .addParameter("prices", prices)
+                    .addParameter("fullDes",fullDes)
+                    .addParameter("language",language)
+                    .executeUpdate();
+        }
+    }
 }
