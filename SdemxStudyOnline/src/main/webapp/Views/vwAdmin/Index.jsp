@@ -17,7 +17,7 @@
                 <a href="${pageContext.request.contextPath}/Admin/Category" class="list-group-item list-group-item-action">
                     <i class="fa fa-meetup" aria-hidden="true"></i> Category Management
                 </a>
-                <a href="#" class="list-group-item list-group-item-action">Dapibus ac facilisis in</a>
+                <a href="${pageContext.request.contextPath}/Admin/User" class="list-group-item list-group-item-action">Teacher Management</a>
                 <a href="#" class="list-group-item list-group-item-action">Morbi leo risus</a>
                 <a href="#" class="list-group-item list-group-item-action">Porta ac consectetur ac</a>
                 <a href="#" class="list-group-item list-group-item-action disabled" tabindex="-1" aria-disabled="true">Vestibulum at eros</a>

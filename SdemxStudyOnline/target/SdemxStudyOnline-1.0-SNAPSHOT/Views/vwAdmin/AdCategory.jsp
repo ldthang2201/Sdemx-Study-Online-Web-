@@ -15,7 +15,7 @@
         <div class="container">
             <div class="row">
                 <div class="col h3">
-                    ListUser
+                    List Category
                 </div>
                 <div class="col-4">
                     <a href="${pageContext.request.contextPath}/Admin/AddCategory" class="btn btn-outline-primary">Add new Category</a>

@@ -95,4 +95,31 @@ public class UserModel {
         }
 
     }
+
+    public static List<User> getUserTeacher(){
+        final String sql = "select * from user where rule=2";
+        try (Connection con = DBUtils.getConnection()) {
+            return con.createQuery(sql)
+                    .executeAndFetch(User.class);
+        }
+    }
+    public static List<User> getUsserStudent(){
+        final String sql = "select * from user where rule=3";
+        try (Connection con = DBUtils.getConnection()) {
+            return con.createQuery(sql)
+                    .executeAndFetch(User.class);
+        }
+    }
+
+    public static void addTeacher(String username, String password, String fullname, String email){
+        final String sql = "call sp_AddNewTeacherUser(:userName,:pass,:fullname,:email,now())";
+        try (Connection con = DBUtils.getConnection()){
+            con.createQuery(sql)
+                    .addParameter("userName",username)
+                    .addParameter("pass",password)
+                    .addParameter("fullname",fullname)
+                    .addParameter("email",email)
+                    .executeUpdate();
+        }
+    }
 }

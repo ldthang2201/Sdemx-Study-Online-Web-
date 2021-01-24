@@ -3,9 +3,12 @@ package Controllers;
 import Beans.Branch;
 import Beans.Category;
 import Beans.Course;
+import Beans.User;
 import Models.CategoryModel;
 import Models.CourseModel;
+import Models.UserModel;
 import Utility.ServletUtils;
+import at.favre.lib.crypto.bcrypt.BCrypt;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -30,6 +33,9 @@ public class AdminServlet extends HttpServlet {
                 break;
             case "/UpdateCategory":
                 updateCategory(request,response);
+                break;
+            case "/AddTeacher":
+                addTeacher(request,response);
                 break;
             default:
                 ServletUtils.redirect("/NotFound", request, response);
@@ -66,6 +72,15 @@ public class AdminServlet extends HttpServlet {
         ServletUtils.forward("/Views/vwAdmin/AdCategory.jsp", request, response);
     }
 
+    private void addTeacher(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String username=request.getParameter("username");
+        String email = request.getParameter("email");
+        String fullname = request.getParameter("fullname");
+        String bcryptHashString = BCrypt.withDefaults().hashToString(12, request.getParameter("password").toCharArray());
+        UserModel.addTeacher(username,bcryptHashString,fullname,email);
+        ServletUtils.redirect("/Admin/User",request,response);
+    }
+
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String path = request.getPathInfo();
         if (path == null || path.equals("/")) {
@@ -93,6 +108,16 @@ public class AdminServlet extends HttpServlet {
                 break;
             case "/AddCategory":
                 ServletUtils.forward("/Views/vwAdmin/AddCategory.jsp", request, response);
+                break;
+            case"/User":
+                List<User> lstTeacher = UserModel.getUserTeacher();
+                request.setAttribute("lstTeacher",lstTeacher);
+                List<User> lstStudent = UserModel.getUsserStudent();
+                request.setAttribute("lstStudent",lstStudent);
+                ServletUtils.forward("/Views/vwAdmin/AdUser.jsp", request, response);
+                break;
+            case"/AddTeacher":
+                ServletUtils.forward("/Views/vwAdmin/AddTeacher.jsp", request, response);
                 break;
             default:
                 ServletUtils.redirect("/NotFound", request, response);

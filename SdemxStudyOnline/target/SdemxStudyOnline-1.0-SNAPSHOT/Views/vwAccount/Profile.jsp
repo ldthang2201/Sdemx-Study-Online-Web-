@@ -591,7 +591,7 @@
                     $('.Account').css('display', 'none');
                     $('.Profile').css('display', 'block');
                     $('.MyCourse').css('display', 'none')
-                    $('.profile-body').css('height', '520px')
+                    $('.profile-body').css('height', '600px')
                 }
             )
 
