@@ -134,6 +134,17 @@ public class Course {
         this.numRate = numRate;
     }
 
+    //Constructor for Admin
+
+
+    public Course(int courID, String title, String catName, String branchName, int teacherID) {
+        this.courID = courID;
+        this.title = title;
+        this.catName = catName;
+        this.branchName = branchName;
+        this.teacherID = teacherID;
+    }
+
     public int getCourID() {
         return courID;
     }

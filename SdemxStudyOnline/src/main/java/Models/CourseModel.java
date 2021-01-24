@@ -212,4 +212,21 @@ public class CourseModel {
                     .executeAndFetch(Course.class);
         }
     }
+
+    public static List<Course> getAllCourse(){
+        final String sql="select courID, title, catName, branchName,teacherID from alldetailcourse";
+        try (Connection con = DBUtils.getConnection()){
+            return con.createQuery(sql)
+                    .executeAndFetch(Course.class);
+        }
+    }
+
+    public static void deleteCourse(int id){
+        final String sql="delete from course where courID=:courID";
+        try(Connection con = DBUtils.getConnection()){
+            con.createQuery(sql)
+                    .addParameter("courID",id)
+                    .executeUpdate();
+        }
+    }
 }

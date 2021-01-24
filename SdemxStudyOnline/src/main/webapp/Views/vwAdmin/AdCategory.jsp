@@ -12,7 +12,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <t:main>
     <jsp:body>
-        <div class="container">
+        <div class="container mt-3 mb-5">
             <div class="row">
                 <div class="col h3">
                     List Category
@@ -57,6 +57,12 @@
                         </div>
                     </c:otherwise>
                 </c:choose>
+            </div>
+            <div class="row">
+                <a class="btn btn-primary" href="${pageContext.request.contextPath}/Admin" role="button">
+                    <i class="fa fa-backward" aria-hidden="true"></i>
+                    List
+                </a>
             </div>
         </div>
     </jsp:body>

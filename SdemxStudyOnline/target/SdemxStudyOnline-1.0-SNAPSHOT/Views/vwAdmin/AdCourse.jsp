@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Son Van
-  Date: 1/24/2021
-  Time: 10:26 AM
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
@@ -15,17 +8,14 @@
         <div class="container mt-3 mb-5">
             <div class="row">
                 <div class="col h3">
-                    List Category
-                </div>
-                <div class="col-4">
-                    <a href="${pageContext.request.contextPath}/Admin/AddCategory" class="btn btn-outline-primary">Add new Category</a>
+                    List Course
                 </div>
             </div>
             <div class="row">
                 <c:choose>
-                    <c:when test="${categories.size() == 0}">
+                    <c:when test="${lstCourse.size() == 0}">
                         <div class="card-body">
-                            <p class="card-text">Không có dữ liệu.</p>
+                            <p class="card-text">No Information</p>
                         </div>
                     </c:when>
                     <c:otherwise>
@@ -34,19 +24,21 @@
                                 <thead>
                                 <tr>
                                     <th scope="col">#</th>
+                                    <th scope="col">Title</th>
                                     <th scope="col">Category</th>
-                                    <th scope="col">Branch</th>
+                                    <th scope="col">Teacherss</th>
                                     <th scope="col">&nbsp;</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <c:forEach var="c" items="${lstCat}">
+                                <c:forEach var="c" items="${lstCourse}">
                                     <tr>
-                                        <th scope="row">${c.catID}</th>
+                                        <th scope="row">${c.courID}</th>
+                                        <td>${c.title}</td>
                                         <td>${c.catName}</td>
-                                        <td>${c.getBranchName()}</td>
+                                        <td>${c.teacherID}</td>
                                         <td class="text-right">
-                                            <a class="btn btn-sm btn-outline-primary" href="${pageContext.request.contextPath}/Admin/EditCategory?id=${c.catID}" role="button">
+                                            <a class="btn btn-sm btn-outline-primary" href="${pageContext.request.contextPath}/Admin/DeleteCourse?id=${c.courID}" role="button">
                                                 <i class="fa fa-pencil" aria-hidden="true"></i>
                                             </a>
                                         </td>

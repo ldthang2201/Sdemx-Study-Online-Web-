@@ -122,4 +122,13 @@ public class UserModel {
                     .executeUpdate();
         }
     }
+
+    public static void deleteCourse(int id) {
+        final String sql = "delete from course where courID=:courID";
+        try (Connection con = DBUtils.getConnection()){
+            con.createQuery(sql)
+                    .addParameter("courID",id)
+                    .executeUpdate();
+        }
+    }
 }

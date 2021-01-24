@@ -37,6 +37,9 @@ public class AdminServlet extends HttpServlet {
             case "/AddTeacher":
                 addTeacher(request,response);
                 break;
+            case "/DeleteCourse":
+                deleteCourse(request,response);
+                break;
             default:
                 ServletUtils.redirect("/NotFound", request, response);
         }
@@ -80,6 +83,11 @@ public class AdminServlet extends HttpServlet {
         UserModel.addTeacher(username,bcryptHashString,fullname,email);
         ServletUtils.redirect("/Admin/User",request,response);
     }
+    private void deleteCourse(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("courID"));
+        UserModel.deleteCourse(id);
+        ServletUtils.redirect("/Admin/Course",request,response);
+    }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String path = request.getPathInfo();
@@ -118,6 +126,22 @@ public class AdminServlet extends HttpServlet {
                 break;
             case"/AddTeacher":
                 ServletUtils.forward("/Views/vwAdmin/AddTeacher.jsp", request, response);
+                break;
+            case "/Course":
+                List<Course> lstCourse = CourseModel.getAllCourse();
+                request.setAttribute("lstCourse",lstCourse);
+                System.out.println("da di qua day");
+                ServletUtils.forward("/Views/vwAdmin/AdCourse.jsp",request,response);
+                break;
+            case "/DeleteCourse":
+                int id = Integer.parseInt(request.getParameter("id"));
+                Optional<Course> c = CourseModel.getCourseDetailsById(id);
+                if (c.isPresent()) {
+                    request.setAttribute("course", c.get());
+                    ServletUtils.forward("/Views/vwAdmin/DeleteCourse.jsp", request, response);
+                } else {
+                    ServletUtils.redirect("/Admin", request, response);
+                }
                 break;
             default:
                 ServletUtils.redirect("/NotFound", request, response);
