@@ -15,6 +15,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -90,6 +91,20 @@ public class AdminServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session=request.getSession();
+        boolean auth =(boolean) session.getAttribute("auth");
+        User curUser = (User) session.getAttribute("authUser");
+
+        if(!auth){
+            ServletUtils.forward("/Views/vwAccount/Login.jsp", request, response);
+            return;
+        }
+        else{
+            if (curUser.getPermission()!=1){
+                ServletUtils.redirect("/NotFound",request,response);
+                return;
+            }
+        }
         String path = request.getPathInfo();
         if (path == null || path.equals("/")) {
             path = "/Index";
