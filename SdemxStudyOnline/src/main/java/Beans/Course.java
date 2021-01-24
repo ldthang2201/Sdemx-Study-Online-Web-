@@ -97,6 +97,14 @@ public class Course {
         this.numRegister = numRegister;
     }
 
+    //Constructor for Top3Course
+    public Course(int courID, String title, String tiniDes, int numRegister) {
+        this.courID = courID;
+        this.title = title;
+        this.tiniDes = tiniDes;
+        this.numRegister = numRegister;
+    }
+
     //Constructor for profile
     public Course(int courID, String title, int catID, int teacherID, Date dateUpload, Date lastUpdate, boolean premium) {
         this.courID = courID;

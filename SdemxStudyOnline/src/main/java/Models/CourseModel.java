@@ -181,4 +181,11 @@ public class CourseModel {
                     .executeScalar(boolean.class);
         }
     }
+
+    public static List<Course> getTop3Course(){
+        final String sql="select * from Top3Course";
+        try (Connection con = DBUtils.getConnection()){
+            return con.createQuery(sql).executeAndFetch(Course.class);
+        }
+    }
 }

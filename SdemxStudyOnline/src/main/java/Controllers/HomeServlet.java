@@ -3,8 +3,10 @@ package Controllers;
 import Beans.Branch;
 import Beans.Category;
 import Beans.Course;
+import Beans.News;
 import Models.CategoryModel;
 import Models.CourseModel;
+import Models.NewsModel;
 import Utility.ServletUtils;
 
 import javax.servlet.ServletException;
@@ -34,6 +36,10 @@ public class HomeServlet extends HttpServlet {
                 request.setAttribute("lstMV",lstMostViewedCour);
                 List<Branch> lstMostSubBranch = CategoryModel.getTop4MostSubBranch();
                 request.setAttribute("lstMSB",lstMostSubBranch);
+                List<Course> lstBestCourse = CourseModel.getTop3Course();
+                request.setAttribute("lstBC",lstBestCourse);
+                List<News> lstNews = NewsModel.getListNew();
+                request.setAttribute("lstNews",lstNews);
                 ServletUtils.forward("/Views/vwHome/Home.jsp", request, response);
                 break;
             default:
