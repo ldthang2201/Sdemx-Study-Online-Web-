@@ -50,12 +50,23 @@ public class UserModel {
         }
     }
 
+
     public static void ChangePassword(String Username, String newpassword) {
         final String sql = " call sp_ChangePassword(:Username,:newpassword)";
         try (Connection con = DBUtils.getConnection()) {
             con.createQuery(sql)
                     .addParameter("Username", Username)
                     .addParameter("newpassword", newpassword)
+                    .executeUpdate();
+        }
+
+    }
+    public static void ChangeAvatar(String Username, String Url) {
+        final String sql = " UPDATE user set avatar =:Url  WHERE userName=:Username";
+        try (Connection con = DBUtils.getConnection()) {
+            con.createQuery(sql)
+                    .addParameter("Username", Username)
+                    .addParameter("Url", Url)
                     .executeUpdate();
         }
 

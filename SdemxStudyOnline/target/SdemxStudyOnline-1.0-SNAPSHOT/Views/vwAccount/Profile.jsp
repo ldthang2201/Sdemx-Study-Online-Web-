@@ -152,6 +152,13 @@
         padding-right: 50px;
         margin-bottom: 20px;
     }
+    #uploadimage{
+
+        box-sizing: border-box;
+        border: 2px solid bisque;
+        border-radius: 50%;
+
+    }
 </style>
 <t:main>
     <jsp:body>
@@ -212,7 +219,15 @@
                             <div class="row d-flex align-items-center">
                                 <span class="profile-input-span">Name :</span>
                                 <input id="Name" class=" profile-input " type="text" name="name" placeholder="Name"
-                                       value=${authUser.name}><br>
+                                       value=""><br>
+                            <script>
+                                $('#Name').val(`${authUser.name}`);
+                                console.log(`${authUser.name}`);
+                                $(document).ready(()=>{
+                                    $(`.profile-avatar`).attr('src',`${authUser.avatar}`)
+                                })
+
+                            </script>
                             </div>
                             <div class="row d-flex align-items-center">
                                 <span class="profile-input-span">Email :</span>
@@ -278,14 +293,23 @@
                         </div>
                     </div>
 
-                    <div class="ChangeAvatar" style="display: none">
-                        <form id="frmUpload" action="">
+                    <div class="ChangeAvatar " style="display: none">
+
+                        <form id="frmUpload">
+                            <img id="uploadimage" class="  "  style="width: 300px;height: 300px;margin: 50px 200px  ; "><br>
                                 <%--                                        <input type="file" id="myFile" name="filename"><br>--%>
-                            <button id="upload">upload</button>
+                            <button id="btn-upload" class="  btn btn-primary  " style="margin: 30px 0 30px 220px;width: 120px ">upload</button>
+
+                                <%--                                        <input type="file" id="myFile" name="filename"><br>--%>
+                            <button id="btn-saveupload" class="  btn btn-primary  " style="margin: 30px;width: 120px  ">save change</button>
 
                         </form>
-                        <img id="uploadimage" style="width: 200px;height: 200px">
+
+
+
                         <script>
+
+
                             $(function () {
                                 // Configure Cloudinary
                                 // with the credentials on
@@ -295,8 +319,9 @@
                                     api_key: '295818925833263'
                                 });
                                 // Upload button
-                                var uploadButton = $('#upload');
+                                var uploadButton = $('#btn-upload');
                                 // Upload-button event
+                                var url;
                                 uploadButton.on('click', function (e) {
                                     // Initiate upload
                                     $('#frmUpload').on('submit', (e) => {
@@ -311,16 +336,41 @@
                                             if (error) console.log(error);
                                             // If NO error, log image data to console
                                             var id = result[0].public_id;
-                                            console.log(processImage(id));
+                                            url=processImage(id);
                                         });
                                 });
+                                // console.log($.cloudinary.url(id, options))
+
+
+                                $('#btn-saveupload').on('click',()=>{
+                                    $('#frmUpload').on('submit', (e) => {
+                                        e.preventDefault();
+                                    })
+                                   $('.profile-avatar').attr('src',url);
+                                    $.ajax({
+                                        url: '${pageContext.request.contextPath}/Account/Avatar',
+                                        data: jQuery.param({
+                                            action: "Avatar",
+                                            url: url,
+                                        }),
+                                        processData: false,
+                                        contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                                        type: 'POST',
+                                        success: function (data) {
+                                            console.log("submit")
+                                        }
+                                    });
+
+
+                                })
                             })
 
                             function processImage(id) {
                                 var options = {
                                     client_hints: true,
                                 };
-                                return $('#uploadimage').attr('src', $.cloudinary.url(id, options))
+                                $('#uploadimage').attr('src', $.cloudinary.url(id, options));
+                                return   $.cloudinary.url(id, options)
                             }
                         </script>
                     </div>

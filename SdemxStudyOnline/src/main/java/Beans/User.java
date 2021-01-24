@@ -25,6 +25,7 @@ public class User {
         this.rule = rule;
         this.premium=premium;
         this.phone=phone;
+
     }
 
     public int getId() {
@@ -86,9 +87,10 @@ public class User {
         return avatar;
     }
 
-    public void setAvatar(int id) {
+    public void setAvatar(String avatar) {
         this.avatar = avatar;
     }
+
     public int getPremium() {
         return premium;
     }
@@ -108,7 +110,7 @@ public class User {
                 ", fullName='" + fullName + '\'' +
                 ", email='" + email + '\'' +
                 ", dob=" + dob +
-                ", rule=" + rule +
+                ", rule=" + rule + ", avatar=" +avatar +
                 '}';
     }
 }

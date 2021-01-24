@@ -53,9 +53,11 @@ public class AccountServlet extends HttpServlet {
                 break;
             case"PasswordChange":
                 postPasswordChange(request,response);
-
+                    break;
+            case"Avatar":
+                        postAvatar(request,response);
+                        break;
             default:
-
                 ServletUtils.redirect("/NotFound", request, response);
                 break;
         }
@@ -234,8 +236,13 @@ public class AccountServlet extends HttpServlet {
 
     }
 
-    private void postUploadImage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+    private void postAvatar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        User rquser = (User) session.getAttribute("authUser");
+        String url =request.getParameter("url");
+        rquser.setAvatar(url);
+        String username=  rquser.getUsername();
+        UserModel.ChangeAvatar(username,url);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -50,6 +50,7 @@
                     <input type="hidden" name="action" value="Logout">
                     <div style="   margin: 0 auto;" class="user-option-div">
                         <img class="user-icon " src="${pageContext.request.contextPath}/public/ImgLogo/user-logo.png">
+                        <script>  $(`.user-icon`).attr('src',`${authUser.avatar}`)</script>
                         <a class="user-info">Hi! ${authUser.name}</a>
                         <div class="user-dropdown">
                             <div class="list-group">
