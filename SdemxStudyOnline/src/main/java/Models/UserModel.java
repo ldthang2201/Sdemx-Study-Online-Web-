@@ -123,12 +123,36 @@ public class UserModel {
         }
     }
 
-    public static void deleteCourse(int id) {
-        final String sql = "delete from course where courID=:courID";
+    public static Optional<User> getUserByUserID(int id){
+        final String sql = "select * from user where userID = :userID";
         try (Connection con = DBUtils.getConnection()){
-            con.createQuery(sql)
-                    .addParameter("courID",id)
-                    .executeUpdate();
+            List<User> lstU = con.createQuery(sql)
+                                    .addParameter("userID",id)
+                                    .executeAndFetch(User.class);
+            if (lstU.size() == 0) {
+                return Optional.empty();
+            }
+            return Optional.ofNullable(lstU.get(0));
+        }
+    }
+
+    public static void deleteUser(int id){
+        final String sql = "Delete from user where userID = :userID";
+        try(Connection con = DBUtils.getConnection()){
+            con.createQuery(sql).addParameter("userID",id).executeUpdate();
+        }
+    }
+
+    public static boolean checkUser(int id){
+        final String sql = "select count(*) from user where userID = :userID";
+        try(Connection con = DBUtils.getConnection()){
+            int a = con.createQuery(sql).addParameter("userID",id).executeScalar(int.class);
+            if(a==0)
+            {
+                return false;
+            }
+            else
+                return true;
         }
     }
 }

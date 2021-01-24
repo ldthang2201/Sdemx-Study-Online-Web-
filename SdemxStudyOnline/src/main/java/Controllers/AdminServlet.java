@@ -30,16 +30,19 @@ public class AdminServlet extends HttpServlet {
                 addCategory(request, response);
                 break;
             case "/DeleteCategory":
-                deleteCategory(request,response);
+                deleteCategory(request, response);
                 break;
             case "/UpdateCategory":
-                updateCategory(request,response);
+                updateCategory(request, response);
                 break;
             case "/AddTeacher":
-                addTeacher(request,response);
+                addTeacher(request, response);
                 break;
             case "/DeleteCourse":
-                deleteCourse(request,response);
+                deleteCourse(request, response);
+                break;
+            case "/DeleteUser":
+                deleteUser(request, response);
                 break;
             default:
                 ServletUtils.redirect("/NotFound", request, response);
@@ -49,8 +52,7 @@ public class AdminServlet extends HttpServlet {
     private void addCategory(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String catName = request.getParameter("categoryname");
         int branchID = Integer.parseInt(request.getParameter("branchID"));
-        System.out.println(catName +"--"+branchID);
-        CategoryModel.addCategory(catName,branchID);
+        CategoryModel.addCategory(catName, branchID);
         List<Category> lstCat = CategoryModel.getCategory();
         request.setAttribute("lstCat", lstCat);
         ServletUtils.forward("/Views/vwAdmin/AdCategory.jsp", request, response);
@@ -58,7 +60,7 @@ public class AdminServlet extends HttpServlet {
 
     private void deleteCategory(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int catID = Integer.parseInt(request.getParameter("CatID"));
-        if(CategoryModel.checkCourseByCatID(catID)==false){
+        if (CategoryModel.checkCourseByCatID(catID) == false) {
             ServletUtils.forward("/Views/vwNotFound/CanNotDelete.jsp", request, response);
         }
         CategoryModel.deleteCategory(catID);
@@ -70,38 +72,49 @@ public class AdminServlet extends HttpServlet {
     private void updateCategory(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int catID = Integer.parseInt(request.getParameter("CatID"));
         String catName = request.getParameter("catName");
-        CategoryModel.updateCategory(catID,catName);
+        CategoryModel.updateCategory(catID, catName);
         List<Category> lstCat = CategoryModel.getCategory();
         request.setAttribute("lstCat", lstCat);
         ServletUtils.forward("/Views/vwAdmin/AdCategory.jsp", request, response);
     }
 
     private void addTeacher(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String username=request.getParameter("username");
+        String username = request.getParameter("username");
         String email = request.getParameter("email");
         String fullname = request.getParameter("fullname");
         String bcryptHashString = BCrypt.withDefaults().hashToString(12, request.getParameter("password").toCharArray());
-        UserModel.addTeacher(username,bcryptHashString,fullname,email);
-        ServletUtils.redirect("/Admin/User",request,response);
+        UserModel.addTeacher(username, bcryptHashString, fullname, email);
+        ServletUtils.redirect("/Admin/User", request, response);
     }
+
     private void deleteCourse(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("courID"));
-        UserModel.deleteCourse(id);
-        ServletUtils.redirect("/Admin/Course",request,response);
+        CourseModel.deleteCourse(id);
+        ServletUtils.redirect("/Admin/Course", request, response);
     }
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        HttpSession session=request.getSession();
-        boolean auth =(boolean) session.getAttribute("auth");
+    private void deleteUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("userid"));
+        if (UserModel.checkUser(id)) {
+            ServletUtils.forward("/Views/vwNotFound/CanNotDeleteUser.jsp", request, response);
+        } else {
+            UserModel.deleteUser(id);
+            ServletUtils.redirect("/Admin/User", request, response);
+        }
+    }
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws
+            ServletException, IOException {
+        HttpSession session = request.getSession();
+        boolean auth = (boolean) session.getAttribute("auth");
         User curUser = (User) session.getAttribute("authUser");
 
-        if(!auth){
+        if (!auth) {
             ServletUtils.forward("/Views/vwAccount/Login.jsp", request, response);
             return;
-        }
-        else{
-            if (curUser.getPermission()!=1){
-                ServletUtils.redirect("/NotFound",request,response);
+        } else {
+            if (curUser.getPermission() != 1) {
+                ServletUtils.redirect("/NotFound", request, response);
                 return;
             }
         }
@@ -121,7 +134,6 @@ public class AdminServlet extends HttpServlet {
             case "/EditCategory":
                 int catID = Integer.parseInt(request.getParameter("id"));
                 Optional<Category> cat = CategoryModel.getCategoryByCatID(catID);
-                System.out.println("catID=" + cat.get().getCatName());
                 if (cat.isPresent()) {
                     request.setAttribute("category", cat.get());
                     ServletUtils.forward("/Views/vwAdmin/EditCategory.jsp", request, response);
@@ -132,21 +144,20 @@ public class AdminServlet extends HttpServlet {
             case "/AddCategory":
                 ServletUtils.forward("/Views/vwAdmin/AddCategory.jsp", request, response);
                 break;
-            case"/User":
+            case "/User":
                 List<User> lstTeacher = UserModel.getUserTeacher();
-                request.setAttribute("lstTeacher",lstTeacher);
+                request.setAttribute("lstTeacher", lstTeacher);
                 List<User> lstStudent = UserModel.getUsserStudent();
-                request.setAttribute("lstStudent",lstStudent);
+                request.setAttribute("lstStudent", lstStudent);
                 ServletUtils.forward("/Views/vwAdmin/AdUser.jsp", request, response);
                 break;
-            case"/AddTeacher":
+            case "/AddTeacher":
                 ServletUtils.forward("/Views/vwAdmin/AddTeacher.jsp", request, response);
                 break;
             case "/Course":
                 List<Course> lstCourse = CourseModel.getAllCourse();
-                request.setAttribute("lstCourse",lstCourse);
-                System.out.println("da di qua day");
-                ServletUtils.forward("/Views/vwAdmin/AdCourse.jsp",request,response);
+                request.setAttribute("lstCourse", lstCourse);
+                ServletUtils.forward("/Views/vwAdmin/AdCourse.jsp", request, response);
                 break;
             case "/DeleteCourse":
                 int id = Integer.parseInt(request.getParameter("id"));
@@ -154,6 +165,16 @@ public class AdminServlet extends HttpServlet {
                 if (c.isPresent()) {
                     request.setAttribute("course", c.get());
                     ServletUtils.forward("/Views/vwAdmin/DeleteCourse.jsp", request, response);
+                } else {
+                    ServletUtils.redirect("/Admin", request, response);
+                }
+                break;
+            case "/DeleteUser":
+                int uid = Integer.parseInt(request.getParameter("id"));
+                Optional<User> lstU = UserModel.getUserByUserID(uid);
+                if (lstU.isPresent()) {
+                    request.setAttribute("curUser", lstU.get());
+                    ServletUtils.forward("/Views/vwAdmin/DeleteUser.jsp", request, response);
                 } else {
                     ServletUtils.redirect("/Admin", request, response);
                 }

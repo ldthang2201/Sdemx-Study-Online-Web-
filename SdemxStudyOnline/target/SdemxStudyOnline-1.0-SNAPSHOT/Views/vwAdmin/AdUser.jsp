@@ -37,7 +37,7 @@
                                     <th scope="col">UserName</th>
                                     <th scope="col">FullName</th>
                                     <th scope="col">Email</th>
-                                    <th scope="col">&nbsp;</th>
+<%--                                    <th scope="col">&nbsp;</th>--%>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -48,8 +48,8 @@
                                         <td>${u.name}</td>
                                         <td>${u.email}</td>
                                         <td class="text-right">
-                                            <a class="btn btn-sm btn-outline-primary" href="${pageContext.request.contextPath}/Admin/EditCategory?id=${c.catID}" role="button">
-                                                <i class="fa fa-pencil" aria-hidden="true"></i>
+                                            <a class="btn btn-sm btn-outline-danger" href="${pageContext.request.contextPath}/Admin/DeleteUser?id=${u.id}" role="button">
+                                                <i class="fa fa-trash-o" aria-hidden="true"></i></i>
                                             </a>
                                         </td>
                                     </tr>
