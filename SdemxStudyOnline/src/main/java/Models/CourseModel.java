@@ -238,4 +238,16 @@ public class CourseModel {
                     .executeUpdate();
         }
     }
+
+    public static void addFeedback(int courID, int userID, float rate, String feedback){
+        final String sql = "INSERT into feedback(userID,courID,fullfeedback,rate,dateFeedback) values(:userID,:courID,:feedback,:rate,now())";
+        try(Connection con = DBUtils.getConnection()){
+            con.createQuery(sql)
+                    .addParameter("userID",userID)
+                    .addParameter("courID",courID)
+                    .addParameter("feedback",feedback)
+                    .addParameter("rate",rate)
+                    .executeUpdate();
+        }
+    }
 }

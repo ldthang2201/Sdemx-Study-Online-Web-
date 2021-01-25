@@ -47,14 +47,16 @@
                 font-size: 16px;
                 font-weight: bold;
             }
-            #btn-like:focus{
+
+            #btn-like:focus {
                 background-color: red !important;
             }
-            #btn-buy:focus{
-                background-color: #218838!important;
+
+            #btn-buy:focus {
+                background-color: #218838 !important;
             }
         </style>
-        <link rel="stylesheet" href="https://cdn.plyr.io/3.6.3/plyr.css" />
+        <link rel="stylesheet" href="https://cdn.plyr.io/3.6.3/plyr.css"/>
 
         <div class="container-detail">
             <div class="container">
@@ -62,22 +64,22 @@
                     <div class="col-md-4">
                         <div class="   mt-5 video   plyr__video-embed" id="player">
 
-                                <iframe
-                                        src=""
-                                        allowfullscreen
-                                        allowtransparency
-                                        allow="autoplay" id="video"
-                                        class=" mt-5 "
-                                ></iframe>
-                                <script src="https://cdn.plyr.io/3.6.3/plyr.js"></script>
+                            <iframe
+                                    src=""
+                                    allowfullscreen
+                                    allowtransparency
+                                    allow="autoplay" id="video"
+                                    class=" mt-5 "
+                            ></iframe>
+                            <script src="https://cdn.plyr.io/3.6.3/plyr.js"></script>
 
-                                <script>
-                                    const player = new Plyr('#player');
-                                </script>
+                            <script>
+                                const player = new Plyr('#player');
+                            </script>
 
                         </div>
                         <div class="d-flex justify-content-around" style="width: 100%">
-                            <form method="POST"  id="frmbuy"   >
+                            <form method="POST" id="frmbuy">
                                 <c:choose>
                                     <c:when test="${!auth}">
                                         <button id="btn-buy" type="button" class="btn btn-register mt-3 mb-4">
@@ -88,75 +90,75 @@
                                         <script>
                                             $('#inputCourseId').val($('#courseID').text());
 
-                                            $('#btn-buy').on('click',()=>{
+                                            $('#btn-buy').on('click', () => {
                                                 console.log("submit");
                                                 $('#frmbuy').submit();
                                             })
-                                            $('#frmbuy').on("submit",(e)=>{
+                                            $('#frmbuy').on("submit", (e) => {
                                                 e.preventDefault()
                                                 $('#frmbuy').off('submit').submit();
                                             })
                                         </script>
                                     </c:when>
                                     <c:otherwise>
-                                       <c:choose>
-                                           <c:when test="${checkBuy}">
-                                               <button id="btn-buy" type="button" class="btn btn-success mt-3 mb-4">
-                                                   Buy now <i class="fa fa-check" aria-hidden="true"></i>
-                                               </button>
+                                        <c:choose>
+                                            <c:when test="${checkBuy}">
+                                                <button id="btn-buy" type="button" class="btn btn-success mt-3 mb-4">
+                                                    Buy now <i class="fa fa-check" aria-hidden="true"></i>
+                                                </button>
                                                 <script>
-                                                    $('#video').attr('src','https://www.youtube.com/embed/rwCJvSKzQkc')
+                                                    $('#video').attr('src', 'https://www.youtube.com/embed/rwCJvSKzQkc')
                                                 </script>
-                                           </c:when>
-                                           <c:otherwise>
-                                               <button id="btn-buy" type="button" class="btn btn-register mt-3 mb-4">
-                                                   Buy now <i id="checkicon" class=" " aria-hidden="true"></i>
-                                               </button>
-                                               <script>
-                                                   $('#btn-buy').click(
-                                                       () => {
-                                                           $('#btn-buy').removeClass('btn-register ');
-                                                           $('#btn-buy').addClass('btn-success');
-                                                           $('#video').attr('src','https://www.youtube.com/embed/rwCJvSKzQkc')
-                                                           $('#checkicon').addClass('fa fa-check');
-                                                           $.ajax({
-                                                               url: '${pageContext.request.contextPath}/Course/Buy',
-                                                               data: jQuery.param({
-                                                                   action: "buy",
-                                                                   CourseId:$('#courseID').text(),
-                                                               }),
-                                                               processData: false,
-                                                               contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-                                                               type: 'POST',
-                                                               success: function (data) {
-                                                               }
-                                                           });
+                                            </c:when>
+                                            <c:otherwise>
+                                                <button id="btn-buy" type="button" class="btn btn-register mt-3 mb-4">
+                                                    Buy now <i id="checkicon" class=" " aria-hidden="true"></i>
+                                                </button>
+                                                <script>
+                                                    $('#btn-buy').click(
+                                                        () => {
+                                                            $('#btn-buy').removeClass('btn-register ');
+                                                            $('#btn-buy').addClass('btn-success');
+                                                            $('#video').attr('src', 'https://www.youtube.com/embed/rwCJvSKzQkc')
+                                                            $('#checkicon').addClass('fa fa-check');
+                                                            $.ajax({
+                                                                url: '${pageContext.request.contextPath}/Course/Buy',
+                                                                data: jQuery.param({
+                                                                    action: "buy",
+                                                                    CourseId: $('#courseID').text(),
+                                                                }),
+                                                                processData: false,
+                                                                contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                                                                type: 'POST',
+                                                                success: function (data) {
+                                                                }
+                                                            });
 
-                                                       }
-                                                   )
-                                               </script>
-                                           </c:otherwise>
-                                       </c:choose>
+                                                        }
+                                                    )
+                                                </script>
+                                            </c:otherwise>
+                                        </c:choose>
 
                                     </c:otherwise>
                                 </c:choose>
                             </form>
-                            <form method="POST"  id="frmlike"  >
+                            <form method="POST" id="frmlike">
                                 <c:choose>
                                     <c:when test="${!auth}">
-                                        <button  id="btn-dislike" type="button" class="btn btn-outline-danger mt-3 mb-4">
+                                        <button id="btn-dislike" type="button" class="btn btn-outline-danger mt-3 mb-4">
                                             Wishlisted <i class="fa fa-heart" aria-hidden="true"></i>
                                         </button>
-                                        <input type="hidden" name="action" value="like" >
-                                        <input id="inputlike" type="hidden" name="CourseId" value="" >
+                                        <input type="hidden" name="action" value="like">
+                                        <input id="inputlike" type="hidden" name="CourseId" value="">
                                         <script>
                                             $('#inputlike').val(${course.courID});
-                                                <%--console.log(${course.courID})--%>
-                                            $('#btn-dislike').on('click',()=>{
+                                            <%--console.log(${course.courID})--%>
+                                            $('#btn-dislike').on('click', () => {
                                                 console.log("submit");
                                                 $('#frmlike').submit();
                                             })
-                                            $('#frmlike').on("submit",(e)=>{
+                                            $('#frmlike').on("submit", (e) => {
                                                 e.preventDefault()
                                                 $('#frmlike').off('submit').submit();
                                             })
@@ -171,7 +173,8 @@
 
                                             </c:when>
                                             <c:otherwise>
-                                                <button  id="btn-like" type="button" class="btn btn-outline-danger mt-3 mb-4">
+                                                <button id="btn-like" type="button"
+                                                        class="btn btn-outline-danger mt-3 mb-4">
                                                     Wishlisted <i class="fa fa-heart" aria-hidden="true"></i>
                                                 </button>
                                             </c:otherwise>
@@ -200,7 +203,7 @@
                                         }
                                     )
                                 </script>
-                                <a id="courseID" style="display:none;" >${course.getCourID()}</a>
+                                <a id="courseID" style="display:none;">${course.getCourID()}</a>
 
                             </form>
                         </div>
@@ -293,6 +296,31 @@
                 </a>
             </c:forEach>
             <div class="row h3 font-weight-bold mt-3"> Student feedback</div>
+            <c:if test="${auth}">
+                <form method="post">
+                    <div class="row ml-5">
+                        <div class="form-group">
+                            <select class="form-control" id="txrate" name="rate">
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                            </select>
+                        </div>
+                        <div class="star-ratings-css mt-2" style="font-size: 20px"><i class="fa fa-star"
+                                                                                      aria-hidden="true"></i></div>
+                        <div class="form-group">
+                            <textarea class="form-control" id="txtfeedback" name="feedback" rows="3" placeholder="Feedback content"></textarea>
+                        </div>
+                        <div class="ml-5">
+                        <button type="submit" class="btn btn-outline-dark" formaction="${pageContext.request.contextPath}/AddFeedback">Add Feedback</button>
+                        </div>
+                        <input style="display: none" name="courid" value="${course.courID}">
+                        <input style="display: none" name="userid" value="${authUser.id}">
+                    </div>
+                </form>
+            </c:if>
             <c:forEach var="f" items="${course.lstFeedbackByCourID()}">
                 <div class="row mb-2">
                     <div class="col-sm-1">
