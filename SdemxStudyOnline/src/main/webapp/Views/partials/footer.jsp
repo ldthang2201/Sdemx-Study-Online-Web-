@@ -43,7 +43,7 @@
                     <div class="widget no-box ">
                         <h5 class="widget-title ">Get Started<span style="margin-top:60px "></span></h5>
                         <p>Get access to your full Training and Marketing Suite.</p>
-                        <a class="btn btn-register " href="#. " target="_blank ">Register Now</a>
+                        <a class="btn btn-register " href="#" style="display: none" target="_blank ">Register Now</a>
                     </div>
                 </div>
 
