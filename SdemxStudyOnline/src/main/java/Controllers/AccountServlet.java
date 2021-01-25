@@ -106,11 +106,11 @@ public class AccountServlet extends HttpServlet {
           }
             if(password==""){
                response.setHeader("errorMessage","password empty !!!");
-               outResponce+="pempty";
+               outResponce+=" pempty ";
            }
          if(!validateEmail(email)){
             response.setHeader("errorMessage","Invalid Email !!!");
-            outResponce+=" Email ";
+            outResponce+=" email ";
         }
         if(UserModel.findByEmail(email)>1){
             response.setHeader("errorMessage","Email already exist!!!");

@@ -99,7 +99,7 @@
                     <label class="label-mess" id="email-mess"></label>
                 <input  id="input-email" type="text" class="input-signup" placeholder ="Email" name="email">
             </label>
-                <label class="label-signup">
+                <label class="label-signup" style="display: none">
                     <label class="label-mess" id="phone-mess"></label>
                     <input  id="input-phone" type="text" class="input-signup" placeholder ="Phone number" name="email">
                 </label>
@@ -170,16 +170,21 @@
             contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
             type: 'POST',
             success: function(data){
-               if(data.includes("Email"))
+                console.log(data);
+               if(data.includes("email"))
                {
-                   if(!$('#email-mess').text())$('#email-mess').text("Invalid Email");
+                   $('#email-mess').text("");
+
+                   $('#email-mess').text("Invalid Email");
                }
-               else $('#email-mess').text("")
+               else $('#email-mess').text("");
+
                 if(data.includes("exist"))
                 {
-                    if(!$('#email-mess').text())$('#email-mess').text("Email already exist!!!");
+                    $('#email-mess').text("");
+                    $('#email-mess').text("Email already exist!!!");
                 }
-                else $('#email-mess').text("")
+
 
                 if(data.includes("Username")){
                     if(!$('#username-mess').text())$('#username-mess').text("Username already exists");

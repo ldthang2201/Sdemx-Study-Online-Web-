@@ -110,7 +110,7 @@ public class AdminServlet extends HttpServlet {
         User curUser = (User) session.getAttribute("authUser");
 
         if (!auth) {
-            ServletUtils.forward("/Views/vwAccount/Login.jsp", request, response);
+            ServletUtils.redirect("/Account/Login", request, response);
             return;
         } else {
             if (curUser.getPermission() != 1) {

@@ -110,7 +110,7 @@ public class CategoryModel {
     }
 
     public static void deleteCategory(int catID){
-        final String sql="call sp_DeleteCategory(:catID)";
+        final String sql="delete from category where catID=:catID";
         try(Connection con = DBUtils.getConnection()){
             con.createQuery(sql)
                     .addParameter("catID",catID)
