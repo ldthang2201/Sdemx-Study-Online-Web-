@@ -250,4 +250,11 @@ public class CourseModel {
                     .executeUpdate();
         }
     }
+
+    public static List<Course> getMyCourse(int id){
+        final String sql = "CALL MyCourse(:teacherID)";
+        try (Connection con = DBUtils.getConnection()){
+            return con.createQuery(sql).addParameter("teacherID",id).executeAndFetch(Course.class);
+        }
+    }
 }

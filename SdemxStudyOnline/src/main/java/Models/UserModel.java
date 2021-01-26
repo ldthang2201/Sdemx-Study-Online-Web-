@@ -1,6 +1,7 @@
 package Models;
 
 
+import Beans.Teacher;
 import Beans.User;
 import org.sql2o.Connection;
 import Utility.DBUtils;
@@ -144,7 +145,7 @@ public class UserModel {
     }
 
     public static boolean checkUser(int id){
-        final String sql = "select count(*) from user where userID = :userID";
+        final String sql = "select count(*) from course where teacherID = :userID";
         try(Connection con = DBUtils.getConnection()){
             int a = con.createQuery(sql).addParameter("userID",id).executeScalar(int.class);
             if(a==0)
@@ -153,6 +154,30 @@ public class UserModel {
             }
             else
                 return true;
+        }
+    }
+
+    public static Optional<Teacher> getTeacherByID(int id){
+        final String sql = "call sp_getDetailTeacher(:teacherID)";
+        try (Connection con = DBUtils.getConnection()){
+            List<Teacher> lstU = con.createQuery(sql)
+                    .addParameter("teacherID",id)
+                    .executeAndFetch(Teacher.class);
+            if (lstU.size() == 0) {
+                return Optional.empty();
+            }
+            return Optional.ofNullable(lstU.get(0));
+        }
+    }
+
+    public static void EditTeacher (int id, String aoe, String fulldes){
+        final String sql = "call EditTeacher(:teacherID,:aoe,:fullDes)";
+        try (Connection con = DBUtils.getConnection()){
+            con.createQuery(sql)
+                    .addParameter("teacherID",id)
+                    .addParameter("aoe",aoe)
+                    .addParameter("fullDes",fulldes)
+                    .executeUpdate();
         }
     }
 }

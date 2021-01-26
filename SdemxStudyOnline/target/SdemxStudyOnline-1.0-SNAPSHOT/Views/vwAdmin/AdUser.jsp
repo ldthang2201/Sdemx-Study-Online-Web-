@@ -92,7 +92,9 @@
                                         <td>${u.name}</td>
                                         <td>${u.email}</td>
                                         <td class="text-right">
-                                            &nbsp;
+                                            <a class="btn btn-sm btn-outline-danger" href="${pageContext.request.contextPath}/Admin/DeleteUser?id=${u.id}" role="button">
+                                                <i class="fa fa-trash-o" aria-hidden="true"></i></i>
+                                            </a>
                                         </td>
                                     </tr>
                                 </c:forEach>

@@ -62,8 +62,7 @@
             <div class="container">
                 <div class="row ">
                     <div class="col-md-4">
-                        <div class="   mt-5 video   plyr__video-embed" id="player">
-
+                        <div class=" mt-5 video plyr__video-embed" id="player">
                             <iframe
                                     src=""
                                     allowfullscreen
@@ -72,11 +71,9 @@
                                     class=" mt-5 "
                             ></iframe>
                             <script src="https://cdn.plyr.io/3.6.3/plyr.js"></script>
-
                             <script>
                                 const player = new Plyr('#player');
                             </script>
-
                         </div>
                         <div class="d-flex justify-content-around" style="width: 100%">
                             <form method="POST" id="frmbuy">
@@ -229,7 +226,7 @@
                                     value="${course.numRegister}"/> students</span>
                         </div>
                         <div class="detail-sub">Create by <a style="color: white"
-                                                             href="">${course.getTeacherNameByTeacherID()}</a></div>
+                                                             href="${pageContext.request.contextPath}/Teacher/Detail?id=${course.teacherID}">${course.getTeacherNameByTeacherID()}</a></div>
                         <div class="detail-sub">
                             <span><i class="fa fa-wrench"
                                      aria-hidden="true"></i> Last Update: ${course.lastUpdate}</span>
