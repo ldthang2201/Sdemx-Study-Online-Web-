@@ -620,13 +620,15 @@
         </body>
         </html>
         <script>
-            $('#datepicker').click(function (){
+
+            $('#datepicker').on('click', function() {
                 $("#datepicker").datetimepicker({
                     format: 'd/m/Y',
-                    mask: false,
-                    value: $('#datepicker').val()
+                    timepicker: false,
+                    mask: true,
                 });
-            })
+            } );
+
             var owl_card1 = $('.owl-carousel_card1');
             owl_card1.owlCarousel();
             var right_click_card1 = function () {

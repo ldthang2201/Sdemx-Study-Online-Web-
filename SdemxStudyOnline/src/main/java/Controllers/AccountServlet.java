@@ -82,6 +82,7 @@ public class AccountServlet extends HttpServlet {
         String name = request.getParameter("name");
         String email = request.getParameter("email");
         Date dob = new Date();
+        System.out.println(dob);
         String phone="";
         PrintWriter out = response.getWriter();
         response.setContentType("text/html");
@@ -265,7 +266,6 @@ public class AccountServlet extends HttpServlet {
             response.setHeader("errorMessage","Invalid birthday !!!");
             PrintWriter out = response.getWriter();
             response.setContentType("text/html");
-
             outResponce+="birthday";
             out.println("Invalid birthday");
             out.close();
@@ -273,6 +273,7 @@ public class AccountServlet extends HttpServlet {
         }else {
             try {
                 dob = formatter.parse(request.getParameter("dob"));
+                System.out.println(dob);
             } catch (ParseException e) {
                 PrintWriter out = response.getWriter();
                 response.setContentType("text/html");
@@ -289,6 +290,8 @@ public class AccountServlet extends HttpServlet {
             response.setHeader("errorMessage","successfully");
             UserModel.update(rquser.getUsername(),email,dob,fullname,phone);
 //            ServletUtils.redirect("/Home", request, response);
+            Optional<User> user = UserModel.findByUserName(rquser.getUsername());
+               request.setAttribute("authUser",user.get());
 //            UserModel.ChangeAvatar(user.getUsername(),\"/SdemxStudyOnline/public/ImgLogo/user-logo.png");
             out.println("Your infomation has been changed successfully! !!!!");
             out.close();
