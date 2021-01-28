@@ -325,9 +325,16 @@
                     </div>
 
                     <div class="ChangeAvatar " style="display: none">
-
+                        <div class="profile-header">
+                            <div class="row d-flex justify-content-center mt-2">
+                                <h2> Public profile</h2>
+                            </div>
+                            <div class="row  justify-content-center mb-2">
+                                <h4>Change your avatar</h4>
+                            </div>
+                        </div>
                         <form id="frmUpload">
-                            <img id="uploadimage" class="  "  style="width: 300px;height: 300px;margin: 50px 200px  ; "><br>
+                            <img id="uploadimage" class="  "  style="width: 300px;height: 300px;margin: 20px 200px  ; "><br>
                                 <%--                                        <input type="file" id="myFile" name="filename"><br>--%>
                             <button id="btn-upload" class="  btn btn-primary  " style="margin: 30px 0 30px 220px;width: 120px ">upload</button>
 
@@ -620,14 +627,16 @@
         </body>
         </html>
         <script>
+                 var dob = $('#datepicker').val();
+                    console.log(dob);
 
-            $('#datepicker').on('click', function() {
                 $("#datepicker").datetimepicker({
                     format: 'd/m/Y',
                     timepicker: false,
                     mask: true,
+                    value:dob
                 });
-            } );
+
 
             var owl_card1 = $('.owl-carousel_card1');
             owl_card1.owlCarousel();

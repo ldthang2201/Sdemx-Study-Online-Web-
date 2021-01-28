@@ -161,6 +161,8 @@ public class AccountServlet extends HttpServlet {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         Optional<User> user = UserModel.findByUserName(username);
+
+
         if (user.isPresent()) {
             BCrypt.Result result = BCrypt.verifyer().verify(password.toCharArray(), user.get().getPassword());
             if (result.verified) {
@@ -257,14 +259,15 @@ public class AccountServlet extends HttpServlet {
         User rquser = (User) session.getAttribute("authUser");
         String phone = request.getParameter("phone");
         String email=request.getParameter("email");
+        String name= request.getParameter("name");
         String fullname = request.getParameter("fullname");
         Date dob = new Date();
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         response.setContentType("text/html");
+        PrintWriter out = response.getWriter();
         String outResponce= new String();
         if(request.getParameter("dob")==""){
             response.setHeader("errorMessage","Invalid birthday !!!");
-            PrintWriter out = response.getWriter();
             response.setContentType("text/html");
             outResponce+="birthday";
             out.println("Invalid birthday");
@@ -273,9 +276,9 @@ public class AccountServlet extends HttpServlet {
         }else {
             try {
                 dob = formatter.parse(request.getParameter("dob"));
-                System.out.println(dob);
+
             } catch (ParseException e) {
-                PrintWriter out = response.getWriter();
+
                 response.setContentType("text/html");
                 response.setHeader("errorMessage","Invalid birthday !!!");
                 out.println("Invalid infomation");
@@ -284,8 +287,26 @@ public class AccountServlet extends HttpServlet {
                 return;
             }
         }
+        if(!validateEmail(email)){
+            out.println("Invalid Email !!!");
+            out.close();
+            return;
+
+        }
+        if(fullname==""){
+            out.println("Invalid Name !!!");
+            out.close();
+            return;
+
+        }
+        if(UserModel.findByEmail(email)>1){
+            out.println("Email already exist!!!");
+            out.close();
+            return;
+        }
+
         if(outResponce.length()<=0)  {
-            PrintWriter out = response.getWriter();
+
             response.setContentType("text/html");
             response.setHeader("errorMessage","successfully");
             UserModel.update(rquser.getUsername(),email,dob,fullname,phone);
