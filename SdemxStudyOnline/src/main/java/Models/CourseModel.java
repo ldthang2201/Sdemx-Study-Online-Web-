@@ -1,9 +1,6 @@
 package Models;
 
-import Beans.Branch;
-import Beans.Category;
-import Beans.Course;
-import Beans.Feedback;
+import Beans.*;
 import Utility.DBUtils;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
@@ -288,6 +285,15 @@ public class CourseModel {
                     .addParameter("limit",limit)
                     .addParameter("offset",offset)
                     .executeAndFetch(Course.class);
+        }
+    }
+
+    public static List<Chapter> getAllChapterByCourID(int id){
+        final String sql = "select * from chapter where courID = :courID";
+        try (Connection con = DBUtils.getConnection()){
+            return con.createQuery(sql)
+                    .addParameter("courID",id)
+                    .executeAndFetch(Chapter.class);
         }
     }
 }

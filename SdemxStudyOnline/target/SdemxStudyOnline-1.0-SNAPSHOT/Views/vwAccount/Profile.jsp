@@ -242,13 +242,13 @@
                             <div class="row d-flex align-items-center">
                                 <span class="profile-input-span">Birthday :</span>
                                 <input class="profile-input" type="text" id="datepicker" name="birthday"
-                                       value=${authUser.dob} placeholder="BirthDay"><br>
+                                       value=${user.dob} placeholder="BirthDay"><br>
                             </div>
                         <div class="row d-flex align-items-center">
                             <span class="profile-input-span">Phone :</span>
                             <input class="profile-input" type="text" id="Phone"
                                    value="" placeholder="Phone number"><br>
-                            <script> $('#Phone').val(`${authUser.phone}`)</script>
+                            <script> $('#Phone').val(`${user.phone}`)</script>
                         </div>
 
                             <div class="row d-flex justify-content-end  mr-5 mt-3">
@@ -620,13 +620,13 @@
         </body>
         </html>
         <script>
-
-            $("#datepicker").datetimepicker({
-                format: 'd/m/Y',
-                timepicker: false,
-                mask: true,
-                value: $('#datepicker').val()
-            });
+            $('#datepicker').click(function (){
+                $("#datepicker").datetimepicker({
+                    format: 'd/m/Y',
+                    mask: false,
+                    value: $('#datepicker').val()
+                });
+            })
             var owl_card1 = $('.owl-carousel_card1');
             owl_card1.owlCarousel();
             var right_click_card1 = function () {

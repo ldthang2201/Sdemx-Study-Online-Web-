@@ -1,9 +1,6 @@
 package Controllers;
 
-import Beans.Category;
-import Beans.Course;
-import Beans.Feedback;
-import Beans.User;
+import Beans.*;
 import Models.CategoryModel;
 import Models.CourseModel;
 import Utility.ServletUtils;
@@ -86,9 +83,10 @@ public class CourseServlet extends HttpServlet {
                 User curUser = (User) session1.getAttribute("authUser");
                 boolean likeCourse = CourseModel.checkWistList(curUser.getId(),id);
                 boolean buyCourse =  CourseModel.checkBuy(curUser.getId(),id);
-                System.out.println(buyCourse);
                 request.setAttribute("checkBuy",buyCourse);
                 request.setAttribute("checkLike",likeCourse);
+                List<Chapter> lstChap = CourseModel.getAllChapterByCourID(id);
+                request.setAttribute("lstChap",lstChap);
                 if (c.isPresent()) {
                     request.setAttribute("course", c.get());
                     ServletUtils.forward("/Views/vwCourse/Detail.jsp", request, response);

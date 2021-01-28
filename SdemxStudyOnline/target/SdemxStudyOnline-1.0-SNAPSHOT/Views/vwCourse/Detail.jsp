@@ -255,6 +255,39 @@
                     ${course.fullDes}
             </div>
             <div class="row h3 font-weight-bold mt-3">Courses Content</div>
+            <div class="row">
+                <c:choose>
+                    <c:when test="${lstChap.size() == 0}">
+                        <div class="card-body">
+                            <p class="card-text">No Information</p>
+                        </div>
+                    </c:when>
+                    <c:otherwise>
+                        <div class="card-body">
+                            <table class="table table-hover">
+                                <thead>
+                                <tr>
+                                    <th scope="col">Title</th>
+                                    <th scope="col">&nbsp;</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <c:forEach var="c" items="${lstChap}">
+                                    <tr>
+                                        <td>${c.getChapName()}</td>
+                                        <td class="text-right">
+                                            <a class="btn btn-sm btn-outline-primary" href="#" role="button">
+                                                <i class="fa fa-eye" aria-hidden="true"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </c:forEach>
+                                </tbody>
+                            </table>
+                        </div>
+                    </c:otherwise>
+                </c:choose>
+            </div>
             <div class="row h3 font-weight-bold mt-3">Another Courses</div>
             <c:forEach var="c" items="${lst5Course}">
                 <a href="${pageContext.request.contextPath}/Course/Detail?id=${c.courID}" class="row card-course">

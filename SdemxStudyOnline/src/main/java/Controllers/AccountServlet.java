@@ -35,7 +35,6 @@ public class AccountServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 //        String path = request.getPathInfo();
         String action = request.getParameter("action");
-            System.out.println(action);
         switch (action) {
             case "Login":
                 postLogin(request, response);
@@ -251,7 +250,6 @@ public class AccountServlet extends HttpServlet {
         }
 
 
-
     }
     private void postUpdate(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
@@ -295,8 +293,6 @@ public class AccountServlet extends HttpServlet {
             out.println("Your infomation has been changed successfully! !!!!");
             out.close();
         }
-
-
     }
 
     private void postAvatar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -352,7 +348,13 @@ public class AccountServlet extends HttpServlet {
                 request.setAttribute("lstWish",lstWish);
                 List<Category> lstCat = CategoryModel.getCategory();
                 request.setAttribute("lstCat",lstCat);
-                ServletUtils.forward("/Views/vwAccount/Profile.jsp", request, response);
+                Optional<User> u = UserModel.getUserByUserID(curUser.getId());
+                if (u.isPresent()) {
+                    request.setAttribute("user", u.get());
+                    ServletUtils.forward("/Views/vwAccount/Profile.jsp", request, response);
+                } else {
+                    ServletUtils.redirect("/Home", request, response);
+                }
                 break;
             default:
                 ServletUtils.redirect("/NotFound", request, response);
