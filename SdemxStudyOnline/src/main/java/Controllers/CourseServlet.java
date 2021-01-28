@@ -105,10 +105,8 @@ public class CourseServlet extends HttpServlet {
 
                 final int LIMIT = 6;
                 int offset = (curPage - 1) * LIMIT;
-                System.out.println(offset);
                 int total = CourseModel.CountNoCourseByCatID(CatID);
                 int nPages=total/LIMIT;
-                System.out.println(nPages);
                 if(total % LIMIT > 0) nPages++;
 
                 int[] pages = new int[nPages];

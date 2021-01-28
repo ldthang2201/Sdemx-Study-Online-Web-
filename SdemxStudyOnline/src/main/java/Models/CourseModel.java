@@ -257,4 +257,37 @@ public class CourseModel {
             return con.createQuery(sql).addParameter("teacherID",id).executeAndFetch(Course.class);
         }
     }
+
+    public static List<Course> searchCourseWithPage(String search, int limit, int offset){
+        final String sql = "Call sp_SearchCourseWithPage(:search,:limit,:offset)";
+        try (Connection con = DBUtils.getConnection()){
+            return con.createQuery(sql)
+                    .addParameter("search", search)
+                    .addParameter("limit",limit)
+                    .addParameter("offset",offset)
+                    .executeAndFetch(Course.class);
+        }
+    }
+
+    public static List<Course> searchCourseWithPageHighest(String search, int limit, int offset){
+        final String sql = "Call sp_SearchCourseWithPageHighest(:search,:limit,:offset)";
+        try (Connection con = DBUtils.getConnection()){
+            return con.createQuery(sql)
+                    .addParameter("search", search)
+                    .addParameter("limit",limit)
+                    .addParameter("offset",offset)
+                    .executeAndFetch(Course.class);
+        }
+    }
+
+    public static List<Course> searchCourseWithPageNewest(String search, int limit, int offset){
+        final String sql = "Call sp_SearchCourseWithPageNewest(:search,:limit,:offset)";
+        try (Connection con = DBUtils.getConnection()){
+            return con.createQuery(sql)
+                    .addParameter("search", search)
+                    .addParameter("limit",limit)
+                    .addParameter("offset",offset)
+                    .executeAndFetch(Course.class);
+        }
+    }
 }
