@@ -630,12 +630,17 @@
                  var dob = $('#datepicker').val();
                     console.log(dob);
 
-                $("#datepicker").datetimepicker({
-                    format: 'd/m/Y',
-                    timepicker: false,
-                    mask: true,
-                    value:dob
-                });
+                     $("#datepicker").datetimepicker({
+                         useCurrent:false,
+                         defaultDate: Date.parse(dob),
+                         format: 'd/m/Y',
+                         timepicker: false,
+                         mask: true,
+                         value:dob
+                     });
+
+
+
 
 
             var owl_card1 = $('.owl-carousel_card1');
