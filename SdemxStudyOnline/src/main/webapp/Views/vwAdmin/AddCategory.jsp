@@ -22,7 +22,7 @@
                     <label for="txtBranch">Branch</label>
                     <select class="form-control" id="txtBranch" name="branchID">
                         <c:forEach var="b" items="${filterlstBranch}">
-                            <option>${b.branchID}</option>
+                            <option>${b.branchName}</option>
                         </c:forEach>
                     </select>
                 </div>

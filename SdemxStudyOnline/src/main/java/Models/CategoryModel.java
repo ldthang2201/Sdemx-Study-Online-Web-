@@ -138,4 +138,24 @@ public class CategoryModel {
                 return false;
         }
     }
+
+    public static int getCatIDByCatName(String catName)
+    {
+        final String sql="select catID from category where catName=:catName";
+        try(Connection con = DBUtils.getConnection()){
+            return con.createQuery(sql)
+                    .addParameter("catName",catName)
+                    .executeScalar(int.class);
+        }
+    }
+
+    public static int getBranchIDByBranchName(String branchName)
+    {
+        final String sql="select branchID from branch where branchname=:branchName";
+        try(Connection con = DBUtils.getConnection()){
+            return con.createQuery(sql)
+                    .addParameter("branchName",branchName)
+                    .executeScalar(int.class);
+        }
+    }
 }

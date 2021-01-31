@@ -51,7 +51,8 @@ public class AdminServlet extends HttpServlet {
 
     private void addCategory(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String catName = request.getParameter("categoryname");
-        int branchID = Integer.parseInt(request.getParameter("branchID"));
+        String branchName = request.getParameter("branchID");
+        int branchID = CategoryModel.getBranchIDByBranchName(branchName);
         CategoryModel.addCategory(catName, branchID);
         List<Category> lstCat = CategoryModel.getCategory();
         request.setAttribute("lstCat", lstCat);

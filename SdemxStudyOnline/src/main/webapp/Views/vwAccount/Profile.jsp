@@ -549,45 +549,46 @@
                             </div>
                         </div>
                         <div class="row ml-3">
-                            <div class="form-group">
+                            <div class="form-group" style="width: 80%">
                                 <label for="txttitle">Course title</label>
                                 <input type="text" autofocus class="form-control" id="txttitle" name="title">
                             </div>
                         </div>
                         <div class="row ml-3">
-                            <div class="form-group">
+                            <div class="form-group" style="width: 80%">
                                 <label for="txtcatid">Category ID</label>
                                 <select class="form-control" id="txtcatid" name="catid">
                                     <c:forEach var="c" items="${lstCat}">
-                                        <option>${c.catID}</option>
+                                        <option>${c.catName}</option>
                                     </c:forEach>
                                 </select>
                             </div>
                         </div>
                         <div class="row ml-3">
-                            <div class="form-group">
+                            <div class="form-group" style="width: 80%">
                                 <label for="txttini">Tini Description</label>
                                 <input type="text" autofocus class="form-control" id="txttini" name="tinides">
                             </div>
                         </div>
                         <div class="row ml-3">
-                            <div class="form-group">
+                            <div class="form-group" style="width: 80%">
                                 <label for="txtprice">Price</label>
                                 <input type="text" autofocus class="form-control" id="txtprice" name="prices">
                             </div>
                         </div>
                         <div class="row ml-3">
-                            <div class="form-group">
+                            <div class="form-group" style="width: 80%">
                                 <label for="txtfulldes">Full Descripe</label>
                                 <textarea class="form-control" id="txtfulldes" rows="3" name="fulldes"></textarea>
                             </div>
                         </div>
                         <div class="row ml-3">
-                            <div class="form-group">
+                            <div class="form-group" style="width: 80%">
                                 <label for="txtLanguage">Language</label>
                                 <input type="text" autofocus class="form-control" id="txtLanguage" name="language">
                             </div>
                         </div>
+                        <div id="mess-add-course" style="display: none;">Add new course successfull!</div>
                         <button id="addcourse" type="submit" class="btn btn-outline-success"  >
                             <i class="fa fa-plus" aria-hidden="true"></i> Add
                         </button>
@@ -613,6 +614,7 @@
                                     contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
                                     type: 'POST',
                                     success: function (data) {
+                                        $('#mess-add-course').css('display','block')
                                     }
                                 });
 
@@ -687,23 +689,23 @@
 
             $('#profile').click(
                 () => {
-                    $('.ChangeAvatar').css('display', 'none')
+                    $('.ChangeAvatar').css('display', 'none');
                     $('.Account').css('display', 'none');
                     $('.Profile').css('display', 'block');
-                    $('.MyCourse').css('display', 'none')
-                    $('.profile-body').css('height', '600px')
-                    $('.AddCoure').css('display', 'none')
+                    $('.MyCourse').css('display', 'none');
+                    $('.profile-body').css('height', '600px');
+                    $('.AddCourse').css('display', 'none');
                 }
             )
 
             $('#changepassword').click(
                 () => {
-                    $('.ChangeAvatar').css('display', 'none')
+                    $('.ChangeAvatar').css('display', 'none');
+                    $('.AddCourse').css('display', 'none');
                     $('.Profile').css('display', 'none');
                     $('.Account').css('display', 'block');
-                    $('.MyCourse').css('display', 'none')
-                    $('.profile-body').css('height', '520px')
-                    $('.AddCoure').css('display', 'none')
+                    $('.MyCourse').css('display', 'none');
+                    $('.profile-body').css('height', '600px');
                 }
             )
 
@@ -711,30 +713,30 @@
                 () => {
                     $('.Profile').css('display', 'none');
                     $('.Account').css('display', 'none');
-                    $('.ChangeAvatar').css('display', 'block')
-                    $('.MyCourse').css('display', 'none')
-                    $('.profile-body').css('height', '520px')
-                    $('.AddCoure').css('display', 'none')
+                    $('.ChangeAvatar').css('display', 'block');
+                    $('.MyCourse').css('display', 'none');
+                    $('.profile-body').css('height', '600px');
+                    $('.AddCourse').css('display', 'none');
                 }
             )
             $('#Mycourses').click(
                 () => {
                     $('.Profile').css('display', 'none');
                     $('.Account').css('display', 'none');
-                    $('.ChangeAvatar').css('display', 'none')
-                    $('.MyCourse').css('display', 'block')
-                    $('.profile-body').css('height', '880px')
-                    $('.AddCoure').css('display', 'none')
+                    $('.ChangeAvatar').css('display', 'none');
+                    $('.MyCourse').css('display', 'block');
+                    $('.profile-body').css('height', '880px');
+                    $('.AddCourse').css('display', 'none');
                 }
             )
             $('#addnewCourse').click(
                 () => {
                     $('.Profile').css('display', 'none');
                     $('.Account').css('display', 'none');
-                    $('.ChangeAvatar').css('display', 'none')
-                    $('.MyCourse').css('display', 'none')
-                    $('.profile-body').css('height', '880px')
-                    $('.AddCourse').css('display', 'block')
+                    $('.ChangeAvatar').css('display', 'none');
+                    $('.MyCourse').css('display', 'none');
+                    $('.profile-body').css('height', '880px');
+                    $('.AddCourse').css('display', 'block');
                 }
             )
 

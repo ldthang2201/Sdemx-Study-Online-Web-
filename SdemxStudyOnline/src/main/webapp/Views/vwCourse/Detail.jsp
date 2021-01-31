@@ -67,7 +67,7 @@
             <div class="container">
                 <div class="row ">
                     <div class="col-md-4">
-                        <div class=" mt-5 video plyr__video-embed" id="player">
+                        <div class=" mt-5 video plyr__video-embed" id="player" style="margin-top: 20px">
                             <iframe
                                     src="https://www.youtube.com/embed/rwCJvSKzQkc"
                                     allowfullscreen
@@ -256,7 +256,7 @@
             <div class="row ml-5">
                     ${course.fullDes}
             </div>
-            <div class="row h3 font-weight-bold mt-3">Courses Content</div>
+            <div class="row h3 font-weight-bold mt-3">Course Content</div>
             <div class="row">
                 <c:choose>
                     <c:when test="${lstChap.size() == 0 or !checkBuy or !auth }">

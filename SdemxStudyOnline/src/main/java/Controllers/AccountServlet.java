@@ -333,12 +333,15 @@ public class AccountServlet extends HttpServlet {
         User rquser = (User) session.getAttribute("authUser");
         String url =request.getParameter("url");
         String title = request.getParameter("title");
-        int catID = Integer.parseInt(request.getParameter("catid"));
+        String catName = request.getParameter("catid");
+//        int catID = Integer.parseInt(request.getParameter("catid"));
+        int catID = CategoryModel.getCatIDByCatName(catName);
         String language = request.getParameter("language");
         String tiniDes = request.getParameter("tinides");
         String fullDes = request.getParameter("fulldes");
         int prices = Integer.parseInt(request.getParameter("prices")) ;
         CourseModel.addNewCourse(title,catID,rquser.getId(),tiniDes,prices,fullDes,language);
+
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
