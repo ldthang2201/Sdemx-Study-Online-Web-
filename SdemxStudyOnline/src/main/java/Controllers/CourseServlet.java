@@ -19,7 +19,6 @@ import java.util.Optional;
 public class CourseServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
-            System.out.println(action);
             switch (action){
                 case "buy":
                     postBuy(request,response);
@@ -58,10 +57,6 @@ public class CourseServlet extends HttpServlet {
              int userid=user.getId();
              boolean auth= (boolean)session.getAttribute("auth");
              String courseId = (String)request.getParameter("CourseId");
-                System.out.print("user");
-                System.out.println(user);
-                System.out.print(("auth "));
-               System.out.println(auth);
              if(!auth){
                  ServletUtils.redirect("/Account/Login", request, response);
              }
@@ -134,10 +129,8 @@ public class CourseServlet extends HttpServlet {
 
                 final int LIMIT1 = 6;
                 int offset1 = (curPage1 - 1) * LIMIT1;
-                System.out.println(offset1);
                 int total1 = CourseModel.CountNoCourseByBranchID(branchID);
                 int nPages1=total1/LIMIT1;
-                System.out.println(nPages1);
                 if(total1 % LIMIT1 > 0) nPages1++;
 
                 int[] pages1 = new int[nPages1];

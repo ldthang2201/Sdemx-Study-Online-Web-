@@ -226,10 +226,10 @@
                                 <input id="Name" class=" profile-input " type="text" name="name" placeholder="Name"
                                        value=""><br>
                             <script>
-                                $('#Name').val(`${authUser.name}`);
-                                console.log(`${authUser.name}`);
+                                $('#Name').val(`${user.name}`);
+                                console.log(`${user.name}`);
                                 $(document).ready(()=>{
-                                    $(`.profile-avatar`).attr('src',`${authUser.avatar}`)
+                                    $(`.profile-avatar`).attr('src',`${user.avatar}`)
                                 })
 
                             </script>
@@ -237,7 +237,7 @@
                             <div class="row d-flex align-items-center">
                                 <span class="profile-input-span">Email :</span>
                                 <input id="Email" class="profile-input" type="text" name="email" PLACEHOLDER="Email"
-                                       value=${authUser.email}><br>
+                                       value=${user.email}><br>
                             </div>
                             <div class="row d-flex align-items-center">
                                 <span class="profile-input-span">Birthday :</span>

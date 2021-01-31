@@ -112,7 +112,7 @@ public class AccountServlet extends HttpServlet {
             response.setHeader("errorMessage","Invalid Email !!!");
             outResponce+=" email ";
         }
-        if(UserModel.findByEmail(email)>1){
+        if(UserModel.findByEmail(email)>=1){
             response.setHeader("errorMessage","Email already exist!!!");
             outResponce+=" exist ";
         }
